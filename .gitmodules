@@ -1,0 +1,4 @@
+
+[submodule "Programs/DotNet/ProjectTools"]
+	path = Programs/DotNet/ProjectTools
+	url = https://github.com/andersonlucasg3/CppProjectTools

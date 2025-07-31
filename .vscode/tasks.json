@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Gen Project",
+            "command": "pwsh",
+            "type": "shell",
+            "args": [
+                "-c",
+                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/GenCodeProject.ps1",
+                "-Project", "Core",
+                "-Generator", "VisualStudio",
+                "-Platform", "Windows",
+                "-Configuration", "Debug"
+            ],
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        {
+            "label": "Compile",
+            "command": "pwsh",
+            "type": "shell",
+            "args": [
+                "-c",
+                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "Core",
+                "-Platform", "Windows",
+                "-Configuration", "Debug"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        {
+            "label": "Clean",
+            "command": "pwsh",
+            "type": "shell",
+            "args": [
+                "-c",
+                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "Core",
+                "-Platform", "Windows",
+                "-Configuration", "Debug",
+                "-Clean"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        }
+    ]
+}
