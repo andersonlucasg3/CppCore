@@ -16,7 +16,7 @@ class CString : public TString<char, CString>
 	using ArrayDeleter = SArrayDeleter<char>;
 
 protected:
-    SSizeT StrLen(const char* Buffer) const override
+    SizeT StrLen(const char* Buffer) const override
     {
         return std::strlen(Buffer);
     }
@@ -47,11 +47,31 @@ public:
 		//
 	}
 	
-	inline CString(const wchar_t* WStr)
+	inline CString(const wchar_t* WStr, SizeT WStrLen)
 	{
-        SSizeT WStrLen = wcslen(WStr);
         char* NewBuffer = new char[WStrLen + 1];
-		wcstombs(NewBuffer, WStr, WStrLen);
+
+		UInt64 Index = 0;
+		UInt64 Remaining = WStrLen;
+		while (Index + Remaining < WStrLen)
+		{
+			SizeT ConvertedSize = 0;
+			char ConvertedChars[1024];
+			errno_t Err = wcstombs_s(&ConvertedSize, ConvertedChars, WStr + Index, 1024);
+
+			if (Err == 0)
+			{
+				GMemory.Copy(ConvertedChars, NewBuffer + Index, ConvertedSize * sizeof(char));
+
+				Index += ConvertedSize;
+				Remaining -= ConvertedSize;
+			}
+			else
+			{
+				throw "Failed to convert wchar string to char string";
+			}
+		}
+		
 		NewBuffer[WStrLen] = '\0';
 
 		BufferPtr = MakeShareable<char, ArrayDeleter>(NewBuffer);

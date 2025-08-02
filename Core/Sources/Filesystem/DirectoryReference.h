@@ -29,7 +29,7 @@ class CDirectoryReference : public TFilesystemReference<CDirectoryReference>
     using Super = TFilesystemReference<CDirectoryReference>;
 
 protected:
-    CDirectoryReference(const CString& InPath) : Super(InPath) { }
+    explicit CDirectoryReference(const CString& InPath) : Super(InPath) { }
     virtual ~CDirectoryReference() = default;
 
 public:

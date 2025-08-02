@@ -60,7 +60,7 @@ class TSet
 	}
 
 public:
-	inline TSet(SSizeT Size = 4) :
+	inline TSet(SizeT Size = 4) :
 		DataPtr(MakeShareable<TElement, SSetDestructor>(new TElement[Size])),
 		ItemNum(0),
 		SetSize(Size)

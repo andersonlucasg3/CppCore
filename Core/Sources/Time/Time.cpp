@@ -11,7 +11,7 @@ ITime* ITime::GetTime()
 	return &GTime;
 }
 
-SDouble ITime::GetTimeInSeconds()
+Double ITime::GetTimeInSeconds()
 {
 	return GetTime()->GetTimeInSecondsInternal();
 }

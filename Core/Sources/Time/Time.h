@@ -8,10 +8,10 @@ class ITime
 {
 	CORE_API static ITime* GetTime();
 
-	CORE_API virtual SDouble GetTimeInSecondsInternal() const = 0;
+	CORE_API virtual Double GetTimeInSecondsInternal() const = 0;
 
 public:
 	CORE_API virtual ~ITime() = default;
 
-	CORE_API static SDouble GetTimeInSeconds();
+	CORE_API static Double GetTimeInSeconds();
 };

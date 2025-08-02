@@ -33,16 +33,16 @@ class TMap
 	using TBucket = TLinkedList<TKeyValuePair>;
 
 	TArray<TBucket> _buckets;
-	SSizeT _size = 0;
+	SizeT _size = 0;
 
     template<typename THashableKey, std::enable_if_t<std::is_integral_v<THashableKey> || std::is_enum_v<THashableKey>, bool> = true>
-    SSizeT Hash(const THashableKey& Key) 
+    SizeT Hash(const THashableKey& Key) 
 	{
-        return static_cast<SSizeT>(Key) % _buckets.Num();
+        return static_cast<SizeT>(Key) % _buckets.Num();
     }
 
     template<typename THashableKey, std::enable_if_t<std::is_base_of_v<CHashable, THashableKey>, bool> = true>
-    SSizeT Hash(const THashableKey& Key) 
+    SizeT Hash(const THashableKey& Key) 
 	{
         static_assert(std::is_base_of_v<CHashable, THashableKey>, "For being a Key to TMap, TKey type must implement CHashable");
 
@@ -60,7 +60,7 @@ class TMap
 			{
 				Bucket.ForEach([this](const TKeyValuePair& Pair)
 				{
-					SSizeT NewIndex = Hash(Pair.Key); // doing against new bucket
+					SizeT NewIndex = Hash(Pair.Key); // doing against new bucket
 					_buckets[NewIndex].Add(Pair);
 				});
 			}
@@ -84,7 +84,7 @@ public:
 	{
 		ResizeIfNeeded();
 
-		SSizeT Index = Hash(Pair.Key);
+		SizeT Index = Hash(Pair.Key);
 
 		TBucket& Bucket = _buckets[Index];
 
@@ -106,7 +106,7 @@ public:
 	{
 		ResizeIfNeeded();
 
-		SSizeT Index = Hash(Pair.Key);
+		SizeT Index = Hash(Pair.Key);
 
 		TBucket& Bucket = _buckets[Index];
 
@@ -128,7 +128,7 @@ public:
 
 	bool Remove(const TKey& Key)
 	{
-		SSizeT Index = Hash(Key);
+		SizeT Index = Hash(Key);
 
 		TBucket& Bucket = _buckets[Index];
 
@@ -177,7 +177,7 @@ public:
 
 	TValue* Find(const TKey& Key)
 	{
-		SSizeT Index = Hash(Key);
+		SizeT Index = Hash(Key);
 
 		TBucket& Bucket = _buckets[Index];
 
@@ -215,7 +215,7 @@ public:
 		}
 	}
 
-	template<typename TNum = SSizeT>
+	template<typename TNum = SizeT>
 	TNum Num() const
 	{
 		return static_cast<TNum>(_size);

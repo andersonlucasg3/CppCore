@@ -2,15 +2,12 @@
 
 #include "CoreDefinitions.h"
 
-class IEnvironment
+class CEnvironment
 {
-    CORE_API static IEnvironment* Get();
-    
-protected:
-	CORE_API virtual const char* NewLineInternal() const = 0;
-
 public:
-	CORE_API virtual ~IEnvironment();
+	CORE_API virtual ~CEnvironment() = default;
 
-	CORE_API static const char* NewLine();
+	CORE_API virtual const char* NewLine() const = 0;
 };
+
+extern const CEnvironment& GEnvironment;

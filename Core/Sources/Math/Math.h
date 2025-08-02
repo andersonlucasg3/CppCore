@@ -101,5 +101,5 @@ namespace Core::Maths
     };
 
     typedef TMath<SFixed> SFMath;
-    typedef TMath<SFloat> SMathF;
+    typedef TMath<Float> SMathF;
 }

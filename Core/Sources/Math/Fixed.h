@@ -8,38 +8,38 @@
 constexpr TFixed operator OP(T Value) const { TFixed Copy = *this; Copy.Value OP##= V; return Copy; }
 
 #define DECLARE_FIXED_OPERATOR_PRIMITIVES(OP, V) \
-DECLARE_FIXED_OPERATOR(OP, SInt32, V); \
-DECLARE_FIXED_OPERATOR(OP, SInt64, V); \
-DECLARE_FIXED_OPERATOR(OP, SDouble, V);
+DECLARE_FIXED_OPERATOR(OP, Int32, V); \
+DECLARE_FIXED_OPERATOR(OP, Int64, V); \
+DECLARE_FIXED_OPERATOR(OP, Double, V);
 
 #define DECLARE_FIXED_OPERATOR_REF(OP, T, V) \
 constexpr TFixed& operator OP(T Value) { this->Value OP V; return *this; }
 
 #define DECLARE_FIXED_OPERATOR_REF_PRIMITIVES(OP, V) \
-DECLARE_FIXED_OPERATOR_REF(OP, SInt32, V); \
-DECLARE_FIXED_OPERATOR_REF(OP, SInt64, V); \
-DECLARE_FIXED_OPERATOR_REF(OP, SDouble, V);
+DECLARE_FIXED_OPERATOR_REF(OP, Int32, V); \
+DECLARE_FIXED_OPERATOR_REF(OP, Int64, V); \
+DECLARE_FIXED_OPERATOR_REF(OP, Double, V);
 
 #define DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, T, V)	\
 constexpr TFixed operator OP(T Value, const TFixed& Fixed) { return Fixed OP V; }
 
 // don't need to scale here
 #define DECLARE_FIXED_ARITHMETIC_OPERATOR_PRIMITIVES(OP) \
-DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, SInt32, Value); \
-DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, SInt64, Value); \
-DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, SDouble, Value);
+DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, Int32, Value); \
+DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, Int64, Value); \
+DECLARE_FIXED_ARITHMETIC_OPERATOR(OP, Double, Value);
 
 #define DECLARE_FIXED_COMPARISON_OPERATOR(OP, T, V) \
 constexpr bool operator OP(T Value) const { return this->Value OP V; }
 
 #define DECLARE_FIXED_COMPARISON_OPERATORS(OP) \
 DECLARE_FIXED_COMPARISON_OPERATOR(OP, const TFixed&, Value.Value); \
-DECLARE_FIXED_COMPARISON_OPERATOR(OP, SInt32, Scaled(Value)); \
-DECLARE_FIXED_COMPARISON_OPERATOR(OP, SInt64, Scaled(Value)); \
-DECLARE_FIXED_COMPARISON_OPERATOR(OP, SDouble, Scaled(Value));
+DECLARE_FIXED_COMPARISON_OPERATOR(OP, Int32, Scaled(Value)); \
+DECLARE_FIXED_COMPARISON_OPERATOR(OP, Int64, Scaled(Value)); \
+DECLARE_FIXED_COMPARISON_OPERATOR(OP, Double, Scaled(Value));
 
 #define DECLARE_FIXED_SCALED_FUNC(T) \
-static SInt64 Scaled(T Value) { return static_cast<SInt64>(Value * Precision); }
+static Int64 Scaled(T Value) { return static_cast<Int64>(Value * Precision); }
 
 #define DECLARE_FIXED_DESCALE_FUNC(T, R) \
 static R Descale(T Value) { return static_cast<R>(Value) / static_cast<R>(Precision); }
@@ -48,31 +48,31 @@ namespace Core::Maths
 {
     using namespace Types;
 
-	template<SInt64 P>
+	template<Int64 P>
     struct TFixed
 	{
-		constexpr static SInt64 Precision = P;
+		constexpr static Int64 Precision = P;
 
 		constexpr TFixed() = default;
 
-		constexpr TFixed(SInt32 Value) : Value(Scaled(Value))
+		constexpr TFixed(Int32 Value) : Value(Scaled(Value))
 		{
 			//
 		}
 		
-		constexpr TFixed(SInt64 Value) : Value(Scaled(Value))
+		constexpr TFixed(Int64 Value) : Value(Scaled(Value))
 		{
 			//
 		}
 
-		constexpr TFixed(SDouble Value) : Value(Scaled(Value))
+		constexpr TFixed(Double Value) : Value(Scaled(Value))
 		{
 			//
 		}
 
-		constexpr SFloat AsFloat() const
+		constexpr Float AsFloat() const
 		{
-			return static_cast<SFloat>(Descale(Value));
+			return static_cast<Float>(Descale(Value));
 		}
 
 		constexpr operator SDouble() const
@@ -80,7 +80,7 @@ namespace Core::Maths
 			return Descale(Value);
 		}
 
-		constexpr SInt64 operator *() const
+		constexpr Int64 operator *() const
 		{
 			return Value;
 		}
@@ -92,19 +92,19 @@ namespace Core::Maths
 			return Negated;
 		}
 
-		constexpr TFixed& operator =(SInt32 NewValue)
+		constexpr TFixed& operator =(Int32 NewValue)
 		{
 			Value = Scaled(NewValue);
 			return *this;
 		}
 
-		constexpr TFixed& operator =(SInt64 NewValue)
+		constexpr TFixed& operator =(Int64 NewValue)
 		{
 			Value = Scaled(NewValue);
 			return *this;
 		}
 
-		constexpr TFixed& operator =(SDouble NewValue)
+		constexpr TFixed& operator =(Double NewValue)
 		{
 			Value = Scaled(NewValue);
 			return *this;
@@ -117,21 +117,21 @@ namespace Core::Maths
 			return Copy;
 		}
 		
-		constexpr TFixed operator+(SInt32 Value) const 
+		constexpr TFixed operator+(Int32 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value += Scaled(Value);
 			return Copy;
 		}
 		
-		constexpr TFixed operator+(SInt64 Value) const 
+		constexpr TFixed operator+(Int64 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value += Scaled(Value);
 			return Copy;
 		}
 		
-		constexpr TFixed operator+(SDouble Value) const 
+		constexpr TFixed operator+(Double Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value += Scaled(Value);
@@ -145,21 +145,21 @@ namespace Core::Maths
 			return Copy;
 		}
 
-		constexpr TFixed operator-(SInt32 Value) const 
+		constexpr TFixed operator-(Int32 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value -= Scaled(Value);
 			return Copy;
 		}
 
-		constexpr TFixed operator-(SInt64 Value) const 
+		constexpr TFixed operator-(Int64 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value -= Scaled(Value);
 			return Copy;
 		}
 
-		constexpr TFixed operator-(SDouble Value) const 
+		constexpr TFixed operator-(Double Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value -= Scaled(Value);
@@ -169,56 +169,56 @@ namespace Core::Maths
 		constexpr TFixed operator*(const TFixed &Other) const 
 		{
 			TFixed Copy = *this;
-			Copy.Value = static_cast<SInt64>(static_cast<SDouble>(Copy.Value) * Descale(Other.Value));
+			Copy.Value = static_cast<Int64>(static_cast<Double>(Copy.Value) * Descale(Other.Value));
 			return Copy;
 		}
 
-		constexpr TFixed operator*(SInt32 Value) const
+		constexpr TFixed operator*(Int32 Value) const
         {
 			TFixed Copy = *this;
 			Copy.Value *= Value;
 			return Copy;
 		}
 		
-		constexpr TFixed operator*(SInt64 Value) const 
+		constexpr TFixed operator*(Int64 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value *= Value;
 			return Copy;
 		}
 		
-		constexpr TFixed operator*(SDouble Value) const 
+		constexpr TFixed operator*(Double Value) const 
 		{
 			TFixed Copy = *this;
-			Copy.Value = static_cast<SInt64>(static_cast<SDouble>(Copy.Value) * Value);
+			Copy.Value = static_cast<Int64>(static_cast<Double>(Copy.Value) * Value);
 			return Copy;
 		}
 
 		constexpr TFixed operator/(const TFixed& Other) const 
 		{
 			TFixed Copy = *this;
-			Copy.Value = static_cast<SInt64>(static_cast<SDouble>(Copy.Value) / Descale(Other.Value));
+			Copy.Value = static_cast<Int64>(static_cast<Double>(Copy.Value) / Descale(Other.Value));
 			return Copy;
 		}
 
-		constexpr TFixed operator/(SInt32 Value) const 
+		constexpr TFixed operator/(Int32 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value /= Value;
 			return Copy;
 		}
 
-		constexpr TFixed operator/(SInt64 Value) const 
+		constexpr TFixed operator/(Int64 Value) const 
 		{
 			TFixed Copy = *this;
 			Copy.Value /= Value;
 			return Copy;
 		}
 
-		constexpr TFixed operator/(SDouble Value) const 
+		constexpr TFixed operator/(Double Value) const 
 		{
 			TFixed Copy = *this;
-			Copy.Value = static_cast<SInt64>(static_cast<SDouble>(Copy.Value) / Value);
+			Copy.Value = static_cast<Int64>(static_cast<Double>(Copy.Value) / Value);
 			return Copy;
 		}
 
@@ -228,19 +228,19 @@ namespace Core::Maths
 			return *this;
 		}
 
-		constexpr TFixed &operator+=(SInt32 Value) 
+		constexpr TFixed &operator+=(Int32 Value) 
 		{
 			this->Value += Scaled(Value);
 			return *this;
 		}
 		
-		constexpr TFixed &operator+=(SInt64 Value) 
+		constexpr TFixed &operator+=(Int64 Value) 
 		{
 			this->Value += Scaled(Value);
 			return *this;
 		}
 		
-		constexpr TFixed &operator+=(SDouble Value) 
+		constexpr TFixed &operator+=(Double Value) 
 		{
 			this->Value += Scaled(Value);
 			return *this;
@@ -252,19 +252,19 @@ namespace Core::Maths
 			return *this;
 		}
 
-		constexpr TFixed &operator-=(SInt32 Value) 
+		constexpr TFixed &operator-=(Int32 Value) 
 		{
 			this->Value -= Scaled(Value);
 			return *this;
 		}
 		
-		constexpr TFixed &operator-=(SInt64 Value) 
+		constexpr TFixed &operator-=(Int64 Value) 
 		{
 			this->Value -= Scaled(Value);
 			return *this;
 		}
 
-		constexpr TFixed &operator-=(SDouble Value) 
+		constexpr TFixed &operator-=(Double Value) 
 		{
 			this->Value -= Scaled(Value);
 			return *this;
@@ -276,19 +276,19 @@ namespace Core::Maths
 			return *this;
 		}
 
-		constexpr TFixed &operator*=(SInt32 Value) 
+		constexpr TFixed &operator*=(Int32 Value) 
 		{
 			this->Value *= Value;
 			return *this;
 		}
 
-		constexpr TFixed &operator*=(SInt64 Value) 
+		constexpr TFixed &operator*=(Int64 Value) 
 		{
 			this->Value *= Value;
 			return *this;
 		}
 
-		constexpr TFixed &operator*=(SDouble Value) 
+		constexpr TFixed &operator*=(Double Value) 
 		{
 			this->Value *= Value;
 			return *this;
@@ -300,19 +300,19 @@ namespace Core::Maths
 			return *this;
 		}
 
-		constexpr TFixed &operator/=(SInt32 Value) 
+		constexpr TFixed &operator/=(Int32 Value) 
 		{
 			this->Value /= Value;
 			return *this;
 		}
 
-		constexpr TFixed &operator/=(SInt64 Value) 
+		constexpr TFixed &operator/=(Int64 Value) 
 		{
 			this->Value /= Value;
 			return *this;
 		}
 
-		constexpr TFixed &operator/=(SDouble Value) 
+		constexpr TFixed &operator/=(Double Value) 
 		{
 			this->Value /= Value;
 			return *this;
@@ -323,17 +323,17 @@ namespace Core::Maths
 			return this->Value > Value.Value;
 		}
 
-		constexpr bool operator>(SInt32 Value) const 
+		constexpr bool operator>(Int32 Value) const 
 		{
 			return this->Value > Scaled(Value);
 		}
 
-		constexpr bool operator>(SInt64 Value) const 
+		constexpr bool operator>(Int64 Value) const 
 		{
 			return this->Value > Scaled(Value);
 		}
 
-		constexpr bool operator>(SDouble Value) const 
+		constexpr bool operator>(Double Value) const 
 		{
 			return this->Value > Scaled(Value);
 		}
@@ -343,17 +343,17 @@ namespace Core::Maths
 			return this->Value >= Value.Value;
 		}
 
-		constexpr bool operator>=(SInt32 Value) const 
+		constexpr bool operator>=(Int32 Value) const 
 		{
 			return this->Value >= Scaled(Value);
 		}
 
-		constexpr bool operator>=(SInt64 Value) const 
+		constexpr bool operator>=(Int64 Value) const 
 		{
 			return this->Value >= Scaled(Value);
 		}
 
-		constexpr bool operator>=(SDouble Value) const 
+		constexpr bool operator>=(Double Value) const 
 		{
 			return this->Value >= Scaled(Value);
 		}
@@ -363,17 +363,17 @@ namespace Core::Maths
 			return this->Value < Value.Value;
 		}
 		
-		constexpr bool operator<(SInt32 Value) const
+		constexpr bool operator<(Int32 Value) const
         {
 			return this->Value < Scaled(Value);
 		}
 		
-		constexpr bool operator<(SInt64 Value) const
+		constexpr bool operator<(Int64 Value) const
         {
 			return this->Value < Scaled(Value);
 		}
 
-		constexpr bool operator<(SDouble Value) const
+		constexpr bool operator<(Double Value) const
         {
 			return this->Value < Scaled(Value);
 		}
@@ -383,17 +383,17 @@ namespace Core::Maths
 			return this->Value <= Value.Value;
 		}
 
-		constexpr bool operator<=(SInt32 Value) const
+		constexpr bool operator<=(Int32 Value) const
         {
 			return this->Value <= Scaled(Value);
 		}
 
-		constexpr bool operator<=(SInt64 Value) const
+		constexpr bool operator<=(Int64 Value) const
         {
 			return this->Value <= Scaled(Value);
 		}
 
-		constexpr bool operator<=(SDouble Value) const
+		constexpr bool operator<=(Double Value) const
         {
 			return this->Value <= Scaled(Value);
 		}
@@ -403,17 +403,17 @@ namespace Core::Maths
 			return this->Value == Value.Value;
 		}
 
-		constexpr bool operator==(SInt32 Value) const 
+		constexpr bool operator==(Int32 Value) const 
 		{
 			return this->Value == Scaled(Value);
 		}
 
-		constexpr bool operator==(SInt64 Value) const 
+		constexpr bool operator==(Int64 Value) const 
 		{
 			return this->Value == Scaled(Value);
 		}
 
-		constexpr bool operator==(SDouble Value) const 
+		constexpr bool operator==(Double Value) const 
 		{
 			return this->Value == Scaled(Value);
 		}
@@ -423,39 +423,39 @@ namespace Core::Maths
 			return this->Value != Value.Value;
 		}
 
-		constexpr bool operator!=(SInt32 Value) const 
+		constexpr bool operator!=(Int32 Value) const 
 		{
 			return this->Value != Scaled(Value);
 		}
 
-		constexpr bool operator!=(SInt64 Value) const 
+		constexpr bool operator!=(Int64 Value) const 
 		{
 			return this->Value != Scaled(Value);
 		}
 
-		constexpr bool operator!=(SDouble Value) const 
+		constexpr bool operator!=(Double Value) const 
 		{
 			return this->Value != Scaled(Value);
 		}
 
-		static SInt64 Scaled(SInt32 Value) 
+		static Int64 Scaled(Int32 Value) 
 		{
-			return static_cast<SInt64>(Value * Precision);
+			return static_cast<Int64>(Value * Precision);
 		}
 
-		static SInt64 Scaled(SInt64 Value) 
+		static Int64 Scaled(Int64 Value) 
 		{
-			return static_cast<SInt64>(Value * Precision);
+			return static_cast<Int64>(Value * Precision);
 		}
 
-		static SInt64 Scaled(SDouble Value) 
+		static Int64 Scaled(Double Value) 
 		{
-			return static_cast<SInt64>(Value * Precision);
+			return static_cast<Int64>(Value * Precision);
 		}
 
-		static SDouble Descale(SInt64 Value) 
+		static Double Descale(Int64 Value) 
 		{
-			return static_cast<SDouble>(Value) / static_cast<SDouble>(Precision);
+			return static_cast<Double>(Value) / static_cast<Double>(Precision);
 		};
 
 		CString ToString() const
@@ -464,67 +464,67 @@ namespace Core::Maths
 		}
 
 	private:
-		SInt64 Value = 0;
+		Int64 Value = 0;
 	};
 
 	typedef TFixed<1000000000L> SFixed;
 
-	constexpr SFixed operator+(SInt32 Value, const SFixed &Fixed) 
+	constexpr SFixed operator+(Int32 Value, const SFixed &Fixed) 
 	{
 		return Fixed + Value;
 	}
 
-	constexpr SFixed operator+(SInt64 Value, const SFixed &Fixed) 
+	constexpr SFixed operator+(Int64 Value, const SFixed &Fixed) 
 	{
 		return Fixed + Value;
 	}
 	
-	constexpr SFixed operator+(SDouble Value, const SFixed &Fixed) 
+	constexpr SFixed operator+(Double Value, const SFixed &Fixed) 
 	{
 		return Fixed + Value;
 	}
 
-	constexpr SFixed operator-(SInt32 Value, const SFixed &Fixed) 
+	constexpr SFixed operator-(Int32 Value, const SFixed &Fixed) 
 	{
 		return Fixed - Value;
 	}
 
-	constexpr SFixed operator-(SInt64 Value, const SFixed &Fixed) 
+	constexpr SFixed operator-(Int64 Value, const SFixed &Fixed) 
 	{
 		return Fixed - Value;
 	}
 
-	constexpr SFixed operator-(SDouble Value, const SFixed &Fixed) 
+	constexpr SFixed operator-(Double Value, const SFixed &Fixed) 
 	{
 		return Fixed - Value;
 	}
 
-	constexpr SFixed operator*(SInt32 Value, const SFixed &Fixed) 
+	constexpr SFixed operator*(Int32 Value, const SFixed &Fixed) 
 	{
 		return Fixed * Value;
 	}
 
-	constexpr SFixed operator*(SInt64 Value, const SFixed &Fixed) 
+	constexpr SFixed operator*(Int64 Value, const SFixed &Fixed) 
 	{
 		return Fixed * Value;
 	}
 	
-	constexpr SFixed operator*(SDouble Value, const SFixed &Fixed) 
+	constexpr SFixed operator*(Double Value, const SFixed &Fixed) 
 	{
 		return Fixed * Value;
 	}
 
-	constexpr SFixed operator/(SInt32 Value, const SFixed &Fixed) 
+	constexpr SFixed operator/(Int32 Value, const SFixed &Fixed) 
 	{
 		return Fixed / Value;
 	}
 
-	constexpr SFixed operator/(SInt64 Value, const SFixed &Fixed) 
+	constexpr SFixed operator/(Int64 Value, const SFixed &Fixed) 
 	{
 		return Fixed / Value;
 	}
 
-	constexpr SFixed operator/(SDouble Value, const SFixed &Fixed) 
+	constexpr SFixed operator/(Double Value, const SFixed &Fixed) 
 	{
 		return Fixed / Value;
 	}

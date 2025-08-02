@@ -30,8 +30,8 @@ class TArray
 	using ArrayDeleter = SArrayDeleter<TElement>;
 
 	ArrayType DataPtr;
-	SSizeT ItemNum;
-	SSizeT ArraySize;
+	SizeT ItemNum;
+	SizeT ArraySize;
 	
 	inline TElement& SetAt(const UInt64& Index, const TElement& Item)
 	{
@@ -78,7 +78,7 @@ public:
 		}
 	}
 
-	inline TArray(SSizeT Size = 4, bool bSetItemNumFromSize = false) :
+	inline TArray(SizeT Size = 4, bool bSetItemNumFromSize = false) :
 		ItemNum(0),
 		ArraySize(Size)
 	{
@@ -93,7 +93,7 @@ public:
 		}
 	}
 
-	inline TArray(const TElement* Data, SSizeT Size) :
+	inline TArray(const TElement* Data, SizeT Size) :
 		DataPtr(MakeShareable<TElement, ArrayDeleter>(new TElement[Size])),
 		ItemNum(Size),
 		ArraySize(Size)
@@ -131,7 +131,7 @@ public:
 
 	inline TElement& Insert(UInt64 Index, const TElement& NewItem)
 	{
-		if ((static_cast<SInt64>(ArraySize) - static_cast<SInt64>(ItemNum + 1)) <= 0)
+		if ((static_cast<Int64>(ArraySize) - static_cast<Int64>(ItemNum + 1)) <= 0)
 		{
 			IncreaseArray();
 		}
@@ -233,7 +233,7 @@ public:
 		return false;
 	}
 
-	template<typename TSize = SSizeT>
+	template<typename TSize = SizeT>
 	inline const TSize Num() const
 	{
 		return static_cast<TSize>(ItemNum);
@@ -278,7 +278,7 @@ public:
 		return *DataPtr.Get();
 	}
 
-	inline void Resize(SSizeT NewSize, bool bApplyNewSizeToItemNum = false)
+	inline void Resize(SizeT NewSize, bool bApplyNewSizeToItemNum = false)
 	{
 		if (ArraySize != NewSize)
 		{
@@ -293,7 +293,7 @@ public:
 			ArrayType NewDataPtr = MakeShareable<TElement, ArrayDeleter>(new TElement[NewSize]);
 			
 			// must use assign so copy operators will be used
-			for (SInt32 Index = 0; Index < ItemNum; ++Index)
+			for (Int32 Index = 0; Index < ItemNum; ++Index)
 			{
 				NewDataPtr.Raw()[Index] = DataPtr.Raw()[Index];
 			}
@@ -358,14 +358,14 @@ public:
 		DataPtr = NewDataPtr;
 	}
 
-	inline TElement& operator[](SSizeT Index)
+	inline TElement& operator[](SizeT Index)
 	{
 		TElement& Element = *(DataPtr + Index);
 
 		return Element;
 	}
 
-	inline const TElement& operator[](SSizeT Index) const
+	inline const TElement& operator[](SizeT Index) const
 	{
 		const TElement& Element = *(DataPtr + Index);
 

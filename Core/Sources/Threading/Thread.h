@@ -25,7 +25,7 @@ public:
     CORE_API ~CThread() override = default;
 
     CORE_API virtual void SetName(const CString& Name) = 0;
-    CORE_API virtual CString Name() const = 0;
+    CORE_API virtual const CString& Name() const = 0;
 
     CORE_API virtual bool IsRunning();
     CORE_API virtual void Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc);

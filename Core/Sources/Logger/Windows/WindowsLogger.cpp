@@ -3,17 +3,18 @@
 #if PLATFORM_WINDOWS
 
 #include "Process/Process.h"
+#include "Environment/Environment.h"
 
 #include <Windows.h>
 #include <iostream>
 
 void CWindowsLogger::WriteLogLine(const std::string& LogLine) const
 {
-	std::string Line = LogLine + IEnvironment::NewLine();
+	std::string Line = LogLine + GEnvironment.NewLine();
 
 	Super::WriteLogLine(Line);
 
-	std::cout << Line << IEnvironment::NewLine();
+	std::cout << Line << GEnvironment.NewLine();
 
 	OutputDebugStringA(Line.c_str());
 }

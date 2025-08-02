@@ -4,7 +4,7 @@
 
 #include <Windows.h>
 
-SDouble CWindowsTime::GetTimeInSecondsInternal() const
+Double CWindowsTime::GetTimeInSecondsInternal() const
 {
 	LARGE_INTEGER Frequency;
 	QueryPerformanceFrequency(&Frequency);
@@ -12,7 +12,7 @@ SDouble CWindowsTime::GetTimeInSecondsInternal() const
 	LARGE_INTEGER Counter;
 	QueryPerformanceCounter(&Counter);
 
-	return static_cast<SDouble>(Counter.QuadPart) / static_cast<SDouble>(Frequency.QuadPart);
+	return static_cast<Double>(Counter.QuadPart) / static_cast<Double>(Frequency.QuadPart);
 }
 
 #endif // PLATFORM_WINDOWS

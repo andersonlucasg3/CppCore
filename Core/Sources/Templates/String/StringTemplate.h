@@ -29,7 +29,7 @@ protected:
 		return MakeShareable<TBuffer, ArrayDeleter>(NewBuffer);
 	}
 
-	inline virtual SSizeT StrLen(const TBuffer* Buffer) const = 0;
+	inline virtual SizeT StrLen(const TBuffer* Buffer) const = 0;
 
 public:
 	inline TString() :
@@ -46,14 +46,14 @@ public:
 		//
 	}
 
-	inline TString(const TBuffer* CStr, SSizeT Len) :
+	inline TString(const TBuffer* CStr, SizeT Len) :
 		BufferPtr(CopyStr(CStr, Len)),
 		Length(Len)
 	{
 		//
 	}
 
-	inline TString(TBuffer* CStr, SSizeT Len) :
+	inline TString(TBuffer* CStr, SizeT Len) :
 		BufferPtr(MakeShareable<TBuffer, ArrayDeleter>(CStr)),
 		Length(Len)
 	{
@@ -62,7 +62,7 @@ public:
 
 	inline virtual ~TString() = default;
 
-	inline SSizeT Len() const
+	inline SizeT Len() const
 	{
 		return Length;
 	}
@@ -162,7 +162,7 @@ public:
 	inline TArray<TDerived> Split(const char Separator) const
 	{
 		TArray<TDerived> Results;
-		SInt64 LastFoundSeparator = 0;
+		Int64 LastFoundSeparator = 0;
 		for (UInt64 Index = 0; Index < Length; Index++)
 		{
 			if (BufferPtr[Index] == Separator)
@@ -204,22 +204,22 @@ public:
 		return BufferPtr[Length - 1];
 	}
 
-	inline SSizeT Hash() const
+	inline SizeT Hash() const
 	{
-		SSizeT Hash = 14695981039346656037ULL; // 64-bit FNV offset basis
-		constexpr SSizeT FnvPrime = 1099511628211ULL;
+		SizeT Hash = 14695981039346656037ULL; // 64-bit FNV offset basis
+		constexpr SizeT FnvPrime = 1099511628211ULL;
 		
 		TBuffer* Buffer = BufferPtr.Raw();
 
 		while (*Buffer) {
-			Hash ^= static_cast<SSizeT>(*Buffer++);
+			Hash ^= static_cast<SizeT>(*Buffer++);
 			Hash *= FnvPrime;
 		}
 
 		return Hash;
 	}
 
-	inline TBuffer operator[](SSizeT InIndex) const
+	inline TBuffer operator[](SizeT InIndex) const
 	{
 		return BufferPtr[InIndex];
 	}

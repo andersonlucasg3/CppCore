@@ -6,12 +6,12 @@
 
 #include "Resources/Resources.h"
 
-class CWindowsResources : public IResources
+class CWindowsResources : public CResources
 {
 public:
 	CORE_API ~CWindowsResources() override = default;
 	
-	CORE_API CString GetResource(const CString& RelativeResourcePath) const override;
+	CORE_API SFileRef GetResource(const CString& InResourceName) const override;
 };
 
 typedef CWindowsResources CPlatformResources;

@@ -2,12 +2,13 @@
 
 #if PLATFORM_WINDOWS
 
+#include "String/WString.h"
 #include <Windows.h>
 #include <processthreadsapi.h>
 
 void CWindowsThread::SetName(const CString& Name)
 {
-	this->Name = Name;
+	this->_name = Name;
 }
 
 void CWindowsThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc)
@@ -16,7 +17,7 @@ void CWindowsThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadF
 
 	if (!Thread)
 	{
-		CThreadWeakPtr WeakThread = this;
+		CThreadWeakPtr WeakThread = AsWeak();
 		Thread = MakeShared<std::thread>([ThreadFunc, WeakThread]
 		{
 			while (WeakThread->IsRunning())
@@ -25,9 +26,9 @@ void CWindowsThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadF
 			}
 		});
 
-		if (!Name.IsEmpty())
+		if (!_name.IsEmpty())
 		{
-			CWString WName(Name);
+			CWString WName(*_name, _name.Len());
 			SetThreadDescription(Thread->native_handle(), *WName);
 		}
 	}

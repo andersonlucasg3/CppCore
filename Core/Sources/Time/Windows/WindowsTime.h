@@ -9,7 +9,7 @@
 class CWindowsTime : public ITime
 {
 protected:
-	CORE_API SDouble GetTimeInSecondsInternal() const override;
+	CORE_API Double GetTimeInSecondsInternal() const override;
 
 public:
 	CORE_API ~CWindowsTime() override = default;

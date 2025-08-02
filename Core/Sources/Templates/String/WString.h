@@ -9,7 +9,7 @@ class CWString : public TString<wchar_t, CWString>
 	using ArrayDeleter = SArrayDeleter<wchar_t>;
 
 protected:
-	inline virtual SSizeT StrLen(const wchar_t* Buffer) const
+	inline virtual SizeT StrLen(const wchar_t* Buffer) const
 	{
 		return wcslen(Buffer);
 	}
@@ -35,14 +35,34 @@ public:
 		//
 	}
 
-	inline CWString(const char* CStr)
+	inline CWString(const char* CStr, SizeT StrLen)
 	{
-		SSizeT StrLen = strlen(CStr);
 		wchar_t* NewBuffer = new wchar_t[StrLen + 1];
-        mbstowcs(NewBuffer, CStr, StrLen);
-        NewBuffer[StrLen] = L'\0';
-        
+
+		UInt64 Index = 0;
+		UInt64 Remaining = StrLen;
+		while (Index + Remaining < StrLen)
+		{
+			SizeT ConvertedSize = 0;
+			wchar_t ConvertedChars[1024];
+			errno_t Err = mbstowcs_s(&ConvertedSize, ConvertedChars, CStr + Index, 1024);
+
+			if (Err == 0)
+			{
+				GMemory.Copy(ConvertedChars, NewBuffer + Index, ConvertedSize * sizeof(wchar_t));
+				
+				Index += ConvertedSize;
+				Remaining -= ConvertedSize;
+			}
+			else
+			{
+				throw "Failed to convert wchar string to char string";
+			}
+		}
+		
+		NewBuffer[StrLen] = L'\0';
+
 		BufferPtr = MakeShareable<wchar_t, ArrayDeleter>(NewBuffer);
-		Length = StrLen;
+        Length = StrLen;
 	}
 };

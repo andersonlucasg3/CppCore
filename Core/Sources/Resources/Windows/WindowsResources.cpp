@@ -5,12 +5,12 @@
 #include "Filesystem/Path.h"
 #include "Process/Process.h"
 
-CString CWindowsResources::GetResource(const CString& RelativeResourcePath) const
+SFileRef CWindowsResources::GetResource(const CString& InResourceName) const
 {
-	return IPath::Get()->Combine({
-		IProcess::Get()->GetExecutableContainerPath(),
+	return GPath.Combine({
+		GProcess.GetExecutableContainerPath(),
 		"Resources",
-		RelativeResourcePath
+		InResourceName
 	});;
 }
 

@@ -26,7 +26,7 @@ public:
 	CORE_API static bool Exists(const CString& FilePath);
 
 	CORE_API virtual bool Write(const TArray<int8_t>& ByteArray) = 0;
-	CORE_API virtual bool Write(const void* Data, SSizeT Size) = 0;
+	CORE_API virtual bool Write(const void* Data, SizeT Size) = 0;
 	CORE_API virtual bool Read(TArray<int8_t>& OutByteArray) = 0;
 	CORE_API virtual bool Read(void*& OutData, UInt64& Size) = 0;
 	CORE_API virtual bool Flush() = 0;

@@ -21,12 +21,12 @@ void CMemory::Free(void* InPtr) const
 	free(InPtr);
 }
 
-void* CMemory::Copy(const void* From, void* To, SSizeT Size) const
+void* CMemory::Copy(const void* From, void* To, SizeT Size) const
 {
 	return memcpy(To, From, Size);
 }
 
-void* CMemory::Set(void* Ptr, int Val, SSizeT Size) const
+void* CMemory::Set(void* Ptr, int Val, SizeT Size) const
 {
 	return memset(Ptr, Val, Size);
 }

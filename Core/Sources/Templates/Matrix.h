@@ -8,7 +8,7 @@
 
 template<
     typename TElement,
-    SSizeT Size
+    SizeT Size
 >
 struct TMatrix
 {
@@ -131,13 +131,13 @@ public:
     // TODO: strip this code in case of non-debug build
     CString ToString() const
     {
-        CString MatrixString = IEnvironment::NewLine();
+        CString MatrixString = CEnvironment::NewLine();
         MatrixString += "{";
         for (UInt32 VectorIndex = 0; VectorIndex < Size; VectorIndex++)
         {
             const TVector& Vector = Matrix[VectorIndex];
 
-            MatrixString += IEnvironment::NewLine();
+            MatrixString += CEnvironment::NewLine();
             MatrixString += "\t{";
             for (UInt32 Index = 0; Index < Size; Index++)
             {
@@ -155,7 +155,7 @@ public:
                 MatrixString += ",";
             }
         }
-        MatrixString += IEnvironment::NewLine();
+        MatrixString += CEnvironment::NewLine();
         return MatrixString += "}";
     }
 

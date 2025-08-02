@@ -12,7 +12,7 @@ class CWindowsThread : public CThread
 {
     using Super = CThread;
 
-    CString Name;
+    CString _name;
     TSharedPtr<std::thread> Thread;
     bool bIsRunning = false;
 
@@ -23,6 +23,7 @@ public:
     CORE_API ~CWindowsThread() override = default;
 
     CORE_API void SetName(const CString& Name) override;
+    CORE_API const CString& Name() const override;
 
     CORE_API void Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc) override;
     CORE_API void Join() override;

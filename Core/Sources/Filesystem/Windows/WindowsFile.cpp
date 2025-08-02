@@ -57,7 +57,7 @@ bool CWindowsFile::Write(const TArray<int8_t>& ByteArray)
 	return BytesWritten == ByteArray.Num();
 }
 
-bool CWindowsFile::Write(const void* Data, SSizeT Size)
+bool CWindowsFile::Write(const void* Data, SizeT Size)
 {
 	UInt64 BytesWritten = 0;
 	do

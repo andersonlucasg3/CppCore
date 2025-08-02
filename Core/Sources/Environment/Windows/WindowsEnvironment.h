@@ -6,13 +6,14 @@
 
 #include "Environment/Environment.h"
 
-class CWindowsEnvironment : public IEnvironment
+class CWindowsEnvironment : public CEnvironment
 {
-protected:
-	CORE_API virtual const char* NewLineInternal() const override;
+	using Super = CEnvironment;
 
 public:
 	CORE_API ~CWindowsEnvironment() override = default;
+
+	CORE_API const char* NewLine() const override;
 };
 
 typedef CWindowsEnvironment CPlatformEnvironment;

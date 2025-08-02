@@ -12,7 +12,7 @@ using namespace Core::Maths;
 
 template<
     typename TElement,
-    SInt32 Size
+    Int32 Size
 >
 struct TVector
 {
@@ -107,7 +107,7 @@ struct TVector
         CString VectorString = "{";
         for (UInt32 Index = 0; Index < Size; Index++)
         {
-            VectorString += CString("{}", static_cast<SDouble>(Vector[Index]));
+            VectorString += CString("{}", static_cast<Double>(Vector[Index]));
 
             if (Index < Size - 1)
             {
@@ -396,7 +396,7 @@ protected:
 
 template<
     typename TElement,
-    SSizeT Size
+    SizeT Size
 >
 TVector<TElement, Size> operator*(TElement Factor, const TVector<TElement, Size>& Vector)
 {

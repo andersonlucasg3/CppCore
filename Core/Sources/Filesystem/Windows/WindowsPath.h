@@ -6,16 +6,22 @@
 
 #include "Filesystem/Path.h"
 
-class CWindowsPath : public IPath
+class CWindowsPath : public CPath
 {
 	CORE_API static CString FixPath(const CString& Path);
 
 public:
-	CORE_API CWindowsPath() = default;
 	CORE_API ~CWindowsPath() override = default;
 
+	CORE_API CString GetFullPath(const CString& InPath) const override;
+	CORE_API CString GetPathRoot(const CString& InPath) const override;
+
 	CORE_API CString Combine(const TArray<CString>& PathComponents) const override;
+
+	CORE_API CString LastPathComponent(const CString& Path) const override;
 	CORE_API CString RemoveLastPathComponent(const CString& Path) const override;
+
+	CORE_API const CString& CachesPath() const override;
 };
 
 typedef CWindowsPath CPlatformPath;

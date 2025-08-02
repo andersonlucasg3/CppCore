@@ -14,7 +14,7 @@ CWindowsProcess::CWindowsProcess()
 void CWindowsProcess::SetCommandLine(int argc, const char** argv)
 {
 	ExecutablePath = argv[0];
-	ExecutableContainerPath = IPath::Get()->RemoveLastPathComponent(ExecutablePath);
+	ExecutableContainerPath = GPath.RemoveLastPathComponent(ExecutablePath);
 
 	for (int Index = 1; Index < argc; ++Index)
 	{
@@ -35,11 +35,6 @@ const CString& CWindowsProcess::GetExecutableContainerPath() const
 const TArray<CString>& CWindowsProcess::GetCommandLineArgs() const
 {
 	return CommandLineArgs;
-}
-
-CWindowsProcess* CWindowsProcess::Get()
-{
-	return GProcess;
 }
 
 #endif // PLATFORM_WINDOWS

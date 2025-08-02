@@ -6,7 +6,7 @@
 
 #include "Process/Process.h"
 
-class CWindowsProcess : public IProcess
+class CWindowsProcess : public CProcess
 {
 	static CWindowsProcess* GProcess;
 
@@ -22,8 +22,6 @@ public:
 	CORE_API const CString& GetExecutablePath() const override;
 	CORE_API const CString& GetExecutableContainerPath() const override;
 	CORE_API const TArray<CString>& GetCommandLineArgs() const override;
-
-	CORE_API static CWindowsProcess* Get();
 };
 
 typedef CWindowsProcess CPlatformProcess;

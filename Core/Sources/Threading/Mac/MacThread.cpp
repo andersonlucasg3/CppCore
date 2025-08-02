@@ -1,4 +1,7 @@
 #include "MacThread.h"
+
+#if PLATFORM_MACOS
+
 #include "Templates/SmartPointer/MakeAndCasts.h"
 #include "Threading/Thread.h"
 
@@ -44,3 +47,5 @@ CMacThreadPtr CMacThread::Create()
 {
     return MakeShared<CMacThread>();
 }
+
+#endif // PLATFORM_MACOS
