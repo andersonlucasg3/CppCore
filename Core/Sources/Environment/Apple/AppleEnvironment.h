@@ -1,10 +1,7 @@
 #pragma once
 
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_MACOS
 
-#include "CoreDefinitions.h"
 #include "Environment/Environment.h"
 
 class CAppleEnvironment : public IEnvironment

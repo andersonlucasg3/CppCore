@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include <format>
 
 class CFile;

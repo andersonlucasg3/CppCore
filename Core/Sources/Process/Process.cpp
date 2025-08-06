@@ -1,6 +1,7 @@
 #include "Process.h"
 
 #include "Defines/Preprocessors.h"
+#include "Logger/Logger.h"
 
 #include <exception>
 
@@ -13,6 +14,6 @@ CProcess::CProcess()
 {
     std::set_terminate([] 
     {
-        CLogger::LogException();
+        GLogger.LogException();
     });
 }

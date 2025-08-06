@@ -1,6 +1,7 @@
 #pragma once
 
-#include "CoreDefinitions.h"
+#include "ClassMacros.h"
+
 #include "Templates/SmartPointer/SharedPointer.h"
 #include "Templates/SmartPointer/WeakPointer.h"
 #include "Templates/SmartPointer/MakeAndCasts.h"

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PlatformInfo.h"
-
 #define LITERAL_TOSTR(x) #x
 #define TOSTR(x) LITERAL_TOSTR(x)
 #define CONCAT_LITERAL(x, y) x##y

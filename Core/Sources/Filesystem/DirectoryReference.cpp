@@ -1,5 +1,6 @@
 #include "DirectoryReference.h"
 
+#include "Defines/Preprocessors.h"
 #include "Filesystem/Path.h"
 
 #include COMPILE_PLATFORM_HEADER(DirectoryReference.h)

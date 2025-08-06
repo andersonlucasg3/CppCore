@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "SharedPointer.h"
 #include "WeakPointer.h"
 

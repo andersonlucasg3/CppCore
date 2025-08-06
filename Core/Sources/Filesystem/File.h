@@ -1,8 +1,9 @@
 #pragma once
 
-#include "CoreDefinitions.h"
 #include "Templates/String/String.h"
 #include "Templates/Array.h"
+
+#include "Object/ClassMacros.h"
 
 CORE_CLASS_HEADER(File);
 

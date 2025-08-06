@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "Templates/Strings.h"
 
 #define DECLARE_FIXED_OPERATOR(OP, T, V) \

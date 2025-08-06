@@ -2,6 +2,8 @@
 
 #include "Templates/Functions.h"
 
+#include "Defines/Preprocessors.h"
+
 #include COMPILE_PLATFORM_HEADER(FileReference.h)
 
 static TFunction<TSharedPtr<CPlatformFileReference>(const CString&)> FactoryFunction = [](const CString& InPath)

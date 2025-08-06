@@ -1,5 +1,3 @@
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_APPLE
 
 #define NS_PRIVATE_IMPLEMENTATION

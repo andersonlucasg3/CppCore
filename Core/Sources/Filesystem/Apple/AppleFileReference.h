@@ -1,8 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_APPLE
 
 #include "Filesystem/FileReference.h"

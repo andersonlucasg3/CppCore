@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_WINDOWS
 
 #include "Filesystem/DirectoryReference.h"

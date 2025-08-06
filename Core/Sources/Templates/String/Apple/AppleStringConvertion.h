@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_APPLE
 
 #include "Templates/String/String.h"

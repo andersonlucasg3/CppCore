@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "Templates/String/String.h"
 
 class CPath 

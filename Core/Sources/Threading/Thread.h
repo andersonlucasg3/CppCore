@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "Object/Object.h"
 
 #include "Templates/Functions.h"

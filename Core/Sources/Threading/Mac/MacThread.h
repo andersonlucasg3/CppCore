@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #if PLATFORM_MACOS
 
 #include "Templates/SharedPointers.h"

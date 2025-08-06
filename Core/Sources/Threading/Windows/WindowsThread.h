@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #if PLATFORM_WINDOWS
 
 #include "Threading/Thread.h"

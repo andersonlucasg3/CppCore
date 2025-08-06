@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "Class.h"
 
 CORE_CLASS_HEADER(Object);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CoreDefinitions.h"
+#include "Defines/Types.h"
 
 using namespace Core::Types;
 

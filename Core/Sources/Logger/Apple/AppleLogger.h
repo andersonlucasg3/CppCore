@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Defines/PlatformInfo.h"
-
 #if PLATFORM_APPLE
 
 #include "Logger/Logger.h"

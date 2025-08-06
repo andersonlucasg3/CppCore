@@ -4,13 +4,6 @@
 
 #include "Filesystem/Path.h"
 
-CWindowsProcess* CWindowsProcess::GProcess = nullptr;
-
-CWindowsProcess::CWindowsProcess()
-{
-	GProcess = this;
-}
-
 void CWindowsProcess::SetCommandLine(int argc, const char** argv)
 {
 	ExecutablePath = argv[0];

@@ -2,6 +2,8 @@
 
 #if PLATFORM_WINDOWS
 
+#include "Defines/Asserts.h"
+
 #include <filesystem>
 
 CWindowsFile::CWindowsFile(const CString& FilePath) :
@@ -107,6 +109,7 @@ bool CWindowsFile::Read(void*& OutData, UInt64& Size)
 	assert(OutData != nullptr);
 
 	fseek(FileHandle, 0, SEEK_END);
+	// TODO: check why this is not used (compare to apple implementation)
 	UInt64 FileSize = ftell(FileHandle);
 	fseek(FileHandle, 0, SEEK_SET);
 

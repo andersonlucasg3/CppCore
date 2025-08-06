@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #if PLATFORM_WINDOWS
 
 #include "Filesystem/File.h"

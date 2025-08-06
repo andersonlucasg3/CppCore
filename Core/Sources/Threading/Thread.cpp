@@ -1,5 +1,7 @@
 #include "Thread.h"
 
+#include "Defines/Preprocessors.h"
+
 #include "ScopeLock.h"
 
 #include COMPILE_PLATFORM_HEADER(Thread.h)
