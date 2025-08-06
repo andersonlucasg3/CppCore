@@ -8,25 +8,25 @@
 
 void CWindowsDirectoryReference::UpdateExistance()
 {
-	DWORD Attrs = GetFileAttributes(*_pathW);
+	DWORD Attrs = GetFileAttributes(*_path);
 	
 	_bExists = Attrs != INVALID_FILE_ATTRIBUTES && (Attrs & FILE_ATTRIBUTE_DIRECTORY);
 }
 
 CWindowsDirectoryReference::CWindowsDirectoryReference(const CString& InPath) : Super(InPath)
-,	_pathW(*InPath, InPath.Len())
+,	_path(InPath)
 {	
 	UpdateExistance();
 }
 
 bool CWindowsDirectoryReference::Create(bool InCreateIntermediates)
 {
-	return CreateDirectory(*_pathW, NULL);
+	return CreateDirectory(*_path, NULL);
 }
 
 bool CWindowsDirectoryReference::Delete()
 {
-	return RemoveDirectory(*_pathW);
+	return RemoveDirectory(*_path);
 }
 
 SDirectoryRef CWindowsDirectoryReference::Combine(const CString& InComponent) const

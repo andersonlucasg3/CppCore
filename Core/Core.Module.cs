@@ -16,5 +16,11 @@ public class CoreModule : ModuleDefinition
             ETargetPlatform.macOS,
             "External/Apple-Cpp"
         );
+
+        AddLinkWithLibrary(
+            ETargetPlatform.Windows,
+            "shell32.lib",
+            "ole32.lib"
+        );
     }
 }

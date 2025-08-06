@@ -6,13 +6,14 @@
 
 void CWindowsFileReference::UpdateExistance()
 {
-    DWORD Attrs = GetFileAttributes(*_pathW);
+    DWORD Attrs = GetFileAttributes(*_path);
 
     _bExists = Attrs != INVALID_FILE_ATTRIBUTES && !(Attrs & FILE_ATTRIBUTE_DIRECTORY);
 }
 
-CWindowsFileReference::CWindowsFileReference(const CString& InPath) : Super(InPath)
-,   _pathW(*InPath, InPath.Len())
+CWindowsFileReference::CWindowsFileReference(const CString& InPath) 
+:   Super(InPath)
+,   _path(InPath)
 {
     UpdateExistance();
 }

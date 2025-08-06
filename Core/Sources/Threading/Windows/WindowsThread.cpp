@@ -2,13 +2,19 @@
 
 #if PLATFORM_WINDOWS
 
-#include "String/WString.h"
+#include "Templates/String/WString.h"
+
 #include <Windows.h>
 #include <processthreadsapi.h>
 
 void CWindowsThread::SetName(const CString& Name)
 {
 	this->_name = Name;
+}
+
+const CString& CWindowsThread::Name() const
+{
+	return _name;
 }
 
 void CWindowsThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc)

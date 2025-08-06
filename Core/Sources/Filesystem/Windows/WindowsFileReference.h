@@ -5,13 +5,12 @@
 #if PLATFORM_WINDOWS
 
 #include "Filesystem/FileReference.h"
-#include "Templates/String/WString.h"
 
 class CWindowsFileReference : public CFileReference
 {
     using Super = CFileReference;
 
-    CWString _pathW;
+    CString _path;
 
     CORE_API void UpdateExistance() override;
 

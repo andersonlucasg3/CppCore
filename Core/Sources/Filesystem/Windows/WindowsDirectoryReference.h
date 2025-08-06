@@ -5,13 +5,12 @@
 #if PLATFORM_WINDOWS
 
 #include "Filesystem/DirectoryReference.h"
-#include "Templates/String/WString.h"
 
 class CWindowsDirectoryReference : public CDirectoryReference
 {
 	using Super = CDirectoryReference;
 
-	CWString _pathW;
+	CString _path;
 
 	CORE_API void UpdateExistance() override;
 

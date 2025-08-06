@@ -3,7 +3,6 @@
 #if PLATFORM_WINDOWS
 
 #include "Process/Process.h"
-#include "Templates/String/WString.h"
 
 #include <Windows.h>
 #include <shlobj.h>
@@ -28,17 +27,15 @@ CString CWindowsPath::GetFullPath(const CString& InPath) const
         Path = GPath.Combine({ WorkingDirectory, InPath });
     }
 
-    CWString PathW(*Path, Path.Len());
-
-    wchar_t FullPath[MAX_PATH];
-    DWORD Length = GetFullPathName(*PathW, MAX_PATH, FullPath, nullptr);
+    char FullPath[MAX_PATH];
+    DWORD Length = GetFullPathName(*Path, MAX_PATH, FullPath, nullptr);
 
     if (Length == 0 || Length > MAX_PATH)
     {
         return Path;
     }
 
-    return CString(FullPath, Length);
+    return CString(FullPath, static_cast<UInt64>(Length));
 }
 
 CString CWindowsPath::GetPathRoot(const CString& InPath) const

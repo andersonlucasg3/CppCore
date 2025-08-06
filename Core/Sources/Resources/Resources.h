@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CoreDefinitions.h"
-
 #include "Filesystem/FileReference.h"
 
 class CResources

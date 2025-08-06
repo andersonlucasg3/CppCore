@@ -9,9 +9,9 @@
                 "-c",
                 "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/GenCodeProject.ps1",
                 "-Project", "Core",
-                "-Generator", "VisualStudio",
-                "-Platform", "Windows",
-                "-Configuration", "Debug"
+                "-Generator", "${input:generators}",
+                "-Platform", "${input:platforms}",
+                "-Configuration", "${input:configurations}"
             ],
             "problemMatcher": [
                 "$tsc"
@@ -29,8 +29,8 @@
                 "-c",
                 "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
                 "-Project", "Core",
-                "-Platform", "Windows",
-                "-Configuration", "Debug"
+                "-Platform", "${input:platforms}",
+                "-Configuration", "${input:configurations}"
             ],
             "problemMatcher": [
                 "$gcc"
@@ -48,8 +48,8 @@
                 "-c",
                 "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
                 "-Project", "Core",
-                "-Platform", "Windows",
-                "-Configuration", "Debug",
+                "-Platform", "${input:platforms}",
+                "-Configuration", "${input:configurations}",
                 "-Clean"
             ],
             "problemMatcher": [
@@ -59,6 +59,38 @@
                 "reveal": "always"
             },
             "group": "build"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "generators",
+            "description": "Gen project Generators parameter",
+            "type": "pickString",
+            "options": [
+                "VisualStudio",
+                "Clang"
+            ]
+        },
+        {
+            "id": "platforms",
+            "description": "Platforms",
+            "type": "pickString",
+            "options": [
+                "Windows",
+                "macOS",
+                "iOS",
+                "tvOS",
+                "Android"
+            ]
+        },
+        {
+            "id": "configurations",
+            "description": "Configurations",
+            "type": "pickString",
+            "options": [
+                "Debug",
+                "Release"
+            ]
         }
     ]
 }
