@@ -1,6 +1,6 @@
 #include "AppleTime.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <mach/mach_time.h> 
@@ -15,4 +15,4 @@ CORE_API SDouble CAppleTime::GetTimeInSecondsInternal() const
     return seconds;
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

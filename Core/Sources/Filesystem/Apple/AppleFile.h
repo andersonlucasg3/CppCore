@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Templates/Array.h"
 
@@ -41,4 +41,4 @@ public:
 
 typedef CAppleFile CPlatformFile;
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

@@ -1,6 +1,6 @@
 #include "AppleProcess.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Filesystem/Path.h"
 
@@ -39,4 +39,4 @@ CAppleProcess& CAppleProcess::Get()
     return static_cast<CAppleProcess&>(GProcess);
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

@@ -2,7 +2,7 @@
 
 #if PLATFORM_MACOS
 
-CORE_API const char* CAppleEnvironment::NewLineInternal() const
+const char* CAppleEnvironment::NewLine() const
 {
     return "\n";
 }

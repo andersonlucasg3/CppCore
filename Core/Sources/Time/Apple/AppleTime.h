@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Time/Time.h"
 
@@ -15,4 +15,4 @@ public:
 
 typedef CAppleTime CPlatformTime;
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

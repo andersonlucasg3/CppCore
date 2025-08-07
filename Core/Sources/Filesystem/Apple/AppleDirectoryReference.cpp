@@ -1,6 +1,6 @@
 #include "AppleDirectoryReference.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Filesystem/DirectoryReference.h"
 #include "Templates/String/String.h"
@@ -88,4 +88,4 @@ NS::URL* CAppleDirectoryReference::PathURL() const
     return _directoryURL.get();
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

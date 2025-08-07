@@ -1,6 +1,6 @@
 #include "AppleStringConvertion.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 CString NSStringToCString(NS::String* InString)
 {
@@ -12,4 +12,4 @@ NS::String* CStringToNSString(const CString& InString)
     return NS::String::string(*InString, NS::UTF8StringEncoding);
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

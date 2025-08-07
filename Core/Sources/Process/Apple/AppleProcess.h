@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Process/Process.h"
 
@@ -24,4 +24,4 @@ public:
     CORE_API static CAppleProcess& Get();
 };
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

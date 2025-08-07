@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Logger/Logger.h"
 
@@ -18,4 +18,4 @@ public:
 
 typedef CAppleLogger CPlatformLogger;
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

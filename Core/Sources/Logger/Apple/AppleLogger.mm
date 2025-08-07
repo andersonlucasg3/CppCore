@@ -1,6 +1,6 @@
 #include "AppleLogger.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include <Foundation/Foundation.h>
 
@@ -10,4 +10,4 @@ CORE_API void CAppleLogger::WriteLogLine(const std::string &LogLine) const
     NSLog(@"%s", LogLine.c_str());
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

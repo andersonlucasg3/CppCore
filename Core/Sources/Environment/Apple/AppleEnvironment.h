@@ -4,13 +4,12 @@
 
 #include "Environment/Environment.h"
 
-class CAppleEnvironment : public IEnvironment
+class CAppleEnvironment : public CEnvironment
 {
-protected:
-    CORE_API virtual const char* NewLineInternal() const override;
-
 public:
     CORE_API ~CAppleEnvironment() override = default;
+
+    CORE_API const char* NewLine() const override;
 };
 
 typedef CAppleEnvironment CPlatformEnvironment;

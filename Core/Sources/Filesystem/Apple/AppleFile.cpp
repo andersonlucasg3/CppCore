@@ -1,6 +1,6 @@
 #include "AppleFile.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Defines/Asserts.h"
 
@@ -165,4 +165,4 @@ bool CAppleFile::Exists(const CString& FilePath)
 	return std::filesystem::exists(*FilePath);
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

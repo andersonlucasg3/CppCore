@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Filesystem/Path.h"
 
@@ -25,4 +25,4 @@ public:
 
 typedef CApplePath CPlatformPath;
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

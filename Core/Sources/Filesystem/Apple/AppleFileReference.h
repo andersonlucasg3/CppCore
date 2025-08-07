@@ -1,6 +1,6 @@
 #pragma once
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Filesystem/FileReference.h"
 
@@ -26,4 +26,4 @@ public:
     CORE_API NS::URL* PathURL() const;
 };
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

@@ -1,6 +1,6 @@
 #include "ApplePath.h"
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 
 #include "Templates/String/Apple/AppleStringConvertion.h"
 #include "Process/Apple/AppleProcess.h"
@@ -109,4 +109,4 @@ const CString& CApplePath::CachesPath() const
     return CachesPath;
 }
 
-#endif // PLATFORM_APPLE
+#endif // PLATFORM_GROUP_APPLE

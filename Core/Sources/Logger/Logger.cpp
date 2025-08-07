@@ -6,7 +6,7 @@
 #include <exception>
 #include <vector>
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 #include <execinfo.h>
 #include <cxxabi.h>
 #endif
@@ -87,7 +87,7 @@ void CLogger::LogException()
 	{
 		Log("EXCEPTION: {}", Exception.what());
 
-#if PLATFORM_APPLE
+#if PLATFORM_GROUP_APPLE
 		CString StackString = "STACKTRACE:\n";
 
 		void* CallstackArray[128];
