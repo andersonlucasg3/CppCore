@@ -1,39 +1,40 @@
 #pragma once
 
-#include "Memory/Memory.h"
-#include "Templates/Array.h"
 #include "Templates/Hashable.h"
-#include "Templates/SharedPointers.h"
+
+#include "Memory/Memory.h"
+
 #include <cstring>
 
+template <typename TElement>
+class TArray;
+
 template<
-	typename TBuffer,
+	typename TChar,
 	typename TDerived
 >
 class TString : public CHashable
 {
-	using ArrayDeleter = SArrayDeleter<TBuffer>;
-
 protected:
 	// TODO: change this to unique ptr maybe?
-	TSharedPtr<TBuffer> BufferPtr;
+	TChar* BufferPtr;
 	UInt64 Length;
 
-	inline TSharedPtr<TBuffer> CopyStr(const TBuffer* CStr, UInt64 Len)
+	inline TChar* CopyStr(const TChar* CStr, UInt64 Len)
 	{
 		const UInt64 NewLength = Len + 1;
-		TBuffer* NewBuffer = new TBuffer[NewLength];
-		GMemory.Copy(CStr, NewBuffer, sizeof(TBuffer) * Len);
+		TChar* NewBuffer = new TChar[NewLength];
+		GMemory.Copy(CStr, NewBuffer, sizeof(TChar) * Len);
 		NewBuffer[Len] = '\0';
 		Length = Len;
-		return MakeShareable<TBuffer, ArrayDeleter>(NewBuffer);
+		return NewBuffer;
 	}
 
-	inline virtual SizeT StrLen(const TBuffer* Buffer) const = 0;
+	inline virtual SizeT StrLen(const TChar* Buffer) const = 0;
 
 public:
 	inline TString() :
-		BufferPtr(),
+		BufferPtr(nullptr),
 		Length(0)
 	{
 		//
@@ -46,28 +47,35 @@ public:
 		//
 	}
 
-	inline TString(const TBuffer* CStr, SizeT Len) :
+	inline TString(const TChar* CStr, SizeT Len) :
 		BufferPtr(CopyStr(CStr, Len)),
 		Length(Len)
 	{
 		//
 	}
 
-	inline TString(TBuffer* CStr, SizeT Len) :
-		BufferPtr(MakeShareable<TBuffer, ArrayDeleter>(CStr)),
+	inline TString(TChar* CStr, SizeT Len) :
+		BufferPtr(CStr),
 		Length(Len)
 	{
 		//
 	}
 
-	inline virtual ~TString() = default;
+	inline virtual ~TString()
+	{
+		if (BufferPtr != nullptr)
+		{
+			delete[] BufferPtr;
+			BufferPtr = nullptr;
+		}
+	}
 
 	inline SizeT Len() const
 	{
 		return Length;
 	}
 
-	inline bool Contains(const TBuffer* Char) const
+	inline bool Contains(const TChar* Char) const
 	{
 		UInt64 SearchingStrLen = StrLen(Char);
 
@@ -82,7 +90,7 @@ public:
 		return false;
 	}
 
-	inline UInt64 LastIndexOf(const TBuffer Char) const
+	inline UInt64 LastIndexOf(const TChar Char) const
 	{
 		for (UInt64 Index = Length - 1; Index >= 0; --Index)
 		{
@@ -103,13 +111,13 @@ public:
 	inline const TDerived SubString(UInt64 Start, UInt64 End) const
 	{
 		const UInt64 NewLength = End - Start + 1;
-		TBuffer* NewBuffer = new TBuffer[NewLength];
-		GMemory.Copy((TBuffer*)BufferPtr + Start, NewBuffer, sizeof(TBuffer) * (NewLength - 1));
+		TChar* NewBuffer = new TChar[NewLength];
+		GMemory.Copy(BufferPtr + Start, NewBuffer, sizeof(TChar) * (NewLength - 1));
 		NewBuffer[NewLength - 1] = '\0';
         return TDerived(NewBuffer, NewLength - 1);
 	}
 
-	inline const TDerived Replace(const TBuffer OldChar, const TBuffer NewChar) const
+	inline const TDerived Replace(const TChar OldChar, const TChar NewChar) const
 	{
 		TDerived NewStr = **this;
 
@@ -124,7 +132,7 @@ public:
 		return NewStr;
 	}
 
-	inline const TDerived Replace(const TBuffer* OldStr, const TBuffer* NewStr) const
+	inline const TDerived Replace(const TChar* OldStr, const TChar* NewStr) const
 	{
 		TDerived Builder = "";
 
@@ -156,7 +164,7 @@ public:
 
 	inline const TDerived Replace(const TString& OldStr, const TString& NewStr) const
 	{
-		return Replace(OldStr.BufferPtr.Get(), NewStr.BufferPtr.Get());
+		return Replace(OldStr.BufferPtr, NewStr.BufferPtr);
 	}
 
 	inline TArray<TDerived> Split(const char Separator) const
@@ -189,17 +197,17 @@ public:
 	{
 		if (Other.Length > Length) return false;
 
-		return GMemory.Equal(BufferPtr.Raw(), Other.Length, Other.BufferPtr.Raw(), Other.Length);
+		return GMemory.Equal(BufferPtr, Other.Length, Other.BufferPtr, Other.Length);
 	}
 
 	inline bool EndsWith(const TDerived& Other) const
 	{
 		if (Other.Length > Length) return false;
 
-		return GMemory.Equal(BufferPtr.Raw() - Other.Length, Other.Length, Other.BufferPtr.Raw(), Other.Length);
+		return GMemory.Equal(BufferPtr - Other.Length, Other.Length, Other.BufferPtr, Other.Length);
 	}
 
-	inline TBuffer LastChar() const
+	inline TChar LastChar() const
 	{
 		return BufferPtr[Length - 1];
 	}
@@ -209,7 +217,7 @@ public:
 		SizeT Hash = 14695981039346656037ULL; // 64-bit FNV offset basis
 		constexpr SizeT FnvPrime = 1099511628211ULL;
 		
-		TBuffer* Buffer = BufferPtr.Raw();
+		TChar* Buffer = BufferPtr;
 
 		while (*Buffer) {
 			Hash ^= static_cast<SizeT>(*Buffer++);
@@ -219,13 +227,13 @@ public:
 		return Hash;
 	}
 
-	inline TBuffer operator[](SizeT InIndex) const
+	inline TChar operator[](SizeT InIndex) const
 	{
 		return BufferPtr[InIndex];
 	}
 
-	inline const TBuffer* operator*() const
+	inline const TChar* operator*() const
 	{
-		return BufferPtr.Raw();
+		return BufferPtr;
 	}
 };

@@ -1,49 +1,56 @@
 #pragma once
 
-#include <format>
+#include "String/String.h"
 
+#include <stdexcept>
+
+struct SFileRef;
 class CFile;
 
 class CLogger
 {
-	CORE_API inline static void WriteLogLineInternal(const std::string& LogLine);
+	CFile* _logFile = nullptr;
 
 protected:
-	CORE_API inline virtual void WriteLogLine(const std::string& LogLine) const;
+	CORE_API inline virtual void WriteLogLine(const CString& LogLine) const;
 
 public:
 	CORE_API virtual ~CLogger();
 
-	CORE_API static void InitializeLogFile(const char* LogFilePath);
+	CORE_API static void InitializeLogFile(const SFileRef& LogFilePath);
 
 	CORE_API static void LogException();
 
 	template<typename ... TArgs>
-	inline static void Log(const char* Format, TArgs ... Arguments)
+	inline void Log(const char* Format, TArgs ... Arguments) const
 	{
-		std::string Formatted = std::vformat(Format, std::make_format_args(Arguments...));
+		CString Formatted(Format, Arguments);
+		
+		Formatted = "LOG: " + Formatted;
 
-		WriteLogLineInternal(Formatted);
+		WriteLogLine(Formatted);
 	}
 
 	template<typename ... TArgs>
-	inline static void Error(const char* Format, TArgs ... Arguments)
+	inline void Error(const char* Format, TArgs ... Arguments) const
 	{
-		std::string Formatted = std::vformat(Format, std::make_format_args(Arguments...));
-
+		CString Formatted(Format, Arguments);
+		
 		Formatted = "ERROR: " + Formatted;
 
-		WriteLogLineInternal(Formatted);
+		WriteLogLine(Formatted);
 	}
 
 	template<typename ... TArgs>
-	inline static void Fatal(const char* Format, TArgs ... Arguments)
+	inline void Fatal(const char* Format, TArgs ... Arguments) const
 	{
-		std::string Formatted = std::vformat(Format, std::make_format_args(Arguments...));
+		CString Formatted(Format, Arguments);
+		
+		Formatted = "FATAL: " + Formatted;
 
-		WriteLogLineInternal(Formatted);
+		WriteLogLine(Formatted);
 
-		throw std::runtime_error(Formatted);
+		throw std::runtime_error(*Formatted);
 	}
 };
 

@@ -1,16 +1,14 @@
-#include "AppleFile.h"
-
-#include "Defines/Asserts.h"
+#include "AndroidFile.h"
 
 #include <filesystem>
 
-bool CAppleFile::Create()
+bool CAndroidFile::Create()
 {
     FileHandle = fopen(*FilePath, "wb+");
 	return FileHandle != nullptr;
 }
 
-bool CAppleFile::Open(EOpenMode Mode)
+bool CAndroidFile::Open(EOpenMode Mode)
 {
 	const char* ModeStr = nullptr;
 	switch (Mode)
@@ -26,12 +24,12 @@ bool CAppleFile::Open(EOpenMode Mode)
 	return FileHandle != nullptr;
 }
 
-bool CAppleFile::Delete()
+bool CAndroidFile::Delete()
 {
 	return std::filesystem::remove(*FilePath);
 }
 
-bool CAppleFile::Write(const TArray<int8_t>& ByteArray)
+bool CAndroidFile::Write(const TArray<int8_t>& ByteArray)
 {
 	UInt64 BytesWritten = 0;
 	do
@@ -51,7 +49,7 @@ bool CAppleFile::Write(const TArray<int8_t>& ByteArray)
 	return BytesWritten == ByteArray.Num();
 }
 
-bool CAppleFile::Write(const void* Data, SizeT Size)
+bool CAndroidFile::Write(const void* Data, SizeT Size)
 {
 	UInt64 BytesWritten = 0;
 	do
@@ -71,7 +69,7 @@ bool CAppleFile::Write(const void* Data, SizeT Size)
 	return BytesWritten == Size;
 }
 
-bool CAppleFile::Read(TArray<int8_t>& OutByteArray)
+bool CAndroidFile::Read(TArray<int8_t>& OutByteArray)
 {
 	fseek(FileHandle, 0, SEEK_END);
 	UInt64 FileSize = ftell(FileHandle);
@@ -97,7 +95,7 @@ bool CAppleFile::Read(TArray<int8_t>& OutByteArray)
 	return BytesRead == OutByteArray.Num();
 }
 
-bool CAppleFile::Read(void*& OutData, UInt64& Size)
+bool CAndroidFile::Read(void*& OutData, UInt64& Size)
 {
 	assert(OutData != nullptr);
 
@@ -119,12 +117,12 @@ bool CAppleFile::Read(void*& OutData, UInt64& Size)
 	return BytesRead == Size;
 }
 
-bool CAppleFile::Flush()
+bool CAndroidFile::Flush()
 {
 	return fflush(FileHandle) > 0;
 }
 
-UInt64 CAppleFile::GetSize() const
+UInt64 CAndroidFile::GetSize() const
 {
 	fseek(FileHandle, 0, SEEK_END);
 	UInt64 FileSize = ftell(FileHandle);
@@ -133,13 +131,13 @@ UInt64 CAppleFile::GetSize() const
 	return FileSize;
 }
 
-CAppleFile::CAppleFile(const CString& FilePath) :
+CAndroidFile::CAndroidFile(const CString& FilePath) :
 	Super(FilePath), FileHandle(nullptr)
 {
 	//
 }
 
-CAppleFile::~CAppleFile()
+CAndroidFile::~CAndroidFile()
 {
 	if (FileHandle != nullptr)
 	{

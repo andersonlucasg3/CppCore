@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Templates/String/String.h"
 #include "Templates/Array.h"
 
+#include "Object/ClassMacros.h"
+
+#include "String/String.h"
 #include "Object/ClassMacros.h"
 
 CORE_CLASS_HEADER(File);
@@ -17,6 +19,16 @@ public:
 		OpenReadWrite
 	};
 
+protected:
+	CString FilePath;
+
+	CORE_API virtual bool Create() = 0;
+	CORE_API virtual bool Open(EOpenMode Mode) = 0;
+	CORE_API virtual bool Delete() = 0;
+
+	CORE_API CFile(const CString& FilePath);
+
+public:
 	CORE_API virtual ~CFile() = default;
 
 	CORE_API static CFilePtr Create(const CString& FilePath);
@@ -32,13 +44,4 @@ public:
 	CORE_API virtual bool Read(void*& OutData, UInt64& Size) = 0;
 	CORE_API virtual bool Flush() = 0;
 	CORE_API virtual UInt64 GetSize() const = 0;
-
-protected:
-	CString FilePath;
-
-	CORE_API virtual bool Create() = 0;
-	CORE_API virtual bool Open(EOpenMode Mode) = 0;
-	CORE_API virtual bool Delete() = 0;
-
-	CORE_API CFile(const CString& FilePath);
 };

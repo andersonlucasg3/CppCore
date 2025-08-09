@@ -1,7 +1,5 @@
 #pragma once
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Filesystem/FilesystemReference.h"
 #include "Filesystem/FileReference.h"
 #include "Filesystem/DirectoryReference.h"
@@ -25,13 +23,6 @@ public:
     CORE_API bool Create(bool InCreateIntermediates = false) override;
     CORE_API bool Delete() override;
 
-    CORE_API SDirectoryRef Combine(const CString& InComponent) const override;
-    CORE_API SDirectoryRef Combine(const TArray<CString>& InComponents) const override;
-    CORE_API SFileRef CombineFile(const CString& InFilename) const override;
-    CORE_API SFileRef CombineFile(const TArray<CString>& InComponents) const override;
-
     CORE_API NS::String* PathString() const;
     CORE_API NS::URL* PathURL() const;
 };
-
-#endif // PLATFORM_GROUP_APPLE

@@ -1,7 +1,5 @@
 #include "AppleDirectoryReference.h"
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Filesystem/DirectoryReference.h"
 #include "Templates/String/String.h"
 #include "Templates/String/Apple/AppleStringConvertion.h"
@@ -51,33 +49,6 @@ bool CAppleDirectoryReference::Delete()
     return true;
 }
 
-SDirectoryRef CAppleDirectoryReference::Combine(const CString& InComponent) const
-{
-    return GPath.Combine({ _path, InComponent });
-}
-
-SDirectoryRef CAppleDirectoryReference::Combine(const TArray<CString>& InComponents) const
-{
-    TArray<CString> NewArray(InComponents);
-    NewArray.Insert(0, _path);
-
-    return GPath.Combine(NewArray);
-}
-
-SFileRef CAppleDirectoryReference::CombineFile(const CString& InFilename) const
-{
-    return GPath.Combine({ _path, InFilename });
-}
-
-SFileRef CAppleDirectoryReference::CombineFile(const TArray<CString>& InComponents) const
-{
-    TArray<CString> NewArray(InComponents);
-    NewArray.Insert(0, _path);
-
-    return GPath.Combine(NewArray);
-    
-}
-
 NS::String* CAppleDirectoryReference::PathString() const
 {
     return _directoryURL->path();
@@ -87,5 +58,3 @@ NS::URL* CAppleDirectoryReference::PathURL() const
 {
     return _directoryURL.get();
 }
-
-#endif // PLATFORM_GROUP_APPLE

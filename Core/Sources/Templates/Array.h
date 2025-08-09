@@ -1,9 +1,13 @@
 #pragma once
 
+#include "Defines/Asserts.h"
+
 #include "Templates/Functions.h"
-#include "Templates/SharedPointers.h"
+#include "Templates/SmartPointer/Deleter.h"
+#include "Templates/SmartPointer/MakeAndCasts.h"
 
 #include "Memory/Memory.h"
+#include "Logger/Logger.h"
 
 template<typename TElement>
 struct SArrayDeleter : public TDeleter<TElement>
@@ -293,7 +297,7 @@ public:
 			ArrayType NewDataPtr = MakeShareable<TElement, ArrayDeleter>(new TElement[NewSize]);
 			
 			// must use assign so copy operators will be used
-			for (Int32 Index = 0; Index < ItemNum; ++Index)
+			for (SizeT Index = 0; Index < ItemNum; ++Index)
 			{
 				NewDataPtr.Raw()[Index] = DataPtr.Raw()[Index];
 			}

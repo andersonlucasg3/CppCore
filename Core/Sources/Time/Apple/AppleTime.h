@@ -4,7 +4,7 @@
 
 #include "Time/Time.h"
 
-class CAppleTime : public ITime
+class CAppleTime : public CTime
 {
 protected:
     CORE_API SDouble GetTimeInSecondsInternal() const override;

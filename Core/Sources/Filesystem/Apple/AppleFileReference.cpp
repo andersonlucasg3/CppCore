@@ -1,7 +1,5 @@
 #include "AppleFileReference.h"
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Templates/String/Apple/AppleStringConvertion.h"
 
 #include "Foundation/NSFileManager.hpp"
@@ -26,5 +24,3 @@ NS::URL* CAppleFileReference::PathURL() const
 {
     return _fileURL.get();
 }
-
-#endif // PLATFORM_GROUP_APPLE

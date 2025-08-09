@@ -1,8 +1,7 @@
 #pragma once
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Filesystem/FileReference.h"
+#include "Object/ClassMacros.h"
 
 #include <Foundation/NSString.hpp>
 #include <Foundation/NSURL.hpp>
@@ -25,5 +24,3 @@ public:
     CORE_API NS::String* PathString() const;
     CORE_API NS::URL* PathURL() const;
 };
-
-#endif // PLATFORM_GROUP_APPLE

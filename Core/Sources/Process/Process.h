@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Templates/String/String.h"
+#include "String/String.h"
 
 class CProcess
 {

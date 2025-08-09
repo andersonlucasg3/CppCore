@@ -1,7 +1,5 @@
 #pragma once
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Filesystem/Path.h"
 
 class CApplePath : public CPath
@@ -24,5 +22,3 @@ public:
 };
 
 typedef CApplePath CPlatformPath;
-
-#endif // PLATFORM_GROUP_APPLE

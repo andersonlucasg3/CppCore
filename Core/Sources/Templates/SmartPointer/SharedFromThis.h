@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Defines/Asserts.h"
+#include "Logger/Logger.h"
 
 struct IDeleter;
 struct SRefCounter;

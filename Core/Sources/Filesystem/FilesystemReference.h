@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Process/Process.h"
-#include "Templates/SmartPointer/SharedPointer.h"
-#include "Templates/String/String.h"
 #include "Templates/Map.h"
+#include "Templates/SmartPointer/SharedPointer.h"
+
+#include "Process/Process.h"
+#include "String/String.h"
 #include "Filesystem/Path.h"
 #include "Threading/CriticalSection.h"
 #include "Threading/ScopeLock.h"
-#include <type_traits>
 
 template<
     typename TItem,

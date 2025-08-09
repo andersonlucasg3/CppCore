@@ -4,14 +4,12 @@
 
 using namespace Core::Types;
 
-class ITime
+class CTime
 {
-	CORE_API static ITime* GetTime();
-
-	CORE_API virtual Double GetTimeInSecondsInternal() const = 0;
-
 public:
-	CORE_API virtual ~ITime() = default;
+	CORE_API virtual ~CTime() = default;
 
-	CORE_API static Double GetTimeInSeconds();
+	CORE_API virtual Double GetTimeInSeconds() const = 0;
 };
+
+extern const CTime& GTime;

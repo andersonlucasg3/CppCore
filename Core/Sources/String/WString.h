@@ -1,6 +1,8 @@
 #pragma once
 
-#include "StringTemplate.h"
+#if PLATFORM_WINDOWS
+
+#include "Templates/StringTemplate.h"
 #include "Templates/Array.h"
 
 class CWString : public TString<wchar_t, CWString>
@@ -66,3 +68,5 @@ public:
         Length = StrLen;
 	}
 };
+
+#endif // PLATFORM_WINDOWS

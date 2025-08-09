@@ -2,6 +2,8 @@
 
 #include "Defines/Preprocessors.h"
 
+#include <filesystem>
+
 #include COMPILE_PLATFORM_HEADER(File.h)
 
 CFile::CFile(const CString& InFilePath) :
@@ -12,7 +14,7 @@ CFile::CFile(const CString& InFilePath) :
 
 CFilePtr CFile::Create(const CString& FilePath)
 {
-	CFilePtr File = CPlatformFile::Create(FilePath);
+	CFilePtr File = MakeShared<CPlatformFile>(FilePath);
 	if (!File->Create()) return CFilePtr();
 	return File;
 }
@@ -26,7 +28,7 @@ CFile* CFile::CreateUnsafe(const char* FilePath)
 
 CFilePtr CFile::Open(const CString& FilePath, EOpenMode Mode)
 {
-	CFilePtr File = CPlatformFile::Create(FilePath);
+	CFilePtr File = MakeShareable(new CPlatformFile(FilePath));
 	if (!File->Open(Mode)) return CFilePtr();
 	return File;
 }
@@ -40,11 +42,11 @@ CFile* CFile::OpenUnsafe(const char* FilePath, EOpenMode Mode)
 
 bool CFile::Delete(const CString& FilePath)
 {
-	CFilePtr File = CPlatformFile::Create(FilePath);
+	CFilePtr File = Create(FilePath);
 	return File->Delete();
 }
 
 bool CFile::Exists(const CString& FilePath)
 {
-	return CPlatformFile::Exists(FilePath);
+	return std::filesystem::exists(*FilePath);
 }

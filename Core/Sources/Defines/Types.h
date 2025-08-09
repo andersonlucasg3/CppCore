@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstddef>
-#include <type_traits>
-
 namespace Core::Types
 {
 	using Int8 			= signed char;

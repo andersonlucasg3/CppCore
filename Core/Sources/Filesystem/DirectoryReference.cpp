@@ -1,9 +1,12 @@
 #include "DirectoryReference.h"
 
 #include "Defines/Preprocessors.h"
+
 #include "Filesystem/Path.h"
 
 #include COMPILE_PLATFORM_HEADER(DirectoryReference.h)
+
+#include <filesystem>
 
 static TFunction<TSharedPtr<CPlatformDirectoryReference>(const CString&)> FactoryFunction = [](const CString& InPath)
 {
@@ -49,4 +52,48 @@ SDirectoryRef& SDirectoryRef::operator=(const TArray<CString>& InComponentes)
 void SDirectoryRef::operator=(const TSharedPtr<CDirectoryReference>& Other)
 {
     Super::operator=(Other);
+}
+
+bool CDirectoryReference::Create(bool InCreateIntermediates)
+{
+    if (InCreateIntermediates ? std::filesystem::create_directories(*_path) : std::filesystem::create_directory(*_path))
+    {
+        UpdateExistance();
+
+        return true;
+    }
+
+    return false;
+}
+
+bool CDirectoryReference::Delete()
+{
+    return std::filesystem::remove(*_path);
+}
+
+SDirectoryRef CDirectoryReference::Combine(const CString& InComponent) const
+{
+    return GPath.Combine({ _path, InComponent });
+}
+
+SDirectoryRef CDirectoryReference::Combine(const TArray<CString>& InComponents) const
+{
+    TArray<CString> NewArray(InComponents);
+    NewArray.Insert(0, _path);
+
+    return GPath.Combine(NewArray);
+}
+
+SFileRef CDirectoryReference::CombineFile(const CString& InFilename) const
+{
+    return GPath.Combine({ _path, InFilename });
+}
+
+SFileRef CDirectoryReference::CombineFile(const TArray<CString>& InComponents) const
+{
+    TArray<CString> NewArray(InComponents);
+    NewArray.Insert(0, _path);
+
+    return GPath.Combine(NewArray);
+    
 }

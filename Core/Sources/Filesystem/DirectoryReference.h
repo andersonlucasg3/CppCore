@@ -33,11 +33,11 @@ protected:
     virtual ~CDirectoryReference() = default;
 
 public:
-    CORE_API virtual bool Create(bool InCreateIntermediates = false) = 0;
-    CORE_API virtual bool Delete() = 0;
+    CORE_API virtual bool Create(bool InCreateIntermediates = false);
+    CORE_API virtual bool Delete();
 
-    CORE_API virtual SDirectoryRef Combine(const CString& InComponent) const = 0;
-    CORE_API virtual SDirectoryRef Combine(const TArray<CString>& InComponents) const = 0;
-    CORE_API virtual SFileRef CombineFile(const CString& InFilename) const = 0;
-    CORE_API virtual SFileRef CombineFile(const TArray<CString>& InComponents) const = 0;
+    CORE_API virtual SDirectoryRef Combine(const CString& InComponent) const;
+    CORE_API virtual SDirectoryRef Combine(const TArray<CString>& InComponents) const;
+    CORE_API virtual SFileRef CombineFile(const CString& InFilename) const;
+    CORE_API virtual SFileRef CombineFile(const TArray<CString>& InComponents) const;
 };

@@ -2,6 +2,8 @@
 
 #include "Defines/Preprocessors.h"
 #include "Defines/Types.h"
+#include "Filesystem/FileReference.h"
+#include "String/String.h"
 
 #include <exception>
 #include <vector>
@@ -17,64 +19,57 @@
 static const CPlatformLogger GPlatformLogger;
 const CLogger& GLogger = GPlatformLogger;
 
-std::vector<std::string> GLogBuffer;
-
-CFile* GLogFile = nullptr;
-
-void CLogger::WriteLogLineInternal(const std::string& LogLine)
-{
-	GLogger.WriteLogLine(LogLine);
-}
+std::vector<CString> GLogBuffer;
 
 void CLogger::WriteLogLine(const std::string& LogLine) const
 {
-	if (GLogFile == nullptr)
+	if (_logFile == nullptr)
 	{
 		GLogBuffer.push_back(LogLine);
 
 		return;
 	}
 
-	GLogFile->Write((const int8_t*)LogLine.c_str(), LogLine.size());
-	GLogFile->Flush();
+	_logFile->Write((const int8_t*)LogLine.c_str(), LogLine.size());
+	_logFile->Flush();
 }
 
 CLogger::~CLogger()
 {
-	if (GLogFile != nullptr)
+	if (_logFile != nullptr)
 	{
-		delete GLogFile;
-		GLogFile = nullptr;
+		delete _logFile;
+		_logFile = nullptr;
 	}
 }
 
-void CLogger::InitializeLogFile(const char* LogFilePath)
+void CLogger::InitializeLogFile(const SFileRef& LogFilePath)
 {
-	if (GLogFile != nullptr)
+	if (GLogger._logFile != nullptr)
 	{
-		Log("Trying to initialize log file when it is already initialized");
+		GLogger.Log("Trying to initialize log file when it is already initialized");
 
 		return;
 	}
 
-	if (CFile::Exists(LogFilePath))
+	if (LogFilePath->Exists())
 	{
-		CFile::Delete(LogFilePath);
+		LogFilePath->Delete(LogFilePath);
 	}
 
-	GLogFile = CFile::CreateUnsafe(LogFilePath);
+	GLogger._logFile = CFile::CreateUnsafe(LogFilePath);
 
 	if (GLogBuffer.size() > 0)
 	{
 		for (const std::string& Log : GLogBuffer)
 		{
-			GLogFile->Write((const int8_t*)Log.c_str(), Log.size());
+			_logFile->Write((const int8_t*)Log.c_str(), Log.size());
 		}
 
 		GLogBuffer.clear();
 	}
 
-	GLogFile->Flush();
+	_logFile->Flush();
 }
 
 void CLogger::LogException()

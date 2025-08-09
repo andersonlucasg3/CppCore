@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Logger/Logger.h"
-
 #define assertm(a, message) 																\
 	if (!(a)) 																				\
 	{																						\
-		CLogger::Fatal("Error at file: {}:{}\n{}: {}", __FILE__, __LINE__, message, #a);	\
+		GLogger.Fatal("Error at file: {}:{}\n{}: {}", __FILE__, __LINE__, message, #a);	\
 	}
 
 #ifndef assert

@@ -1,16 +1,13 @@
 #pragma once
 
-#if PLATFORM_GROUP_APPLE
-
+#include "Object/ClassMacros.h"
 #include "Templates/Array.h"
 
-#include "Filesystem/_File.h"
+#include "Filesystem/File.h"
 
 #include <cstdio>
 
-class CAppleFile;
-using CAppleFilePtr = TSharedPtr<CAppleFile>;
-using CAppleFileWeakPtr = TWeakPtr<CAppleFile>;
+CORE_CLASS_HEADER(AppleFile);
 
 class CAppleFile : public CFile
 {
@@ -23,7 +20,7 @@ protected:
     CORE_API bool Open(EOpenMode Mode) override;
     CORE_API bool Delete() override;
     CORE_API bool Write(const TArray<int8_t>& ByteArray) override;
-    CORE_API bool Write(const void* Data, SSizeT Size) override;
+    CORE_API bool Write(const void* Data, SizeT Size) override;
     CORE_API bool Read(TArray<int8_t>& OutByteArray) override;
     CORE_API bool Read(void*& OutData, UInt64& Size) override;
     CORE_API bool Flush() override;
@@ -40,5 +37,3 @@ public:
 };
 
 typedef CAppleFile CPlatformFile;
-
-#endif // PLATFORM_GROUP_APPLE
