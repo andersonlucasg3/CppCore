@@ -17,9 +17,9 @@ protected:
 public:
 	CORE_API virtual ~CLogger();
 
-	CORE_API static void InitializeLogFile(const SFileRef& LogFilePath);
+	CORE_API void InitializeLogFile(const SFileRef& LogFilePath);
 
-	CORE_API static void LogException();
+	CORE_API virtual void LogException() const;
 
 	template<typename ... TArgs>
 	inline void Log(const char* Format, TArgs ... Arguments) const
