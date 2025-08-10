@@ -2,4 +2,21 @@
 
 #include "Filesystem/Path.h"
 
-typedef CPath CPlatformPath;
+class CAndroidPath : public CPath
+{
+    CString _filesPath;
+    CString _cachesPath;
+
+public:
+    CORE_API CAndroidPath();
+    CORE_API ~CAndroidPath() override = default;
+
+    CORE_API char PathSeparator() const;
+
+    CORE_API CString GetFullPath(const CString& InPath) const override;
+    CORE_API CString GetPathRoot(const CString& InPath) const override;
+    
+    CORE_API const CString& CachesPath() const override;
+};
+
+typedef CAndroidPath CPlatformPath;

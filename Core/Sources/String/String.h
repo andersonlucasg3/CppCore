@@ -41,9 +41,12 @@ public:
 
 	inline ~CString() override = default;
 
-	inline CString& operator += (const CString& Other);
+	inline CString& operator+=(const CString& Other);
+	inline CString& operator+=(const char* CStr);
+	inline CString& operator+=(char Char);
 	inline CString operator+(const CString& Other) const;
 	inline CString operator+(const char* CStr) const;
+	inline CString operator+(char Char) const;
 	inline bool operator >(const CString& Other) const;
 	inline bool operator <(const CString& Other) const;
 	inline CString& operator=(const CString& Other);
@@ -52,3 +55,5 @@ public:
 	inline bool operator==(const CString& Other) const;
 	inline bool operator==(const char* InCStr) const;
 };
+
+CString operator+(const char* Lhs, const CString& Rhs);

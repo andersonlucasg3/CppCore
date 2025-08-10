@@ -58,24 +58,39 @@ CString::CString::CString(const wchar_t* WStr, SizeT WStrLen)
     
     NewBuffer[WStrLen] = '\0';
 
-    BufferPtr = MakeShareable<char, ArrayDeleter>(NewBuffer);
+    BufferPtr = NewBuffer;
     Length = WStrLen;
 }
 #endif
 
-CString& CString::operator += (const CString& Other)
+CString& CString::operator+=(const CString& Other)
 {
-    return *this = CString("{}{}", BufferPtr.Raw(), Other.BufferPtr.Raw());
+    return *this = CString("{}{}", BufferPtr, Other.BufferPtr);
+}
+
+CString& CString::operator+=(const char* CStr)
+{
+    return *this = CString("{}{}", BufferPtr, CStr);
+}
+
+CString& CString::operator+=(char Char)
+{
+    return *this = CString("{}{}", BufferPtr, Char);
 }
 
 CString CString::operator+(const CString& Other) const
 {
-    return CString("{}{}", BufferPtr.Raw(), Other.BufferPtr.Raw());
+    return CString("{}{}", BufferPtr, Other.BufferPtr);
 }
 
 CString CString::operator+(const char* CStr) const
 {
-    return CString("{}{}", BufferPtr.Raw(), CStr);
+    return CString("{}{}", BufferPtr, CStr);
+}
+
+CString CString::operator+(char Char) const
+{
+    return CString("{}{}", BufferPtr, Char);
 }
 
 bool CString::operator >(const CString& Other) const
@@ -115,11 +130,16 @@ CString& CString::operator=(const char* CStr)
 bool CString::operator==(const CString& Other) const
 {
     if (!BufferPtr || !Other.BufferPtr) return false;
-    return std::string_view(BufferPtr.Raw(), Length) == std::string_view(Other.BufferPtr.Raw(), Other.Length);
+    return std::string_view(BufferPtr, Length) == std::string_view(Other.BufferPtr, Other.Length);
 }
 
 bool CString::operator==(const char* InCStr) const
 {
     if (!BufferPtr || !InCStr) return false;
-    return std::string_view(BufferPtr.Raw(), Length) == std::string_view(InCStr);
+    return std::string_view(BufferPtr, Length) == std::string_view(InCStr);
+}
+
+CString operator+(const char* Lhs, const CString& Rhs)
+{
+    return CString("%s%s", Lhs, *Rhs);
 }

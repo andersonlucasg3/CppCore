@@ -1,5 +1,6 @@
 #include "ApplePath.h"
 
+#include "Environment/Environment.h"
 #include "Templates/String/Apple/AppleStringConvertion.h"
 
 #include "Process/Process.h"
@@ -7,6 +8,11 @@
 #include "Foundation/NSFileManager.hpp"
 #include "Foundation/NSError.hpp"
 #include "Foundation/NSURL.hpp"
+
+char CApplePath::PathSeparator() const
+{
+    return '/';
+}
 
 CString CApplePath::GetFullPath(const CString& InPath) const
 {
@@ -41,48 +47,6 @@ CString CApplePath::GetPathRoot(const CString& InPath) const
     }
 
     return "";
-}
-
-CString CApplePath::Combine(const TArray<CString>& PathComponents) const
-{
-    CString FullPath = PathComponents[0];
-    for (UInt64 Index = 1; Index < PathComponents.Num(); ++Index)
-    {
-        if (FullPath.IsEmpty() || FullPath.LastChar() != '/')
-        {
-            FullPath += "/";
-        }
-
-        FullPath += PathComponents[Index];
-    }
-    return FullPath;
-}
-
-CString CApplePath::LastPathComponent(const CString& InPath) const
-{
-    if (InPath.IsEmpty())
-    {
-        return InPath;
-    }
-
-    UInt64 LastSlashIndex = InPath.LastIndexOf('/');
-    
-    if (LastSlashIndex == -1ul)
-    {
-        return InPath; // No slashes, return the whole path
-    }
-
-    return InPath.SubString(LastSlashIndex + 1);
-}
-
-CString CApplePath::RemoveLastPathComponent(const CString& Path) const
-{
-    UInt64 LastSlashIndex = Path.LastIndexOf('/');
-    if (LastSlashIndex == -1ul)
-    {
-        return Path;
-    }
-    return Path.SubString(0, LastSlashIndex);
 }
 
 const CString& CApplePath::CachesPath() const

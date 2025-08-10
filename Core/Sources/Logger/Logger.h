@@ -22,9 +22,9 @@ public:
 	CORE_API virtual void LogException() const;
 
 	template<typename ... TArgs>
-	inline void Log(const char* Format, TArgs ... Arguments) const
+	inline void Log(const char* Format, TArgs ... Args) const
 	{
-		CString Formatted(Format, Arguments);
+		CString Formatted(Format, Args ...);
 		
 		Formatted = "LOG: " + Formatted;
 
@@ -32,9 +32,9 @@ public:
 	}
 
 	template<typename ... TArgs>
-	inline void Error(const char* Format, TArgs ... Arguments) const
+	inline void Error(const char* Format, TArgs ... Args) const
 	{
-		CString Formatted(Format, Arguments);
+		CString Formatted(Format, Args ...);
 		
 		Formatted = "ERROR: " + Formatted;
 
@@ -42,9 +42,9 @@ public:
 	}
 
 	template<typename ... TArgs>
-	inline void Fatal(const char* Format, TArgs ... Arguments) const
+	inline void Fatal(const char* Format, TArgs ... Args) const
 	{
-		CString Formatted(Format, Arguments);
+		CString Formatted(Format, Args ...);
 		
 		Formatted = "FATAL: " + Formatted;
 

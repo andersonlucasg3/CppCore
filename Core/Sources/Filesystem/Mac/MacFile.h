@@ -1,3 +1,5 @@
 #pragma once
 
-#include "../Apple/AppleFile.h"
+#include "Filesystem/Apple/AppleFile.h"
+
+typedef CAppleFile CPlatformFile;

@@ -35,5 +35,3 @@ public:
     CORE_API static CAppleFile* CreateUnsafe(const char* FilePath);
     CORE_API static bool Exists(const CString& FilePath);
 };
-
-typedef CAppleFile CPlatformFile;
