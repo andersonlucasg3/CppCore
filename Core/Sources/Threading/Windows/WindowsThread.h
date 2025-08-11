@@ -1,8 +1,8 @@
 #pragma once
 
-#if PLATFORM_WINDOWS
-
 #include "Threading/Thread.h"
+
+#include <thread>
 
 CORE_CLASS_HEADER(WindowsThread);
 
@@ -30,5 +30,3 @@ public:
 };
 
 typedef CWindowsThread CPlatformThread;
-
-#endif // PLATFORM_WINDOWS

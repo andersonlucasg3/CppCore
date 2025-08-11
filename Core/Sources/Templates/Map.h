@@ -90,7 +90,7 @@ public:
 
 		if (Bucket.Contains(Pair))
 		{
-			CLogger::Fatal("TMap: Trying to Add a key that is already present");
+			GLogger.Fatal("TMap: Trying to Add a key that is already present");
 		}
 
 		_size++;
@@ -201,7 +201,7 @@ public:
 
 		if (Value == nullptr)
 		{
-			CLogger::Fatal("TMap: There is no value for the given key");
+			GLogger.Fatal("TMap: There is no value for the given key");
 		}
 
 		return *Value;

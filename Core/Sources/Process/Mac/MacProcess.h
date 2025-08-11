@@ -1,9 +1,27 @@
 #pragma once
 
-#if PLATFORM_MACOS
+#include "Process/Desktop/DesktopProcess.h"
 
-#include "Process/Apple/AppleProcess.h"
+#include "Templates/Array.h"
 
-typedef CAppleProcess CPlatformProcess;
+#include "String/String.h"
 
-#endif // PLATFORM_MACOS
+class CMacProcess : public CDesktopProcess
+{
+    CString ExecutablePath;
+    CString ExecutableContainerPath;
+    TArray<CString> CommandLineArgs;
+    
+public:
+    CORE_API CMacProcess() = default;
+    CORE_API ~CMacProcess() override = default;
+
+    CORE_API void SetCommandLine(int argc, const char* argv[]) override;
+    CORE_API const CString& GetExecutablePath() const override;
+    CORE_API const CString& GetExecutableContainerPath() const override;
+    CORE_API const TArray<CString>& GetCommandLineArgs() const override;
+    
+    CORE_API bool IsRunningOnAppBundle() const;
+};
+
+typedef CMacProcess CPlatformProcess;

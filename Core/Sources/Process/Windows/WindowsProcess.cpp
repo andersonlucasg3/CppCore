@@ -1,7 +1,5 @@
 #include "WindowsProcess.h"
 
-#if PLATFORM_WINDOWS
-
 #include "Filesystem/Path.h"
 
 void CWindowsProcess::SetCommandLine(int argc, const char** argv)
@@ -29,5 +27,3 @@ const TArray<CString>& CWindowsProcess::GetCommandLineArgs() const
 {
 	return CommandLineArgs;
 }
-
-#endif // PLATFORM_WINDOWS

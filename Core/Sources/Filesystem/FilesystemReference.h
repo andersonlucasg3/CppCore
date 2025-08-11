@@ -28,6 +28,9 @@ protected:
     {
         _path = GPath.GetFullPath(InPath);
 
+        // TODO: need to think how to move this to platform context
+        // maintaining the idea that android works with /sdcard/Android/data/com.package/files
+        // I mean, mobile in general
         CString WorkingPath = GProcess.GetExecutableContainerPath();
 
         if (_path == WorkingPath)
@@ -57,6 +60,9 @@ protected:
 
         if (GPath.GetPathRoot(InPath) == "")
         {
+            // TODO: need to think how to move this to platform context
+            // maintaining the idea that android works with /sdcard/Android/data/com.package/files
+            // I mean, mobile in general
             Path = GPath.Combine({ GProcess.GetExecutableContainerPath(), Path });
         }
 

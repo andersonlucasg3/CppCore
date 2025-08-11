@@ -3,9 +3,10 @@
 #include "Object/Object.h"
 
 #include "Templates/Functions.h"
-#include "Templates/String/String.h"
 
 #include "CriticalSection.h"
+
+#include "String/String.h"
 
 CORE_CLASS_HEADER(Thread);
 

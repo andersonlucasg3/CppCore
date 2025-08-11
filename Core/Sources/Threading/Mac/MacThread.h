@@ -1,7 +1,5 @@
 #pragma once
 
-#if PLATFORM_MACOS
-
 #include "Templates/SharedPointers.h"
 
 #include "Threading/Thread.h"
@@ -22,7 +20,7 @@ public:
     CORE_API ~CMacThread() override = default;
 
     CORE_API void SetName(const CString& Name) override;
-    CORE_API CString Name() const override;
+    CORE_API const CString& Name() const override;
 
     CORE_API void Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc) override;
     CORE_API void Join() override;
@@ -31,5 +29,3 @@ public:
 };
 
 typedef CMacThread CPlatformThread;
-
-#endif // PLATFORM_MACOS

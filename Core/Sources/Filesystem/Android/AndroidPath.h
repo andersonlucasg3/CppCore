@@ -11,7 +11,7 @@ public:
     CORE_API CAndroidPath();
     CORE_API ~CAndroidPath() override = default;
 
-    CORE_API char PathSeparator() const;
+    CORE_API char PathSeparator() const override;
 
     CORE_API CString GetFullPath(const CString& InPath) const override;
     CORE_API CString GetPathRoot(const CString& InPath) const override;

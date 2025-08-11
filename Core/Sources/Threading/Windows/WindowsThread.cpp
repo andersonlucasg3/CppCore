@@ -1,10 +1,9 @@
 #include "WindowsThread.h"
 
-#if PLATFORM_WINDOWS
-
-#include "Templates/String/WString.h"
+#include "String/WString.h"
 
 #include <Windows.h>
+
 #include <processthreadsapi.h>
 
 void CWindowsThread::SetName(const CString& Name)
@@ -52,5 +51,3 @@ CWindowsThreadPtr CWindowsThread::Create()
 {
 	return MakeShareable(new CWindowsThread);
 }
-
-#endif // PLATFORM_WINDOWS

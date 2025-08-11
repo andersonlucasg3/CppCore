@@ -1,10 +1,12 @@
 #pragma once
 
-#if PLATFORM_WINDOWS
+#include "Process/Desktop/DesktopProcess.h"
 
-#include "Process/Process.h"
+#include "Templates/Array.h"
 
-class CWindowsProcess : public CProcess
+#include "String/String.h"
+
+class CWindowsProcess : public CDesktopProcess
 {
 	CString ExecutablePath;
 	CString ExecutableContainerPath;
@@ -21,5 +23,3 @@ public:
 };
 
 typedef CWindowsProcess CPlatformProcess;
-
-#endif // PLATFORM_WINDOWS

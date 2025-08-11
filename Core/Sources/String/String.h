@@ -33,27 +33,27 @@ public:
 	template<
 		typename ... TArgs
 	>
-	inline explicit CString(const char* CStr, TArgs ... Args) : CString()
+	explicit CString(const char* CStr, TArgs ... Args) : CString()
 	{
 		std::string Formatted = std::vformat(CStr, std::make_format_args(Args...));
 		BufferPtr = CopyStr(Formatted.c_str(), Formatted.size());
 	}
 
-	inline ~CString() override = default;
+	~CString() override = default;
 
-	inline CString& operator+=(const CString& Other);
-	inline CString& operator+=(const char* CStr);
-	inline CString& operator+=(char Char);
-	inline CString operator+(const CString& Other) const;
-	inline CString operator+(const char* CStr) const;
-	inline CString operator+(char Char) const;
-	inline bool operator >(const CString& Other) const;
-	inline bool operator <(const CString& Other) const;
-	inline CString& operator=(const CString& Other);
-	inline CString& operator=(char* CStr);
-	inline CString& operator=(const char* CStr);
-	inline bool operator==(const CString& Other) const;
-	inline bool operator==(const char* InCStr) const;
+	CString& operator+=(const CString& Other);
+	CString& operator+=(const char* CStr);
+	CString& operator+=(char Char);
+	CString operator+(const CString& Other) const;
+	CString operator+(const char* CStr) const;
+	CString operator+(char Char) const;
+	bool operator >(const CString& Other) const;
+	bool operator <(const CString& Other) const;
+	CString& operator=(const CString& Other);
+	CString& operator=(char* CStr);
+	CString& operator=(const char* CStr);
+	bool operator==(const CString& Other) const;
+	bool operator==(const char* InCStr) const;
 };
 
 CString operator+(const char* Lhs, const CString& Rhs);

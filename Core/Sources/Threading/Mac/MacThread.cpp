@@ -1,8 +1,7 @@
 #include "MacThread.h"
 
-#if PLATFORM_MACOS
-
 #include "Templates/SmartPointer/MakeAndCasts.h"
+
 #include "Threading/Thread.h"
 
 void CMacThread::SetName(const CString &Name)
@@ -10,7 +9,7 @@ void CMacThread::SetName(const CString &Name)
     ThreadName = Name;
 }
 
-CString CMacThread::Name() const
+const CString& CMacThread::Name() const
 {
     return ThreadName;
 }
@@ -47,5 +46,3 @@ CMacThreadPtr CMacThread::Create()
 {
     return MakeShared<CMacThread>();
 }
-
-#endif // PLATFORM_MACOS
