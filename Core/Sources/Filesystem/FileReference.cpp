@@ -4,6 +4,8 @@
 
 #include "Defines/Preprocessors.h"
 
+#include <filesystem>
+
 #include COMPILE_PLATFORM_HEADER(FileReference.h)
 
 static TFunction<TSharedPtr<CPlatformFileReference>(const CString&)> FactoryFunction = [](const CString& InPath)
@@ -28,7 +30,7 @@ SFileRef::SFileRef(const TArray<CString>& InComponents) : Super()
 
 SFileRef& SFileRef::operator=(const char* InCStr)
 {
-    this->operator=(CString(InCStr));
+    return this->operator=(CString(InCStr));
 }
 
 SFileRef& SFileRef::operator=(const CString& InPath)
@@ -48,4 +50,18 @@ SFileRef& SFileRef::operator=(const TArray<CString>& InComponents)
 void SFileRef::operator=(const TSharedPtr<CFileReference>& Other)
 {
     Super::operator=(Other);
+}
+
+CFileReference::CFileReference(const CString& InPath) : Super(InPath) 
+{
+    //
+}
+
+bool CFileReference::Delete()
+{
+    bool bResult = std::filesystem::remove(*_path);
+
+    if (bResult) UpdateExistance();
+
+    return bResult;
 }

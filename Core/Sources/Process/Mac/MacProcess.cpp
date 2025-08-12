@@ -2,6 +2,8 @@
 
 #include "Filesystem/Path.h"
 
+const CMacProcess& GMacProcess = static_cast<const CMacProcess&>(GProcess);
+
 void CMacProcess::SetCommandLine(int argc, const char* argv[])
 {
     ExecutablePath = argv[0];
@@ -17,7 +19,7 @@ const CString& CMacProcess::GetExecutablePath() const
     return ExecutablePath;
 }
 
-const CString& CMacProcess::GetExecutableContainerPath() const
+const CString& CMacProcess::GetContainerPath() const
 {
     return ExecutableContainerPath;
 }

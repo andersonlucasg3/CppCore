@@ -18,10 +18,12 @@ public:
 
     CORE_API void SetCommandLine(int argc, const char* argv[]) override;
     CORE_API const CString& GetExecutablePath() const override;
-    CORE_API const CString& GetExecutableContainerPath() const override;
+    CORE_API const CString& GetContainerPath() const override;
     CORE_API const TArray<CString>& GetCommandLineArgs() const override;
     
     CORE_API bool IsRunningOnAppBundle() const;
 };
 
 typedef CMacProcess CPlatformProcess;
+
+extern const CMacProcess& GMacProcess;

@@ -52,6 +52,6 @@ CWString::CWString(const char* CStr, SizeT StrLen)
     
     NewBuffer[StrLen] = L'\0';
 
-    BufferPtr = MakeShareable<wchar_t, ArrayDeleter>(NewBuffer);
+    BufferPtr = NewBuffer;
     Length = StrLen;
 }

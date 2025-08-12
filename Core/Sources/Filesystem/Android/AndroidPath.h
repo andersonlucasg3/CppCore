@@ -17,6 +17,9 @@ public:
     CORE_API CString GetPathRoot(const CString& InPath) const override;
     
     CORE_API const CString& CachesPath() const override;
+    CORE_API const CString& GetFilesPath() const;
 };
 
 typedef CAndroidPath CPlatformPath;
+
+extern const CAndroidPath& GAndroidPath;

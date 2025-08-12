@@ -14,8 +14,6 @@ class CWindowsFile : public CFile
 
 	FILE* FileHandle;
 
-	CORE_API CWindowsFile(const CString& FilePath);
-
 protected:
 	CORE_API bool Create() override;
 	CORE_API bool Open(EOpenMode Mode) override;
@@ -28,6 +26,7 @@ protected:
 	CORE_API UInt64 GetSize() const override;
 
 public:
+	CORE_API CWindowsFile(const CString& FilePath);
 	CORE_API ~CWindowsFile() override;
 
 	CORE_API static CWindowsFilePtr Create(const CString& FilePath);

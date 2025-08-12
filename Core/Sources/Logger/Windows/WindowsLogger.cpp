@@ -8,19 +8,18 @@
 #include <Windows.h>
 #include <iostream>
 
-void CWindowsLogger::WriteLogLine(const std::string& LogLine) const
+void CWindowsLogger::WriteLogLine(const CString& LogLine) const
 {
-	std::string Line = LogLine + GEnvironment.NewLine();
+	CString Line = LogLine + GEnvironment.NewLine();
 
 	Super::WriteLogLine(Line);
 
-	std::cout << Line << GEnvironment.NewLine();
+	std::cout << *Line << GEnvironment.NewLine();
 
-	OutputDebugStringA(Line.c_str());
+	OutputDebugStringA(*Line);
 }
 
-CWindowsLogger::CWindowsLogger() :
-	Super()
+CWindowsLogger::CWindowsLogger() : Super()
 {
 	if (AttachConsole(ATTACH_PARENT_PROCESS)) 
 	{

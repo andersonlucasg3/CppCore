@@ -1,18 +1,13 @@
 #pragma once
 
-#if PLATFORM_WINDOWS
-
 #include "Time/Time.h"
 
-class CWindowsTime : public ITime
+class CWindowsTime : public CTime
 {
-protected:
-	CORE_API Double GetTimeInSecondsInternal() const override;
-
 public:
 	CORE_API ~CWindowsTime() override = default;
+
+	CORE_API Double GetTimeInSeconds() const override;
 };
 
 typedef CWindowsTime CPlatformTime;
-
-#endif

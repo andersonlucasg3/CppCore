@@ -1,13 +1,16 @@
 #pragma once
 
+#include "Defines/Preprocessors.h"
+
 #include "Templates/Map.h"
 #include "Templates/SmartPointer/SharedPointer.h"
 
-#include "Process/Process.h"
 #include "String/String.h"
 #include "Filesystem/Path.h"
 #include "Threading/CriticalSection.h"
 #include "Threading/ScopeLock.h"
+
+#include COMPILE_PLATFORM_TYPE_HEADER_FEATURE(Process, Process.h)
 
 template<
     typename TItem,
@@ -31,7 +34,7 @@ protected:
         // TODO: need to think how to move this to platform context
         // maintaining the idea that android works with /sdcard/Android/data/com.package/files
         // I mean, mobile in general
-        CString WorkingPath = GProcess.GetExecutableContainerPath();
+        CString WorkingPath = GProcess.GetContainerPath();
 
         if (_path == WorkingPath)
         {
@@ -63,7 +66,7 @@ protected:
             // TODO: need to think how to move this to platform context
             // maintaining the idea that android works with /sdcard/Android/data/com.package/files
             // I mean, mobile in general
-            Path = GPath.Combine({ GProcess.GetExecutableContainerPath(), Path });
+            Path = GPath.Combine({ GProcess.GetContainerPath(), Path });
         }
 
         Path = GPath.GetFullPath(Path);
@@ -83,6 +86,8 @@ protected:
     }
 
 public:
+    inline virtual bool Delete() = 0;
+
     inline const CString& Path() const
     {
         return _path;

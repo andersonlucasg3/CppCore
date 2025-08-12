@@ -29,6 +29,21 @@ bool CAndroidFile::Delete()
 	return std::filesystem::remove(*FilePath);
 }
 
+CAndroidFile::CAndroidFile(const CString& FilePath) :
+	Super(FilePath), FileHandle(nullptr)
+{
+	//
+}
+
+CAndroidFile::~CAndroidFile()
+{
+	if (FileHandle != nullptr)
+	{
+		fclose(FileHandle);
+		FileHandle = nullptr;
+	}
+}
+
 bool CAndroidFile::Write(const TArray<int8_t>& ByteArray)
 {
 	UInt64 BytesWritten = 0;
@@ -129,19 +144,4 @@ UInt64 CAndroidFile::GetSize() const
 	fseek(FileHandle, 0, SEEK_SET);
 
 	return FileSize;
-}
-
-CAndroidFile::CAndroidFile(const CString& FilePath) :
-	Super(FilePath), FileHandle(nullptr)
-{
-	//
-}
-
-CAndroidFile::~CAndroidFile()
-{
-	if (FileHandle != nullptr)
-	{
-		fclose(FileHandle);
-		FileHandle = nullptr;
-	}
 }

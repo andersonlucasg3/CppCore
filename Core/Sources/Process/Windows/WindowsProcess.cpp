@@ -18,7 +18,7 @@ const CString& CWindowsProcess::GetExecutablePath() const
 	return ExecutablePath;
 }
 
-const CString& CWindowsProcess::GetExecutableContainerPath() const
+const CString& CWindowsProcess::GetContainerPath() const
 {
 	return ExecutableContainerPath;
 }

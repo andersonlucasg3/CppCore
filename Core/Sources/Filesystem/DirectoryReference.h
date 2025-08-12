@@ -29,12 +29,12 @@ class CDirectoryReference : public TFilesystemReference<CDirectoryReference>
     using Super = TFilesystemReference<CDirectoryReference>;
 
 protected:
-    explicit CDirectoryReference(const CString& InPath) : Super(InPath) { }
-    virtual ~CDirectoryReference() = default;
+    CORE_API explicit CDirectoryReference(const CString& InPath) : Super(InPath) { }
+    CORE_API ~CDirectoryReference() override = default;
 
 public:
     CORE_API virtual bool Create(bool InCreateIntermediates = false);
-    CORE_API virtual bool Delete();
+    CORE_API virtual bool Delete() override;
 
     CORE_API virtual SDirectoryRef Combine(const CString& InComponent) const;
     CORE_API virtual SDirectoryRef Combine(const TArray<CString>& InComponents) const;

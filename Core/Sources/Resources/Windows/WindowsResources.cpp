@@ -8,7 +8,7 @@
 SFileRef CWindowsResources::GetResource(const CString& InResourceName) const
 {
 	return GPath.Combine({
-		GProcess.GetExecutableContainerPath(),
+		GProcess.GetContainerPath(),
 		"Resources",
 		InResourceName
 	});;

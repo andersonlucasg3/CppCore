@@ -12,4 +12,6 @@ public:
 
     CORE_API virtual void SetCommandLine(int argc, const char* argv[]) = 0;
     CORE_API virtual const TArray<CString>& GetCommandLineArgs() const = 0;
+
+    CORE_API virtual const CString& GetContainerPath() const = 0;
 };

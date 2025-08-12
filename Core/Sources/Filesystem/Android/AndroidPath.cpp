@@ -7,6 +7,8 @@
 #warning "ANDROID_APPLICATION_PACKAGE not defined yet"
 #endif // ANDROID_APPLICATION_PACKAGE
 
+const CAndroidPath& GAndroidPath = static_cast<const CAndroidPath&>(GPath);
+
 CAndroidPath::CAndroidPath()
 {
     _filesPath = Combine({
@@ -49,4 +51,9 @@ CString CAndroidPath::GetPathRoot(const CString& InPath) const
 const CString& CAndroidPath::CachesPath() const
 {
     return _cachesPath;
+}
+
+const CString& CAndroidPath::GetFilesPath() const
+{
+    return _filesPath;
 }

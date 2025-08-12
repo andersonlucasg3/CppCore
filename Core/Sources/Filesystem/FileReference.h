@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Filesystem/FilesystemReference.h"
 #include "Templates/SmartPointer/SharedPointer.h"
+
+#include "Filesystem/FilesystemReference.h"
 
 class CFileReference;
 
@@ -28,6 +29,9 @@ class CFileReference : public TFilesystemReference<CFileReference>
     using Super = TFilesystemReference<CFileReference>;
 
 protected:
-    CFileReference(const CString& InPath) : Super(InPath) { }
-    ~CFileReference() override = default;
+    CORE_API explicit CFileReference(const CString& InPath);
+    CORE_API ~CFileReference() override = default;
+
+public:
+    CORE_API bool Delete() override;
 };

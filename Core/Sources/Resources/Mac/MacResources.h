@@ -1,7 +1,5 @@
 #pragma once
 
-#if PLATFORM_MACOS
-
 #include "Resources/Resources.h"
 
 class CMacResources : public CResources
@@ -13,5 +11,3 @@ public:
 };
 
 typedef CMacResources CPlatformResources;
-
-#endif // PLATFORM_MACOS

@@ -1,6 +1,6 @@
 #include "WindowsThread.h"
 
-#include "String/WString.h"
+#include "String/Windows/WString.h"
 
 #include <Windows.h>
 

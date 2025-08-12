@@ -9,6 +9,10 @@ public:
 
     CORE_API void SetCommandLine(int argc, const char* argv[]) override;
     CORE_API const TArray<CString>& GetCommandLineArgs() const override;
+
+    CORE_API const CString& GetContainerPath() const override;
 };
 
 typedef CAndroidProcess CPlatformProcess;
+
+extern const CAndroidProcess& GAndroidProcess;

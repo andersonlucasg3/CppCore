@@ -2,8 +2,6 @@
 
 #include "Templates/String/StringTemplate.h"
 
-#include <string>
-#include <cstring>
 #include <format>
 
 #if PLATFORM_WINDOWS

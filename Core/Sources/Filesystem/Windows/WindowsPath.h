@@ -11,6 +11,8 @@ class CWindowsPath : public CPath
 public:
 	CORE_API ~CWindowsPath() override = default;
 
+	CORE_API char PathSeparator() const override;
+
 	CORE_API CString GetFullPath(const CString& InPath) const override;
 	CORE_API CString GetPathRoot(const CString& InPath) const override;
 

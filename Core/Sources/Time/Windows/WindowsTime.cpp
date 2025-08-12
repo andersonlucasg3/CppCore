@@ -1,10 +1,8 @@
 #include "WindowsTime.h"
 
-#if PLATFORM_WINDOWS
-
 #include <Windows.h>
 
-Double CWindowsTime::GetTimeInSecondsInternal() const
+Double CWindowsTime::GetTimeInSeconds() const
 {
 	LARGE_INTEGER Frequency;
 	QueryPerformanceFrequency(&Frequency);
@@ -14,5 +12,3 @@ Double CWindowsTime::GetTimeInSecondsInternal() const
 
 	return static_cast<Double>(Counter.QuadPart) / static_cast<Double>(Frequency.QuadPart);
 }
-
-#endif // PLATFORM_WINDOWS

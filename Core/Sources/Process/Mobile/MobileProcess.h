@@ -1,7 +1,5 @@
 #pragma once
 
-#if PLATFORM_TYPE_MOBILE
-
 #include "Process/Process.h"
 
 class CMobileProcess : public CProcess
@@ -14,5 +12,3 @@ public:
 };
 
 extern const CMobileProcess& GProcess;
-
-#endif

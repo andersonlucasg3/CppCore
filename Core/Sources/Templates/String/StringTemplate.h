@@ -90,7 +90,7 @@ public:
 		return false;
 	}
 
-	inline UInt64 LastIndexOf(const TChar Char) const
+	inline Int64 LastIndexOf(const TChar Char) const
 	{
 		for (UInt64 Index = Length - 1; Index >= 0; --Index)
 		{

@@ -68,7 +68,11 @@ bool CDirectoryReference::Create(bool InCreateIntermediates)
 
 bool CDirectoryReference::Delete()
 {
-    return std::filesystem::remove(*_path);
+    bool bResult = std::filesystem::remove(*_path);
+
+    if (bResult) UpdateExistance();
+
+    return bResult;
 }
 
 SDirectoryRef CDirectoryReference::Combine(const CString& InComponent) const

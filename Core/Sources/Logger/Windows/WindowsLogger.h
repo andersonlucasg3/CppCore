@@ -1,15 +1,14 @@
 #pragma once
 
-#if PLATFORM_WINDOWS
-
 #include "Logger/Logger.h"
+#include "String/String.h"
 
 class CWindowsLogger : public CLogger
 {
 	using Super = CLogger;
 
 protected:
-	CORE_API void WriteLogLine(const std::string& LogLine) const override;
+	CORE_API void WriteLogLine(const CString& LogLine) const override;
 
 public:
 	CORE_API CWindowsLogger();
@@ -17,5 +16,3 @@ public:
 };
 
 typedef CWindowsLogger CPlatformLogger;
-
-#endif

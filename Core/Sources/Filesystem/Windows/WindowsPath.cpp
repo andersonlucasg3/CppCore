@@ -1,8 +1,10 @@
 #include "WindowsPath.h"
 
-#if PLATFORM_WINDOWS
+#include "Templates/Array.h"
 
-#include "Process/Process.h"
+#include "Process/Desktop/DesktopProcess.h"
+
+#include "Filesystem/Path.h"
 
 #include <Windows.h>
 #include <shlobj.h>
@@ -10,6 +12,11 @@
 CString CWindowsPath::FixPath(const CString& Path)
 {
     return Path.Replace('/', '\\');
+}
+
+char CWindowsPath::PathSeparator() const
+{
+    return '\\';
 }
 
 CString CWindowsPath::GetFullPath(const CString& InPath) const
@@ -23,7 +30,7 @@ CString CWindowsPath::GetFullPath(const CString& InPath) const
 
     if (Path[1] != ':')
     {
-        const CString& WorkingDirectory = GProcess.GetExecutableContainerPath();
+        const CString& WorkingDirectory = GProcess.GetContainerPath();
         Path = GPath.Combine({ WorkingDirectory, InPath });
     }
 
@@ -49,7 +56,7 @@ CString CWindowsPath::GetPathRoot(const CString& InPath) const
 
     if (Path[1] != ':')
     {
-        const CString& WorkingDirectory = GProcess.GetExecutableContainerPath();
+        const CString& WorkingDirectory = GProcess.GetContainerPath();
         Path = WorkingDirectory;
     }
 
@@ -71,7 +78,7 @@ CString CWindowsPath::Combine(const TArray<CString>& PathComponents) const
 
 CString CWindowsPath::LastPathComponent(const CString& InPath) const
 {
-    UInt64 LastSlashIndex = InPath.LastIndexOf('\\');
+    Int64 LastSlashIndex = InPath.LastIndexOf('\\');
     if (LastSlashIndex == -1)
     {
         return InPath;
@@ -81,7 +88,7 @@ CString CWindowsPath::LastPathComponent(const CString& InPath) const
 
 CString CWindowsPath::RemoveLastPathComponent(const CString& InPath) const
 {
-    UInt64 LastSlashIndex = InPath.LastIndexOf('\\');
+    Int64 LastSlashIndex = InPath.LastIndexOf('\\');
     if (LastSlashIndex == -1)
     {
         return InPath;
@@ -117,5 +124,3 @@ const CString& CWindowsPath::CachesPath() const
 
     return CachesPath;
 }
-
-#endif // PLATFORM_WINDOWS

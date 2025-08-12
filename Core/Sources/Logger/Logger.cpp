@@ -50,7 +50,7 @@ void CLogger::InitializeLogFile(const SFileRef& LogFilePath)
 
 	if (LogFilePath->Exists())
 	{
-		LogFilePath->Delete(LogFilePath);
+		LogFilePath->Delete();
 	}
 
 	_logFile = CFile::CreateUnsafe(*LogFilePath->Path());

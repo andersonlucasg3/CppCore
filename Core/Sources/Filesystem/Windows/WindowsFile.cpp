@@ -6,12 +6,6 @@
 
 #include <filesystem>
 
-CWindowsFile::CWindowsFile(const CString& FilePath) :
-	Super(FilePath), FileHandle(nullptr)
-{
-
-}
-
 bool CWindowsFile::Create()
 {
 	FileHandle = _fsopen(*FilePath, "wb+", _SH_DENYNO);
@@ -142,6 +136,11 @@ UInt64 CWindowsFile::GetSize() const
 	fseek(FileHandle, 0, SEEK_SET);
 
 	return FileSize;
+}
+
+CWindowsFile::CWindowsFile(const CString& FilePath) : Super(FilePath), FileHandle(nullptr)
+{
+	//
 }
 
 CWindowsFile::~CWindowsFile()
