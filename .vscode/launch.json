@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet: build",
+            "program": "${workspaceFolder}/Programs/DotNet/ProjectTools/BuildTool/bin/Debug/net9.0/BuildTool.exe",
+            "args": [
+                "GenCodeProject",
+                "-Project=Core",
+                "-Generator=VisualStudio",
+                "-Platform=Android",
+                "-Configuration=Debug",
+                "-DisableMT"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ],
+    "compounds": []
+}
