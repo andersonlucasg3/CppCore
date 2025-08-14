@@ -41,7 +41,7 @@
 *.dwo
 
 # main sln should not be committed as it get regenerated all the time
-Core.sln
+*.sln
 
 bin/
 obj/
