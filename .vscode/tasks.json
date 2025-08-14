@@ -41,6 +41,25 @@
             "group": "build"
         },
         {
+            "label": "Compile ProjectTools",
+            "command": "pwsh",
+            "type": "shell",
+            "args": [
+                "-c",
+                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "Core",
+                "-Platform", "${input:platforms}",
+                "-ProjectToolsOnly"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        {
             "label": "Clean",
             "command": "pwsh",
             "type": "shell",

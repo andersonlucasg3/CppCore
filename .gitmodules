@@ -2,3 +2,6 @@
 [submodule "Programs/DotNet/ProjectTools"]
 	path = Programs/DotNet/ProjectTools
 	url = https://github.com/andersonlucasg3/CppProjectTools
+[submodule "Core/Deps/TestSuit"]
+	path = Core/Deps/TestSuit
+	url = https://github.com/andersonlucasg3/CppTestSuit.git

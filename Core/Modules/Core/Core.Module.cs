@@ -3,14 +3,14 @@ using Shared.Projects;
 
 namespace Core.Modules;
 
-public class CoreModule : ModuleDefinition
+public class CoreModule : AModuleDefinition
 {
     public override string Name => "Core";
     public override EModuleBinaryType BinaryType => EModuleBinaryType.DynamicLibrary;
 
     public override string SourcesRoot => "Sources";
 
-    protected override void Configure(ProjectDefinition InOwnerProject)
+    protected override void Configure()
     {
         AddHeaderSearchPaths(
             ETargetPlatform.macOS,

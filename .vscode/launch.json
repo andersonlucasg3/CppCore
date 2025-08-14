@@ -2,11 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Debug GenCodeProject",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "dotnet: build",
-            "program": "${workspaceFolder}/Programs/DotNet/ProjectTools/BuildTool/bin/Debug/net9.0/BuildTool.exe",
+            "preLaunchTask": "Compile ProjectTools",
+            "windows": {
+                "program": "/Users/anderson/Projects/CppCore/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
+            },
+            "osx": {
+                "program": "/Users/anderson/Projects/CppCore/Core/Binaries/DotNet/ProjectTools/BuildTool"
+            },
             "args": [
                 "GenCodeProject",
                 "-Project=Core",

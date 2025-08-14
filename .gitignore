@@ -49,6 +49,8 @@ Intermediate/
 .vs/
 .cache/
 
+Binaries/
+
 *.deps.json
 *.runtimeconfig.json
 

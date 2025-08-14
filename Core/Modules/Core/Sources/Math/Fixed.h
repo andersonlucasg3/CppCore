@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Templates/Strings.h"
+#include "String/String.h"
 
 #define DECLARE_FIXED_OPERATOR(OP, T, V) \
 constexpr TFixed operator OP(T Value) const { TFixed Copy = *this; Copy.Value OP##= V; return Copy; }
@@ -73,7 +73,7 @@ namespace Core::Maths
 			return static_cast<Float>(Descale(Value));
 		}
 
-		constexpr operator SDouble() const
+		constexpr operator Double() const
 		{
 			return Descale(Value);
 		}
