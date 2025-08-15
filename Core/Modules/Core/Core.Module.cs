@@ -12,9 +12,9 @@ public class CoreModule : AModuleDefinition
 
     protected override void Configure()
     {
-        AddHeaderSearchPaths(
+        AddDependencyModuleNames(
             ETargetPlatform.macOS,
-            "External/Apple-Cpp"
+            "Foundation"
         );
 
         AddLinkWithLibrary(

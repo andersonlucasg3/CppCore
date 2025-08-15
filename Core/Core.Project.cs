@@ -1,5 +1,6 @@
 using Shared.Projects;
 using TestSuit.Projects;
+using AppleFrameworks.Projects;
 
 namespace Core.Projects;
 
@@ -13,9 +14,10 @@ public class CoreProject : AProjectDefinition
 
     protected override void Configure()
     {
+        AddProjectDependency<TestSuitProject>();
+        AddProjectDependency<AppleFrameworksProject>();
+
         AddModule<CoreModule>();
         AddModule<CoreTestsModule>();
-
-        AddProjectDependency<TestSuitProject>();
     }
 }
