@@ -14,12 +14,12 @@ struct SArrayDeleter : public TDeleter<TElement>
 {
 	using Super = TDeleter<TElement>;
 
-	inline SArrayDeleter(TElement* InPtr) : Super(InPtr)
+	SArrayDeleter(TElement* InPtr) : Super(InPtr)
 	{
 		//
 	}
 
-	inline void Delete() override
+	void Delete() override
 	{
 		if (Super::_ptr == nullptr) return;
 
@@ -37,19 +37,19 @@ class TArray
 	SizeT ItemNum;
 	SizeT ArraySize;
 	
-	inline TElement& SetAt(const UInt64& Index, const TElement& Item)
+	TElement& SetAt(const UInt64& Index, const TElement& Item)
 	{
 		TElement& Element = *(DataPtr + Index);
 
 		return Element = Item;
 	}
 
-	inline void IncreaseArray()
+	void IncreaseArray()
 	{
 		Resize(ArraySize + 4);
 	}
 
-	inline void DecreaseArray(bool bKeepArraySize)
+	void DecreaseArray(bool bKeepArraySize)
 	{
 		if (!bKeepArraySize && (ArraySize - ItemNum > 4))
 		{
@@ -58,19 +58,19 @@ class TArray
 	}
 
 	template<typename TEquatable>
-	inline bool IsEqual(TEquatable LHS, TEquatable RHS) const
+	bool IsEqual(TEquatable LHS, TEquatable RHS) const
 	{
 		return LHS == RHS;
 	}
 
 	template<>
-	inline bool IsEqual(const char* LHS, const char* RHS) const
+	bool IsEqual(const char* LHS, const char* RHS) const
 	{
 		return std::strcmp(LHS, RHS) == 0;
 	}
 
 public:
-	inline TArray(const TArray& Other) :
+	TArray(const TArray& Other) :
 		ItemNum(Other.ItemNum),
 		ArraySize(Other.ItemNum)
 	{
@@ -82,7 +82,7 @@ public:
 		}
 	}
 
-	inline TArray(SizeT Size = 4, bool bSetItemNumFromSize = false) :
+	TArray(SizeT Size = 4, bool bSetItemNumFromSize = false) :
 		ItemNum(0),
 		ArraySize(Size)
 	{
@@ -97,7 +97,7 @@ public:
 		}
 	}
 
-	inline TArray(const TElement* Data, SizeT Size) :
+	TArray(const TElement* Data, SizeT Size) :
 		DataPtr(MakeShareable<TElement, ArrayDeleter>(new TElement[Size])),
 		ItemNum(Size),
 		ArraySize(Size)
@@ -106,7 +106,7 @@ public:
 	}
 
 	// initializer lists constructor
-	inline TArray(std::initializer_list<TElement> InitList) noexcept :
+	TArray(std::initializer_list<TElement> InitList) noexcept :
 		ItemNum(InitList.size()),
 		ArraySize(InitList.size())
 	{
@@ -118,12 +118,12 @@ public:
 		}
 	}
 
-	inline virtual ~TArray()
+	virtual ~TArray()
 	{
 		DataPtr = nullptr;
 	}
 
-	inline TElement& Add(const TElement& NewItem)
+	TElement& Add(const TElement& NewItem)
 	{
 		if (ItemNum == ArraySize)
 		{
@@ -133,7 +133,7 @@ public:
 		return SetAt(ItemNum++, NewItem);
 	}
 
-	inline TElement& Insert(UInt64 Index, const TElement& NewItem)
+	TElement& Insert(UInt64 Index, const TElement& NewItem)
 	{
 		if ((static_cast<Int64>(ArraySize) - static_cast<Int64>(ItemNum + 1)) <= 0)
 		{
@@ -149,7 +149,7 @@ public:
 		return SetAt(Index, NewItem);
 	}
 
-	inline void Fill(const TElement& Element)
+	void Fill(const TElement& Element)
 	{
 		ItemNum = ArraySize;
 		for (UInt64 Index = 0; Index < ItemNum; ++Index)
@@ -158,7 +158,7 @@ public:
 		}
 	}
 
-	inline bool Remove(const TElement& Element)
+	bool Remove(const TElement& Element)
 	{
 		int32_t IndexToRemove = -1;
 		for (UInt32 CurrentIndex = 0; CurrentIndex < ItemNum; CurrentIndex++)
@@ -182,7 +182,7 @@ public:
 		return false;
 	}
 
-	inline void RemoveAt(UInt64 Index, bool bKeepArraySize = true)
+	void RemoveAt(UInt64 Index, bool bKeepArraySize = true)
 	{
 		assert(Index <= ItemNum - 1);
 		
@@ -196,7 +196,7 @@ public:
 		DecreaseArray(bKeepArraySize);
 	}
 
-	inline void RemoveWhere(const TFunction<bool(const TElement&)>& Predicate, bool bKeepArraySize = true)
+	void RemoveWhere(const TFunction<bool(const TElement&)>& Predicate, bool bKeepArraySize = true)
 	{
 		for (UInt64 CurrentIndex = 0; CurrentIndex < ItemNum; ++CurrentIndex)
 		{
@@ -210,11 +210,11 @@ public:
 		}
 	}
 
-	inline void RemoveAll(bool bKeepArraySize = true)
+	void RemoveAll(bool bKeepArraySize = true)
 	{
 		for (UInt32 Index = 0; Index < ItemNum; ++Index)
 		{
-			TElement tempItem;
+			TElement tempItem = TElement();
 			SetAt(Index, tempItem);
 		}
 
@@ -223,7 +223,7 @@ public:
 		DecreaseArray(bKeepArraySize);
 	}
 
-	inline bool Contains(const TElement& Element) const
+	bool Contains(const TElement& Element) const
 	{
 		for (UInt64 CurrentIndex = 0; CurrentIndex < ItemNum; ++CurrentIndex)
 		{
@@ -238,51 +238,51 @@ public:
 	}
 
 	template<typename TSize = SizeT>
-	inline const TSize Num() const
+	const TSize Num() const
 	{
 		return static_cast<TSize>(ItemNum);
 	}
 
-	inline bool IsEmpty() const
+	bool IsEmpty() const
 	{
 		return ItemNum == 0;
 	}
 
-	inline TElement* GetData()
+	TElement* GetData()
 	{
 		return DataPtr.Raw();
 	}
 
 	template<typename TReinterpretedElement>
-	inline TReinterpretedElement* GetData()
+	TReinterpretedElement* GetData()
 	{
 		TElement* Data = GetData();
 		return reinterpret_cast<TReinterpretedElement*>(Data);
 	}
 
-	inline const TElement* GetData() const
+	const TElement* GetData() const
 	{
 		return DataPtr.Raw();
 	}
 
 	template<typename TReinterpretedElement>
-	inline const TReinterpretedElement* GetData() const
+	const TReinterpretedElement* GetData() const
 	{
 		const TElement* Data = GetData();
 		return reinterpret_cast<TReinterpretedElement*>(Data);
 	}
 
-	inline TElement& First()
+	TElement& First()
 	{
 		return *DataPtr.Get();
 	}
 
-	inline const TElement& First() const
+	const TElement& First() const
 	{
 		return *DataPtr.Get();
 	}
 
-	inline void Resize(SizeT NewSize, bool bApplyNewSizeToItemNum = false)
+	void Resize(SizeT NewSize, bool bApplyNewSizeToItemNum = false)
 	{
 		if (ArraySize != NewSize)
 		{
@@ -313,7 +313,7 @@ public:
 	}
 
 	template<typename TCast>
-	inline TArray<TCast> Cast(const TFunction<TCast(const TElement& Element)>& CastFunc) const
+	TArray<TCast> Cast(const TFunction<TCast(const TElement& Element)>& CastFunc) const
 	{
 		TArray<TCast> Casted(ItemNum, true);
 		for (UInt32 Index = 0; Index < ItemNum; ++Index)
@@ -324,14 +324,14 @@ public:
 	}
 
 	template<typename TCast>
-	inline TArray<TCast> Cast() const
+	TArray<TCast> Cast() const
 	{
 		TArray<TCast> Casted(ItemNum * sizeof(TElement), true);
 		GMemory.Copy(GetData(), Casted.GetData(), Casted.Num());
 		return Casted;
 	}
 
-	inline void ForEach(const TFunction<void(TElement&)>& EachFunc)
+	void ForEach(const TFunction<void(TElement&)>& EachFunc)
 	{
 		for (UInt32 Index = 0; Index < ItemNum; ++Index)
 		{
@@ -339,7 +339,7 @@ public:
 		}
 	}
 
-	inline void ForEach(const TFunction<void(const TElement&)>& EachFunc) const
+	void ForEach(const TFunction<void(const TElement&)>& EachFunc) const
 	{
 		for (UInt32 Index = 0; Index < ItemNum; ++Index)
 		{
@@ -347,7 +347,7 @@ public:
 		}
 	}
 
-	inline void Reverse()
+	void Reverse()
 	{
 		ArrayType NewDataPtr = MakeShareable<TElement, ArrayDeleter>(new TElement[ArraySize]);
 
@@ -362,21 +362,21 @@ public:
 		DataPtr = NewDataPtr;
 	}
 
-	inline TElement& operator[](SizeT Index)
+	TElement& operator[](SizeT Index)
 	{
 		TElement& Element = *(DataPtr + Index);
 
 		return Element;
 	}
 
-	inline const TElement& operator[](SizeT Index) const
+	const TElement& operator[](SizeT Index) const
 	{
 		const TElement& Element = *(DataPtr + Index);
 
 		return Element;
 	}
 
-	inline TArray& operator=(const TArray& Other)
+	TArray& operator=(const TArray& Other)
 	{
 		DataPtr = MakeShareable<TElement, ArrayDeleter>(new TElement[Other.ItemNum]);
 		ItemNum = Other.ItemNum;
@@ -387,12 +387,12 @@ public:
 		return *this;
 	}
 
-	inline TElement* begin() const
+	TElement* begin() const
 	{
 		return (TElement*)DataPtr;
 	}
 
-	inline TElement* end() const
+	TElement* end() const
 	{
 		return DataPtr + ItemNum;
 	}

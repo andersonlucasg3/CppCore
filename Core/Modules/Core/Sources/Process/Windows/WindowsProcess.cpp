@@ -2,7 +2,7 @@
 
 #include "Filesystem/Path.h"
 
-void CWindowsProcess::SetCommandLine(int argc, const char** argv)
+void CWindowsProcess::SetCommandLine(int argc, char* argv[])
 {
 	ExecutablePath = argv[0];
 	ExecutableContainerPath = GPath.RemoveLastPathComponent(ExecutablePath);

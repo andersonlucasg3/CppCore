@@ -15,4 +15,4 @@ public:
     CORE_API virtual const CString& GetExecutablePath() const = 0;
 };
 
-CORE_API extern const CDesktopProcess& GProcess;
+CORE_API extern CDesktopProcess& GDesktopProcess;

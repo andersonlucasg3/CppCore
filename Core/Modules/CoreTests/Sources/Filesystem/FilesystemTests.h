@@ -5,4 +5,7 @@
 class CFilesystemTests : public CTestBase
 {
     void TestCase() override;
+
+    void TestFiles();
+    void TestDirectories();
 };

@@ -1,17 +1,17 @@
 #include "ArrayTests.h"
+#include "Assert.h"
 
 REGISTER_TEST_CLASS(ArrayTests);
 
 #include "Templates/Array.h"
-#include "Templates/Strings.h"
 
-inline void TestIntArray()
+void CArrayTests::TestIntArray()
 {
 	TArray<int> IntArray;
 
 	for (UInt32 i = 0; i < 5; i++)
 	{
-		assert(IntArray.Num() == i);
+		ASSERT_EQUAL(IntArray.Num(), i);
 
 		IntArray.Add(i);
 	}
@@ -19,17 +19,17 @@ inline void TestIntArray()
 	UInt32 oi = 0;
 	for (const UInt32 i : IntArray)
 	{
-		assert(i == oi);
+		ASSERT_EQUAL(i, oi);
 		oi++;
 	}
 	
-	assert(oi == 5);
+	ASSERT_EQUAL(oi, 5);
 
-	assert(IntArray.Num() == 5);
+	ASSERT_EQUAL(IntArray.Num(), 5);
 
 	for (UInt32 i = 0; i < IntArray.Num(); i++)
 	{
-		assert(IntArray[i] == i);
+		ASSERT_EQUAL(IntArray[i], i);
 	}
 
 	for (UInt32 i = 0; i < 4; i++)
@@ -37,15 +37,15 @@ inline void TestIntArray()
 		int32_t NewElement = (i + 1) * -1;
 		IntArray.Insert(0, NewElement);
 
-		assert(IntArray[0] == NewElement);
+		ASSERT_EQUAL(IntArray[0], NewElement);
 	}
 	
 	for (UInt32 i = 0; i < IntArray.Num(); i++)
 	{
-		assert(IntArray[i] == i - 4);
+		ASSERT_EQUAL(IntArray[i], i - 4);
 	}
 
-	assert(IntArray.Num() == 9);
+	ASSERT_EQUAL(IntArray.Num(), 9);
 
 	for (;IntArray.Num() > 4;)
 	{
@@ -54,17 +54,17 @@ inline void TestIntArray()
 
 	for (UInt32 i = 0; i < IntArray.Num(); i++)
 	{
-		assert(IntArray[i] == (IntArray.Num() - i) * -1);
+		ASSERT_EQUAL(IntArray[i], (IntArray.Num() - i) * -1);
 	}
 
 	IntArray.RemoveAll();
 
 	IntArray.RemoveAll(false);
 
-	assert(IntArray.Num() == 0);
+	ASSERT_EQUAL(IntArray.Num(), 0);
 }
 
-inline void TestSharedPtrArray()
+void CArrayTests::TestSharedPtrArray()
 {
 	TArray<TSharedPtr<int>> ArrayOfPtrs;
 
@@ -74,7 +74,7 @@ inline void TestSharedPtrArray()
 	ArrayOfPtrs.RemoveAt(0);
 }
 
-inline void TestCopyArray()
+void CArrayTests::TestCopyArray()
 {
 	TArray<int> Array {
 		1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -82,28 +82,28 @@ inline void TestCopyArray()
 
 	for (int i = 0; i < 10; i++)
 	{
-		assert(Array[i] == i + 1);
+		ASSERT_EQUAL(Array[i], i + 1);
 	}
 
 	TArray<int> CopiedArray = Array;
 
 	for (int i = 0; i < 10; i++)
 	{
-		assert(CopiedArray[i] == i + 1);
+		ASSERT_EQUAL(CopiedArray[i], i + 1);
 	}
 
 	TArray<int> OtherCopiedArray(CopiedArray);
 
 	for (int i = 0; i < 10; i++)
 	{
-		assert(OtherCopiedArray[i] == i + 1);
+		ASSERT_EQUAL(OtherCopiedArray[i], i + 1);
 	}
 
 	Array[2] = 20;
 
-	assert(Array[2] == 20);
+	ASSERT_EQUAL(Array[2], 20);
 
-	assert(CopiedArray[2] != 20);
+	ASSERT_NOT_EQUAL(CopiedArray[2], 20);
 }
 
 void CArrayTests::TestCase() 

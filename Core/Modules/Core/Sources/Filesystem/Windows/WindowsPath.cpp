@@ -56,7 +56,7 @@ CString CWindowsPath::GetPathRoot(const CString& InPath) const
 
     if (Path[1] != ':')
     {
-        const CString& WorkingDirectory = GProcess.GetContainerPath();
+        const CString& WorkingDirectory = GDesktopProcess.GetContainerPath();
         Path = WorkingDirectory;
     }
 
@@ -114,7 +114,7 @@ const CString& CWindowsPath::CachesPath() const
 
             return GPath.Combine({
                 FullPathString,
-                GPath.LastPathComponent(GProcess.GetExecutablePath()), // executable name
+                GPath.LastPathComponent(GDesktopProcess.GetExecutablePath()), // executable name
                 "Cache"
             });
         }

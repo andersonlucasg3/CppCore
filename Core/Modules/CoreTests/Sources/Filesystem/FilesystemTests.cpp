@@ -2,16 +2,13 @@
 
 #include "TestSuit.h"
 
-#include "Defines/Asserts.h"
-#include "Defines/Types.h"
 #include "Filesystem/Path.h"
 #include "Filesystem/DirectoryReference.h"
 #include "Filesystem/FileReference.h"
-#include "Process/Process.h"
 
 REGISTER_TEST_CLASS(FilesystemTests);
 
-void TestFiles()
+void CFilesystemTests::TestFiles()
 {
     SFileRef Ref = "./Text.txt";
 
@@ -20,16 +17,16 @@ void TestFiles()
 
     bool bEqual = Path == Combined;
 
-    assert(bEqual);
-    assert_equal(Path, Combined);
-    assert(!Ref->Exists());
+    ASSERT_TRUE(bEqual);
+    ASSERT_EQUAL(Path, Combined);
+    ASSERT_FALSE(Ref->Exists());
 
     SFileRef ExistingRef = "./EngineTests";
 
-    assert(ExistingRef->Exists());
+    ASSERT_TRUE(ExistingRef->Exists());
 }
 
-void TestDirectories()
+void CFilesystemTests::TestDirectories()
 {
     SDirectoryRef Ref = ".";
 
@@ -37,17 +34,17 @@ void TestDirectories()
     const CString& Combined = GProcess.GetContainerPath();
     
     bool bEqual = Path == Combined;
-    assert(bEqual);
-    assert_equal(Path, Combined);
-    assert(Ref->Exists());
+    ASSERT_TRUE(bEqual);
+    ASSERT_EQUAL(Path, Combined);
+    ASSERT_TRUE(Ref->Exists());
 
     SDirectoryRef CreateRef = "./Temp";
 
-    assert(CreateRef->Create(true));
-    assert(CreateRef->Exists());
+    ASSERT_TRUE(CreateRef->Create(true));
+    ASSERT_TRUE(CreateRef->Exists());
 
-    assert(CreateRef->Delete());
-    assert(!CreateRef->Exists());
+    ASSERT_TRUE(CreateRef->Delete());
+    ASSERT_FALSE(CreateRef->Exists());
 }
 
 void CFilesystemTests::TestCase()

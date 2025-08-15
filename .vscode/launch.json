@@ -30,12 +30,14 @@
             "type": "lldb",
             "request": "launch",
             "preLaunchTask": "Compile CoreTests",
+            "program": "specified in each platform",
             "windows": {
                 "program": "${workspaceFolder}/Core/Binaries/Windows/Debug/CoreTests.exe"
             },
             "osx": {
                 "program": "${workspaceFolder}/Core/Binaries/Mac/Debug/CoreTests"
-            }
+            },
+            "cwd": "${workspaceFolder}",
         }
     ],
     "compounds": []

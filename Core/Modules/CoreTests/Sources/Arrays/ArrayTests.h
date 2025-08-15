@@ -5,4 +5,8 @@
 class CArrayTests : public CTestBase
 {
 	void TestCase() override;
+
+	void TestIntArray();
+	void TestSharedPtrArray();
+	void TestCopyArray();
 };
