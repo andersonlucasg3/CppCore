@@ -11,8 +11,6 @@ public class CoreProject : AProjectDefinition
 {
     public override string Name => "Core";
 
-    public override string SourcesRoot => "Modules";
-
     protected override void Configure()
     {
         AddProjectDependencyToGroup<AppleFrameworksProject>(ETargetPlatformGroup.Apple);

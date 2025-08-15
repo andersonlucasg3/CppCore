@@ -6,17 +6,18 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Compile ProjectTools",
+            "program": "specified in each platform",
             "windows": {
-                "program": "/Users/anderson/Projects/CppCore/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
+                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
             },
             "osx": {
-                "program": "/Users/anderson/Projects/CppCore/Core/Binaries/DotNet/ProjectTools/BuildTool"
+                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool"
             },
             "args": [
                 "GenCodeProject",
                 "-Project=Core",
-                "-Generator=VisualStudio",
-                "-Platform=Android",
+                "-Generator=Clang",
+                "-Platform=Windows",
                 "-Configuration=Debug",
                 "-DisableMT"
             ],
