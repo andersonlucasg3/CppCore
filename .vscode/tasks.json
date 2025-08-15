@@ -41,6 +41,31 @@
             "group": "build"
         },
         {
+            "label": "Compile CoreTests",
+            "command": "pwsh",
+            "type": "shell",
+            "windows": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Core",
+                    "-Platform", "Windows",
+                    "-Configuration", "Debug",
+                    "-Modules", "CoreTests"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Core",
+                    "-Platform", "macOS",
+                    "-Configuration", "Debug",
+                    "-Modules", "CoreTests"
+                ]
+            }
+        },
+        {
             "label": "Compile ProjectTools",
             "command": "pwsh",
             "type": "shell",

@@ -10,15 +10,15 @@ struct SFileRef final : public TSharedPtr<CFileReference>
 {
     using Super = TSharedPtr<CFileReference>;
 
-    SFileRef() = default;
-    SFileRef(const char* InCStr);
-    SFileRef(const CString& InPath);
-    SFileRef(const TArray<CString>& InComponents);
-    ~SFileRef() = default;
+    CORE_API SFileRef() = default;
+    CORE_API SFileRef(const char* InCStr);
+    CORE_API SFileRef(const CString& InPath);
+    CORE_API SFileRef(const TArray<CString>& InComponents);
+    CORE_API ~SFileRef() = default;
 
-    SFileRef& operator=(const char* InCStr);
-    SFileRef& operator=(const CString& InPath);
-    SFileRef& operator=(const TArray<CString>& InComponents);
+    CORE_API SFileRef& operator=(const char* InCStr);
+    CORE_API SFileRef& operator=(const CString& InPath);
+    CORE_API SFileRef& operator=(const TArray<CString>& InComponents);
 
 private:
     void operator=(const TSharedPtr<CFileReference>& Other);

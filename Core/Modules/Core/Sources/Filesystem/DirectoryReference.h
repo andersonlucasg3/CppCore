@@ -10,15 +10,15 @@ struct SDirectoryRef final : public TSharedPtr<CDirectoryReference>
 {
     using Super = TSharedPtr<CDirectoryReference>;
 
-    SDirectoryRef() = default;
-    SDirectoryRef(const char* InCStr);
-    SDirectoryRef(const CString& InPath);
-    SDirectoryRef(const TArray<CString>& InComponents);
-    ~SDirectoryRef() = default;
+    CORE_API SDirectoryRef() = default;
+    CORE_API SDirectoryRef(const char* InCStr);
+    CORE_API SDirectoryRef(const CString& InPath);
+    CORE_API SDirectoryRef(const TArray<CString>& InComponents);
+    CORE_API ~SDirectoryRef() = default;
 
-    SDirectoryRef& operator=(const char* InCStr);
-    SDirectoryRef& operator=(const CString& InPath);
-    SDirectoryRef& operator=(const TArray<CString>& InComponents);
+    CORE_API SDirectoryRef& operator=(const char* InCStr);
+    CORE_API SDirectoryRef& operator=(const CString& InPath);
+    CORE_API SDirectoryRef& operator=(const TArray<CString>& InComponents);
 
 private:
     void operator=(const TSharedPtr<CDirectoryReference>& Other);

@@ -24,4 +24,4 @@ public:
 	}
 };
 
-extern const CMemory& GMemory;
+CORE_API extern const CMemory& GMemory;

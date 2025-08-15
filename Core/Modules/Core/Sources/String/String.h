@@ -4,10 +4,6 @@
 
 #include <format>
 
-#if PLATFORM_WINDOWS
-#include <cwchar>
-#endif // PLATFORM_WINDOWS
-
 class CWString;
 
 class CString : public TString<char, CString>
@@ -18,14 +14,14 @@ protected:
     SizeT StrLen(const char* Buffer) const override;
 
 public:
-	CString();
-	CString(const CString& Other);
-	CString(char* CStr, UInt64 Len);
-	CString(const char* CStr, UInt64 Len);
-	CString(const char* CStr);
+	CORE_API CString();
+	CORE_API CString(const CString& Other);
+	CORE_API CString(char* CStr, UInt64 Len);
+	CORE_API CString(const char* CStr, UInt64 Len);
+	CORE_API CString(const char* CStr);
 	
 #if PLATFORM_WINDOWS
-	CString(const wchar_t* WStr, SizeT WStrLen);
+	CORE_API CString(const wchar_t* WStr, SizeT WStrLen);
 #endif // PLATFORM_WINDOWS
 
 	template<
@@ -37,21 +33,21 @@ public:
 		BufferPtr = CopyStr(Formatted.c_str(), Formatted.size());
 	}
 
-	~CString() override = default;
+	CORE_API ~CString() override = default;
 
-	CString& operator+=(const CString& Other);
-	CString& operator+=(const char* CStr);
-	CString& operator+=(char Char);
-	CString operator+(const CString& Other) const;
-	CString operator+(const char* CStr) const;
-	CString operator+(char Char) const;
-	bool operator >(const CString& Other) const;
-	bool operator <(const CString& Other) const;
-	CString& operator=(const CString& Other);
-	CString& operator=(char* CStr);
-	CString& operator=(const char* CStr);
-	bool operator==(const CString& Other) const;
-	bool operator==(const char* InCStr) const;
+	CORE_API CString& operator+=(const CString& Other);
+	CORE_API CString& operator+=(const char* CStr);
+	CORE_API CString& operator+=(char Char);
+	CORE_API CString operator+(const CString& Other) const;
+	CORE_API CString operator+(const char* CStr) const;
+	CORE_API CString operator+(char Char) const;
+	CORE_API bool operator >(const CString& Other) const;
+	CORE_API bool operator <(const CString& Other) const;
+	CORE_API CString& operator=(const CString& Other);
+	CORE_API CString& operator=(char* CStr);
+	CORE_API CString& operator=(const char* CStr);
+	CORE_API bool operator==(const CString& Other) const;
+	CORE_API bool operator==(const char* InCStr) const;
 };
 
-CString operator+(const char* Lhs, const CString& Rhs);
+CORE_API CString operator+(const char* Lhs, const CString& Rhs);

@@ -20,4 +20,4 @@ public:
     CORE_API virtual const CString& CachesPath() const = 0;
 };
 
-extern const CPath& GPath;
+CORE_API extern const CPath& GPath;

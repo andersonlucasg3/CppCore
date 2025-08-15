@@ -24,6 +24,18 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
+        },
+        {
+            "name": "Debug CoreTests",
+            "type": "lldb",
+            "request": "launch",
+            "preLaunchTask": "Compile CoreTests",
+            "windows": {
+                "program": "${workspaceFolder}/Core/Binaries/Windows/Debug/CoreTests.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/Core/Binaries/Mac/Debug/CoreTests"
+            }
         }
     ],
     "compounds": []
