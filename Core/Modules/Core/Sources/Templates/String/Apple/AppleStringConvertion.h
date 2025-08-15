@@ -2,7 +2,7 @@
 
 #include "String/String.h"
 
-#include <Foundation/NSString.hpp>
+#include "NSString.h"
 
 extern CString NSStringToCString(NS::String* InString);
 

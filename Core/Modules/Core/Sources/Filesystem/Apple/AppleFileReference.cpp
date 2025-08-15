@@ -2,7 +2,7 @@
 
 #include "Templates/String/Apple/AppleStringConvertion.h"
 
-#include "Foundation/NSFileManager.hpp"
+#include "NSFileManager.h"
 
 void CAppleFileReference::UpdateExistance()
 {

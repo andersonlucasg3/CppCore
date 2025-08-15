@@ -1,4 +1,5 @@
 using Shared.Projects;
+using Shared.Platforms;
 using TestSuit.Projects;
 using AppleFrameworks.Projects;
 
@@ -14,8 +15,9 @@ public class CoreProject : AProjectDefinition
 
     protected override void Configure()
     {
+        AddProjectDependencyToGroup<AppleFrameworksProject>(ETargetPlatformGroup.Apple);
+        
         AddProjectDependency<TestSuitProject>();
-        AddProjectDependency<AppleFrameworksProject>();
 
         AddModule<CoreModule>();
         AddModule<CoreTestsModule>();

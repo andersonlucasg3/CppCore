@@ -1,12 +1,10 @@
 #pragma once
 
-#include "Filesystem/FilesystemReference.h"
-#include "Filesystem/FileReference.h"
 #include "Filesystem/DirectoryReference.h"
 
-#include <Foundation/NSString.hpp>
-#include <Foundation/NSURL.hpp>
-#include <Foundation/NSSharedPtr.hpp>
+#include "NSString.h"
+#include "NSURL.h"
+#include "NSSharedPtr.hpp"
 
 class CAppleDirectoryReference : public CDirectoryReference
 {

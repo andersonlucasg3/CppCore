@@ -2,8 +2,11 @@
 
 #include "String/String.h"
 
+#include "Templates/Array.h"
+
 #include <Foundation/Foundation.h>
 
+#include <exception>
 #include <execinfo.h>
 #include <cxxabi.h>
 

@@ -1,12 +1,12 @@
 #include "AppleDirectoryReference.h"
 
-#include "Filesystem/DirectoryReference.h"
-#include "Templates/String/String.h"
+#include "String/String.h"
 #include "Templates/String/Apple/AppleStringConvertion.h"
-#include "Filesystem/Apple/AppleFileReference.h"
-#include "Filesystem/FileReference.h"
-#include "Foundation/NSFileManager.hpp"
-#include "Foundation/NSSharedPtr.hpp"
+
+#include "Filesystem/DirectoryReference.h"
+
+#include "NSSharedPtr.hpp"
+#include "NSFileManager.h"
 
 #include <sys/_types/_filesec_t.h>
 

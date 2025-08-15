@@ -1,18 +1,12 @@
 #pragma once
 
-#if PLATFORM_GROUP_APPLE
-
 #include "Time/Time.h"
 
 class CAppleTime : public CTime
 {
-protected:
-    CORE_API SDouble GetTimeInSecondsInternal() const override;
-
 public:
     CORE_API ~CAppleTime() override = default;
+    CORE_API Double GetTimeInSeconds() const override;
 };
 
 typedef CAppleTime CPlatformTime;
-
-#endif // PLATFORM_GROUP_APPLE

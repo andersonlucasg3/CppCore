@@ -3,9 +3,9 @@
 #include "Filesystem/FileReference.h"
 #include "Object/ClassMacros.h"
 
-#include <Foundation/NSString.hpp>
-#include <Foundation/NSURL.hpp>
-#include <Foundation/NSSharedPtr.hpp>
+#include "NSSharedPtr.hpp"
+#include "NSString.h"
+#include "NSURL.h"
 
 CORE_CLASS_HEADER(AppleFileReference);
 

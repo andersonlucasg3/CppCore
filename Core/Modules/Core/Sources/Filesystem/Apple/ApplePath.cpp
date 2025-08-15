@@ -1,13 +1,13 @@
 #include "ApplePath.h"
 
-#include "Environment/Environment.h"
+#include "Process/Desktop/DesktopProcess.h"
+#include "Process/Mac/MacProcess.h"
 #include "Templates/String/Apple/AppleStringConvertion.h"
+#include "Templates/Array.h"
 
-#include "Process/Process.h"
-
-#include "Foundation/NSFileManager.hpp"
-#include "Foundation/NSError.hpp"
-#include "Foundation/NSURL.hpp"
+#include "NSFileManager.h"
+#include "NSError.h"
+#include "NSURL.h"
 
 char CApplePath::PathSeparator() const
 {
@@ -25,7 +25,7 @@ CString CApplePath::GetFullPath(const CString& InPath) const
 
     if (Path[0] != '/')
     {
-        const CString& WorkingDirectory = GProcess.GetExecutableContainerPath();
+        const CString& WorkingDirectory = GProcess.GetContainerPath();
         Path = GPath.Combine({ WorkingDirectory, InPath });    
     }
 
@@ -53,7 +53,7 @@ const CString& CApplePath::CachesPath() const
 {
     static CString CachesPath = []
     {
-        if (CAppleProcess::Get().IsRunningOnAppBundle())
+        if (GMacProcess.IsRunningOnAppBundle())
         {
             NS::Error* Error = nullptr;
 
@@ -64,7 +64,7 @@ const CString& CApplePath::CachesPath() const
         else
         {
             return GPath.Combine({
-                CAppleProcess::Get().GetExecutableContainerPath(),
+                GMacProcess.GetContainerPath(),
                 "Caches",
             });
         }
