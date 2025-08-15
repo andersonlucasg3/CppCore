@@ -6,7 +6,7 @@
 
 const CAndroidProcess& GAndroidProcess = static_cast<const CAndroidProcess&>(GProcess);
 
-void CAndroidProcess::SetCommandLine(int argc, const char* argv[])
+void CAndroidProcess::SetCommandLine(int argc, char* argv[])
 {
     // TODO: implement commandline support
 }

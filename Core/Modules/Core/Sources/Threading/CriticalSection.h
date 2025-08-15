@@ -1,13 +1,10 @@
 #pragma once
 
-#include <mutex>
-
 struct SCriticalSection
 {
-    CORE_API void Lock();
-    CORE_API bool TryLock();
-    CORE_API void Unlock();
+    CORE_API virtual ~SCriticalSection() = default;
 
-private:
-    std::mutex Mutex;
+    CORE_API virtual void Lock() = 0;
+    CORE_API virtual bool TryLock() = 0;
+    CORE_API virtual void Unlock() = 0;
 };

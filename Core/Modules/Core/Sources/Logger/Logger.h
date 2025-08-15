@@ -12,7 +12,7 @@ class CLogger
 	CFile* _logFile = nullptr;
 
 protected:
-	CORE_API inline virtual void WriteLogLine(const CString& LogLine) const;
+	CORE_API virtual void WriteLogLine(const CString& LogLine) const;
 
 public:
 	CORE_API virtual ~CLogger();
@@ -22,7 +22,7 @@ public:
 	CORE_API virtual void LogException() const;
 
 	template<typename ... TArgs>
-	inline void Log(const char* Format, TArgs ... Args) const
+	void Log(const char* Format, TArgs ... Args) const
 	{
 		CString Formatted(Format, Args ...);
 		
@@ -32,7 +32,7 @@ public:
 	}
 
 	template<typename ... TArgs>
-	inline void Error(const char* Format, TArgs ... Args) const
+	void Error(const char* Format, TArgs ... Args) const
 	{
 		CString Formatted(Format, Args ...);
 		
@@ -42,7 +42,7 @@ public:
 	}
 
 	template<typename ... TArgs>
-	inline void Fatal(const char* Format, TArgs ... Args) const
+	void Fatal(const char* Format, TArgs ... Args) const
 	{
 		CString Formatted(Format, Args ...);
 		

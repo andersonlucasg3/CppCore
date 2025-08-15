@@ -1,12 +1,14 @@
 #pragma once
 
+#include "Defines/Preprocessors.h"
+
 #include "Object/Object.h"
 
 #include "Templates/Functions.h"
 
-#include "CriticalSection.h"
-
 #include "String/String.h"
+
+#include COMPILE_PLATFORM_HEADER_FEATURE(Threading, CriticalSection.h)
 
 CORE_CLASS_HEADER(Thread);
 
@@ -17,7 +19,7 @@ class CThread :
     using Super = CObject;
     
     bool bIsRunning = false;
-    SCriticalSection IsRunningSection;
+    SPlatformCriticalSection IsRunningSection;
 
 public:
     CORE_API CThread() = default;

@@ -41,7 +41,7 @@ public:
 	}
 
 	inline TString(const TString& Other) :
-		BufferPtr(Other.BufferPtr),
+		BufferPtr(CopyStr(Other.BufferPtr, Other.Length)),
 		Length(Other.Length)
 	{
 		//
@@ -55,7 +55,7 @@ public:
 	}
 
 	inline TString(TChar* CStr, SizeT Len) :
-		BufferPtr(CStr),
+		BufferPtr(CopyStr(CStr, Len)),
 		Length(Len)
 	{
 		//

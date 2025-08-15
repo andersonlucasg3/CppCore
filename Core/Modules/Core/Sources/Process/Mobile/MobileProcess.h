@@ -11,4 +11,4 @@ public:
     CORE_API virtual ~CMobileProcess() override = default;
 };
 
-extern const CMobileProcess& GMobileProcess;
+extern CMobileProcess& GMobileProcess;

@@ -105,8 +105,8 @@ bool CString::operator <(const CString& Other) const
 
 CString& CString::operator=(const CString& Other)
 {
-    BufferPtr = Other.BufferPtr;
     Length = Other.Length;
+    BufferPtr = CopyStr(Other.BufferPtr, Length);
 
     return *this;
 }

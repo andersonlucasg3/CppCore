@@ -1,6 +1,6 @@
 #include "ScopeLock.h"
 
-SScopeLock::SScopeLock(SCriticalSection& Section) :
+SScopeLock::SScopeLock(SPlatformCriticalSection& Section) :
     Section(Section)
 {
     Section.Lock();
