@@ -4,7 +4,7 @@
 
 const CMacProcess& GMacProcess = static_cast<const CMacProcess&>(GProcess);
 
-void CMacProcess::SetCommandLine(int argc, const char* argv[])
+void CMacProcess::SetCommandLine(int argc, char* argv[])
 {
     ExecutablePath = argv[0];
     ExecutableContainerPath = GPath.RemoveLastPathComponent(ExecutablePath);

@@ -35,7 +35,7 @@
                 "program": "${workspaceFolder}/Core/Binaries/Windows/Debug/CoreTests.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/Core/Binaries/Mac/Debug/CoreTests"
+                "program": "${workspaceFolder}/Core/Binaries/macOS/Debug/CoreTests"
             },
             "cwd": "${workspaceFolder}",
         }

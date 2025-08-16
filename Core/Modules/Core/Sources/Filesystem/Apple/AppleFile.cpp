@@ -1,6 +1,7 @@
 #include "AppleFile.h"
 
 #include "Defines/Asserts.h"
+#include "Templates/SmartPointer/MakeAndCasts.h"
 
 #include <filesystem>
 
@@ -146,4 +147,14 @@ CAppleFile::~CAppleFile()
 		fclose(FileHandle);
 		FileHandle = nullptr;
 	}
+}
+
+CAppleFilePtr CAppleFile::Create(const CString &FilePath)
+{
+	return MakeShared<CAppleFile>(FilePath);
+}
+
+CAppleFile* CAppleFile::CreateUnsafe(const char *FilePath)
+{
+	return new CAppleFile(FilePath);
 }
