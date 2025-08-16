@@ -21,7 +21,7 @@ void CFilesystemTests::TestFiles()
     ASSERT_EQUAL(Path, Combined);
     ASSERT_FALSE(Ref->Exists());
 
-    SFileRef ExistingRef = "./EngineTests";
+    SFileRef ExistingRef = "./CoreTests";
 
     ASSERT_TRUE(ExistingRef->Exists());
 }
