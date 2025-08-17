@@ -16,9 +16,32 @@
             "args": [
                 "GenCodeProject",
                 "-Project=Core",
-                "-Generator=Clang",
-                "-Platform=Windows",
-                "-Configuration=Debug",
+                "-Generator=${input:generators}",
+                "-Platform=${input:platforms}",
+                "-Configuration=${input:configurations}",
+                "-DisableMT"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Debug Compile",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Compile ProjectTools",
+            "program": "specified in each platform",
+            "windows": {
+                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool"
+            },
+            "args": [
+                "Compile",
+                "-Project=Core",
+                "-Platform=${input:platforms}",
+                "-Configuration=${input:configurations}",
                 "-DisableMT"
             ],
             "cwd": "${workspaceFolder}",
@@ -40,5 +63,39 @@
             "cwd": "${workspaceFolder}",
         }
     ],
-    "compounds": []
+    "compounds": [
+
+    ],
+    "inputs": [
+        {
+            "id": "generators",
+            "description": "Gen project Generators parameter",
+            "type": "pickString",
+            "options": [
+                "VisualStudio",
+                "Clang"
+            ]
+        },
+        {
+            "id": "platforms",
+            "description": "Platforms",
+            "type": "pickString",
+            "options": [
+                "Windows",
+                "macOS",
+                "iOS",
+                "tvOS",
+                "Android"
+            ]
+        },
+        {
+            "id": "configurations",
+            "description": "Configurations",
+            "type": "pickString",
+            "options": [
+                "Debug",
+                "Release"
+            ]
+        }
+    ]
 }
