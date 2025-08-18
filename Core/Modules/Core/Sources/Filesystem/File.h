@@ -7,7 +7,7 @@
 #include "String/String.h"
 #include "Object/ClassMacros.h"
 
-CORE_CLASS_HEADER(File);
+DECLARE_CLASS_HEADER(File);
 
 class CFile
 {

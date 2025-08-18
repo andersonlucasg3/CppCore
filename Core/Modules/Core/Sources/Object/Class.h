@@ -8,8 +8,8 @@
 
 #include <type_traits>
 
-CORE_CLASS_HEADER(Object);
-CORE_CLASS_HEADER(Class);
+DECLARE_CLASS_HEADER(Object);
+DECLARE_CLASS_HEADER(Class);
 
 class CClass
 {

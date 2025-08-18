@@ -7,7 +7,7 @@
 
 #include <cstdio>
 
-CORE_CLASS_HEADER(AppleFile);
+DECLARE_CLASS_HEADER(AppleFile);
 
 class CAppleFile : public CFile
 {

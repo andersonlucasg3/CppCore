@@ -6,7 +6,7 @@
 
 #include "String/String.h"
 
-CORE_CLASS_HEADER(AndroidThread);
+DECLARE_CLASS_HEADER(AndroidThread);
 
 class CAndroidThread : public CThread
 {

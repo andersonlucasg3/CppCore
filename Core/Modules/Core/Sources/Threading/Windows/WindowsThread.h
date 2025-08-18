@@ -4,7 +4,7 @@
 
 #include <thread>
 
-CORE_CLASS_HEADER(WindowsThread);
+DECLARE_CLASS_HEADER(WindowsThread);
 
 class CWindowsThread : public CThread
 {

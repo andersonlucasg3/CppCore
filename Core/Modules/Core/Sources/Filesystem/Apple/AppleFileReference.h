@@ -7,7 +7,7 @@
 #include "NSString.h"
 #include "NSURL.h"
 
-CORE_CLASS_HEADER(AppleFileReference);
+DECLARE_CLASS_HEADER(AppleFileReference);
 
 class CAppleFileReference : public CFileReference
 {

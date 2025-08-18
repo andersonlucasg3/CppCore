@@ -10,7 +10,7 @@
 
 #include COMPILE_PLATFORM_HEADER_FEATURE(Threading, CriticalSection.h)
 
-CORE_CLASS_HEADER(Thread);
+DECLARE_CLASS_HEADER(Thread);
 
 class CThread : 
     public CObject, 

@@ -6,7 +6,7 @@
 
 #include <thread>
 
-CORE_CLASS_HEADER(MacThread);
+DECLARE_CLASS_HEADER(MacThread);
 
 class CMacThread : public CThread
 {

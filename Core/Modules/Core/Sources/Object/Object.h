@@ -2,7 +2,7 @@
 
 #include "Class.h"
 
-CORE_CLASS_HEADER(Object);
+DECLARE_CLASS_HEADER(Object);
 
 class CObject
 {	
