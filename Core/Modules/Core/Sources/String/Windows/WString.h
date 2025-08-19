@@ -9,12 +9,14 @@ class CWString : public TString<wchar_t, CWString>
 	using ArrayDeleter = SArrayDeleter<wchar_t>;
 
 protected:
-	SizeT StrLen(const wchar_t* Buffer) const override;
+	CORE_API SizeT StrLen(const wchar_t* Buffer) const override;
 
 public:
-	CWString();
-	CWString(const CWString& Other);
-	CWString(const wchar_t* CStr);
-	CWString(const wchar_t* CStr, UInt64 Len);
-	CWString(const char* CStr, SizeT StrLen);
+	CORE_API CWString();
+	CORE_API CWString(const CWString& Other);
+	CORE_API CWString(const CString& CStr);
+	CORE_API CWString(const wchar_t* WCStr);
+	CORE_API CWString(const wchar_t* WCStr, UInt64 Len);
+	CORE_API CWString(const char* CStr);
+	CORE_API CWString(const char* CStr, SizeT StrLen);
 };

@@ -232,7 +232,7 @@ public:
 		return BufferPtr[InIndex];
 	}
 
-	inline const TChar* operator*() const
+	inline TChar* operator*() const
 	{
 		return BufferPtr;
 	}

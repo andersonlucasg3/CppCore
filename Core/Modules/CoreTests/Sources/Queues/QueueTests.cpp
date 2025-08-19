@@ -1,7 +1,8 @@
 #include "QueueTests.h"
 
 #include "Templates/Queue.h"
-#include "Templates/SharedPointers.h"
+
+#include "SmartPointer/MakeAndCasts.h"
 
 REGISTER_TEST_CLASS(QueueTests);
 

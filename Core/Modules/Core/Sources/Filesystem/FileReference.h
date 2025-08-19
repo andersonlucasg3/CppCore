@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Templates/SmartPointer/SharedPointer.h"
+#include "SmartPointer/SharedPointer.h"
 
 #include "Filesystem/FilesystemReference.h"
 

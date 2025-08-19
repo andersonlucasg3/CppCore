@@ -3,13 +3,16 @@
 #include "Defines/Preprocessors.h"
 
 #include "Templates/Map.h"
-#include "Templates/SmartPointer/SharedPointer.h"
 
-#include "String/String.h"
-#include "Filesystem/Path.h"
+#include "SmartPointer/SharedPointer.h"
+
 #include "Threading/CriticalSection.h"
 #include "Threading/ScopeLock.h"
 #include "Threading/CriticalSection.h"
+
+#include "String/String.h"
+
+#include "Filesystem/Path.h"
 
 #include COMPILE_PLATFORM_TYPE_HEADER_FEATURE(Process, Process.h)
 

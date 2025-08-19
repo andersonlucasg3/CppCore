@@ -47,8 +47,6 @@
             "args": [
                 "-c",
                 "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
-                "-Project", "${input:projects}",
-                "-Platform", "${input:platforms}",
                 "-ProjectToolsOnly"
             ],
             "problemMatcher": [

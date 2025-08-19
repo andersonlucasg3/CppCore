@@ -2,9 +2,9 @@
 
 #include "ClassMacros.h"
 
-#include "Templates/SmartPointer/SharedPointer.h"
-#include "Templates/SmartPointer/WeakPointer.h"
-#include "Templates/SmartPointer/MakeAndCasts.h"
+#include "SmartPointer/SharedPointer.h"
+#include "SmartPointer/WeakPointer.h"
+#include "SmartPointer/MakeAndCasts.h"
 
 #include <type_traits>
 

@@ -1,5 +1,9 @@
 #include "WString.h"
 
+#include "String/String.h"
+
+#include <cstring>
+
 SizeT CWString::StrLen(const wchar_t* Buffer) const
 {
     return wcslen(Buffer);
@@ -15,12 +19,22 @@ CWString::CWString(const CWString& Other) : Super(Other)
     //
 }
 
-CWString::CWString(const wchar_t* CStr) : Super(CStr, wcslen(CStr))
+CWString::CWString(const CString& CStr) : CWString(*CStr, CStr.Len())
+{
+
+}
+
+CWString::CWString(const wchar_t* WCStr) : Super(WCStr, wcslen(WCStr))
 {
     //
 }
 
-CWString::CWString(const wchar_t* CStr, UInt64 Len) : Super(CStr, Len)
+CWString::CWString(const wchar_t* WCStr, UInt64 Len) : Super(WCStr, Len)
+{
+    //
+}
+
+CWString::CWString(const char* CStr) : CWString(CStr, strlen(CStr))
 {
     //
 }

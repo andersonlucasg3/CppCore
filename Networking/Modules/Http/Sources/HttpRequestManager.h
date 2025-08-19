@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Templates/Queue.h"
-#include "Templates/SmartPointer/SharedFromThis.h"
+
+#include "SmartPointer/SharedFromThis.h"
 
 #include "Threading/Thread.h"
 #include "Threading/CriticalSection.h"

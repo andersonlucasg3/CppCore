@@ -1,17 +1,24 @@
 #include "SharedPtrTests.h"
 
-#include "Templates/SharedPointers.h"
+#include "SmartPointer/SharedPointer.h"
+#include "SmartPointer/WeakPointer.h"
+#include "SmartPointer/MakeAndCasts.h"
 
 REGISTER_TEST_CLASS(SharedPtrTests);
 
 class ITestType 
 {
+public:
+    virtual ~ITestType() = default;
+
     virtual int MyTestMethod() = 0;
 };
 
 class CTestType : public ITestType 
 {
 public:
+    ~CTestType() override = default;
+
     virtual int MyTestMethod() override { return 1234; }
 };
 

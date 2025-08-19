@@ -2,6 +2,7 @@
 
 #include "RefCounter.h"
 
+#include <cstddef>
 #include <type_traits>
 
 template<typename TPtr>
@@ -115,6 +116,11 @@ struct TWeakPtr
 	inline TPtr* operator+(UInt64 Index) const
 	{
 		return (_object + Index);
+	}
+
+	inline bool operator == (std::nullptr_t)
+	{
+		return _object == nullptr;
 	}
 
 	inline TWeakPtr& operator=(const TWeakPtr& Other)

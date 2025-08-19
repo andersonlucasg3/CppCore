@@ -1,14 +1,29 @@
 #include "HttpRequest.h"
 
-CHttpRequest::CHttpRequest(const CString& InEndpoint)
-:   _endpoint(InEndpoint)
+#include "Defines/Asserts.h"
+
+#include "HttpRequestError.h"
+
+const char* ToString(EHttpRequestMethod InMethod)
 {
-    //
+    switch (InMethod)
+    {
+        case EHttpRequestMethod::Get: return "GET";
+        case EHttpRequestMethod::Post: return "POST";
+        default:
+            assertm(false, "Implement new cases");
+            return "";
+    }
 }
 
-void CHttpRequest::SetHeader(const CString& InKey, const CString& InValue)
+void CHttpRequest::SendErrorCallback(const CHttpRequestError& InError)
 {
-    _headers.Set(InKey, InValue);
+    _callbacks->HttpRequestFailedWithError(AsShared(), InError);
+}
+
+void CHttpRequest::SendSuccessCallback(const CString& InResponseString)
+{
+    _callbacks->HttpRequestSucceeded(AsShared(), InResponseString);
 }
 
 const CString& CHttpRequest::Endpoint() const
@@ -16,7 +31,40 @@ const CString& CHttpRequest::Endpoint() const
     return _endpoint;
 }
 
+EHttpRequestMethod CHttpRequest::Method() const
+{
+    return _method;
+}
+
 const TMap<CString, CString>& CHttpRequest::Headers() const
 {
     return _headers;
+}
+
+CHttpRequest& CHttpRequest::SetEndpoint(const CString& InEndpoint)
+{
+    _endpoint = InEndpoint;
+
+    return *this;
+}
+
+CHttpRequest& CHttpRequest::SetMethod(EHttpRequestMethod InMethod)
+{
+    _method = InMethod;
+
+    return *this;
+}
+
+CHttpRequest& CHttpRequest::SetHeader(const CString& InKey, const CString& InValue)
+{
+    _headers.Set(InKey, InValue);
+
+    return *this;
+}
+
+CHttpRequest& CHttpRequest::SetCallbacks(const CHttpRequestCallbacksPtr& InCallbacks)
+{
+    _callbacks = InCallbacks;
+
+    return *this;
 }

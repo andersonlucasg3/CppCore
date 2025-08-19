@@ -19,5 +19,10 @@ public class HttpModule : AModuleDefinition
             ETargetPlatform.macOS,
             "Foundation"
         );
+
+        AddLinkWithLibrary(
+            ETargetPlatform.Windows,
+            "winhttp.lib"
+        );
     }
 }

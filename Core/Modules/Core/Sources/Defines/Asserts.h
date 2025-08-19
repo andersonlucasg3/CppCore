@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Logger/Logger.h"
+
 #define assertm(a, message) 																\
 	if (!(a)) 																				\
 	{																						\

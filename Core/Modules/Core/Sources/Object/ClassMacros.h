@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Templates/SharedPointers.h"
+#include "SmartPointer/SharedPointer.h"
 
 #define DECLARE_CLASS_HEADER(ClassName)                                         \
 class C##ClassName;                                                             \

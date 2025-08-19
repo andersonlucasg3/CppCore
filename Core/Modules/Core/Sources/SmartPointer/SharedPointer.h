@@ -3,8 +3,9 @@
 #include "RefCounter.h"
 #include "Deleter.h"
 
-#include "Templates/SmartPointer/SharedFromThis.h"
+#include "SharedFromThis.h"
 
+#include <cstddef>
 #include <type_traits>
 
 using namespace Core::Types;
@@ -117,6 +118,11 @@ struct TSharedPtr
 	inline TPtr* operator+(UInt64 Index) const
 	{
 		return (_object + Index);
+	}
+
+	inline bool operator ==(std::nullptr_t)
+	{
+		return _object == nullptr;
 	}
 
 	inline TSharedPtr& operator=(const TSharedPtr& Other)

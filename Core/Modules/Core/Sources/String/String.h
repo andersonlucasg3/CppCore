@@ -16,9 +16,8 @@ protected:
 public:
 	CORE_API CString();
 	CORE_API CString(const CString& Other);
-	CORE_API CString(char* CStr, UInt64 Len);
-	CORE_API CString(const char* CStr, UInt64 Len);
 	CORE_API CString(const char* CStr);
+	CORE_API CString(const char* CStr, SizeT Len);
 	
 #if PLATFORM_WINDOWS
 	CORE_API CString(const wchar_t* WStr, SizeT WStrLen);

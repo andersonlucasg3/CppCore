@@ -15,17 +15,12 @@ CString::CString(const CString& Other) : Super(Other)
     //
 }
 
-CString::CString(char* CStr, UInt64 Len) : Super(CStr, Len)
-{
-    //
-}
-
-CString::CString(const char* CStr, UInt64 Len) : Super(CStr, Len)
-{
-    //
-}
-
 CString::CString(const char* CStr) : Super(CStr, std::strlen(CStr))
+{
+    //
+}
+
+CString::CString(const char* CStr, SizeT Len) : Super(CStr, Len)
 {
     //
 }

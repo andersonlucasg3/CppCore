@@ -1,13 +1,11 @@
 #pragma once
 
-#include "Defines/Asserts.h"
-
 #include "Templates/Functions.h"
-#include "Templates/SmartPointer/Deleter.h"
-#include "Templates/SmartPointer/MakeAndCasts.h"
+
+#include "SmartPointer/MakeAndCasts.h"
+#include "SmartPointer/Deleter.h"
 
 #include "Memory/Memory.h"
-#include "Logger/Logger.h"
 
 template<typename TElement>
 struct SArrayDeleter : public TDeleter<TElement>
