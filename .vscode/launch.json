@@ -8,10 +8,10 @@
             "preLaunchTask": "Compile ProjectTools",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool.exe"
+                "program": "${workspaceFolder}/Binaries/DotNet/ProjectTools/BuildTool.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool"
+                "program": "${workspaceFolder}/Binaries/DotNet/ProjectTools/BuildTool"
             },
             "args": [
                 "GenCodeProject",
@@ -32,10 +32,10 @@
             "preLaunchTask": "Compile ProjectTools",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool.exe"
+                "program": "${workspaceFolder}/Binaries/DotNet/ProjectTools/BuildTool.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool"
+                "program": "${workspaceFolder}/Binaries/DotNet/ProjectTools/BuildTool"
             },
             "args": [
                 "Compile",
@@ -55,10 +55,10 @@
             "preLaunchTask": "Compile CoreTests",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/Windows/Debug/CoreTests.exe"
+                "program": "${workspaceFolder}/Binaries/Windows/Debug/CoreTests.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/${input:projects}/Binaries/macOS/Debug/CoreTests"
+                "program": "${workspaceFolder}/Binaries/macOS/Debug/CoreTests"
             },
             "cwd": "${workspaceFolder}",
         }
