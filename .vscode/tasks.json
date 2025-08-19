@@ -60,6 +60,31 @@
             "group": "build"
         },
         {
+            "label": "Compile CoreTests",
+            "command": "pwsh",
+            "type": "shell",
+            "windows": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Core",
+                    "-Platform", "Windows",
+                    "-Configuration", "Debug",
+                    "-Modules", "CoreTests"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Core",
+                    "-Platform", "macOS",
+                    "-Configuration", "Debug",
+                    "-Modules", "CoreTests"
+                ]
+            }
+        },
+        {
             "label": "Clean",
             "command": "pwsh",
             "type": "shell",
@@ -117,7 +142,6 @@
             "type": "pickString",
             "options": [
                 "Core",
-                "CoreTests",
                 "AppleFrameworks",
                 "Networking",
                 "TestSuit"

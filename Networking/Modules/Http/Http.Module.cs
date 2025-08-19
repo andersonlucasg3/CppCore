@@ -1,3 +1,4 @@
+using Shared.Platforms;
 using Shared.Projects;
 
 namespace Networking.Modules;
@@ -12,6 +13,11 @@ public class HttpModule : AModuleDefinition
     {
         AddDependencyModuleNames(
             "Core"
+        );
+
+        AddDependencyModuleNames(
+            ETargetPlatform.macOS,
+            "Foundation"
         );
     }
 }

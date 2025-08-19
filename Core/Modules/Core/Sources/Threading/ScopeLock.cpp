@@ -1,12 +1,12 @@
 #include "ScopeLock.h"
 
-SScopeLock::SScopeLock(SPlatformCriticalSection& Section) :
-    Section(Section)
+SScopeLock::SScopeLock(SCriticalSection& Section) 
+:   _section(Section)
 {
     Section.Lock();
 }
 
 SScopeLock::~SScopeLock()
 {
-    Section.Unlock();
+    _section.Unlock();
 }

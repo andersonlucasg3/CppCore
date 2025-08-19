@@ -13,14 +13,16 @@ namespace NS
     _NS_CONST(NotificationName, ProcessInfoPowerStateDidChangeNotification);
     _NS_CONST(NotificationName, ProcessInfoPerformanceProfileDidChangeNotification);
 
-    _NS_ENUM(NS::Integer, ProcessInfoThermalState) {
+    _NS_ENUM(Integer, ProcessInfoThermalState) 
+    {
         ProcessInfoThermalStateNominal = 0,
         ProcessInfoThermalStateFair = 1,
         ProcessInfoThermalStateSerious = 2,
         ProcessInfoThermalStateCritical = 3
     };
 
-    _NS_OPTIONS(std::uint64_t, ActivityOptions) {
+    _NS_OPTIONS(std::uint64_t, ActivityOptions) 
+    {
         ActivityIdleDisplaySleepDisabled = (1ULL << 40),
         ActivityIdleSystemSleepDisabled = (1ULL << 20),
         ActivitySuddenTerminationDisabled = (1ULL << 14),

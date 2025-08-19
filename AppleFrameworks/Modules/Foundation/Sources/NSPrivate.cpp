@@ -31,6 +31,7 @@ namespace NS::Private
         _NS_PRIVATE_DEF_CLS(NSValue);
         _NS_PRIVATE_DEF_CLS(NSString);
         _NS_PRIVATE_DEF_CLS(NSFileManager);
+        _NS_PRIVATE_DEF_CLS(NSURLSession);
     }
 
     namespace Selector
@@ -208,10 +209,12 @@ namespace NS::Private
         _NS_PRIVATE_DEF_SEL(retainCount, "retainCount");
         _NS_PRIVATE_DEF_SEL(setAutomaticTerminationSupportEnabled_, "setAutomaticTerminationSupportEnabled:");
         _NS_PRIVATE_DEF_SEL(setProcessName_, "setProcessName:");
+        _NS_PRIVATE_DEF_SEL(setDelegate_, "setDelegate:");
         _NS_PRIVATE_DEF_SEL(sharedFrameworksPath, "sharedFrameworksPath");
         _NS_PRIVATE_DEF_SEL(sharedFrameworksURL, "sharedFrameworksURL");
         _NS_PRIVATE_DEF_SEL(sharedSupportPath, "sharedSupportPath");
         _NS_PRIVATE_DEF_SEL(sharedSupportURL, "sharedSupportURL");
+        _NS_PRIVATE_DEF_SEL(sharedSession, "sharedSession");
         _NS_PRIVATE_DEF_SEL(shortValue, "shortValue");
         _NS_PRIVATE_DEF_SEL(showPools, "showPools");
         _NS_PRIVATE_DEF_SEL(signal, "signal");

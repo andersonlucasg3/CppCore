@@ -9,9 +9,9 @@
 #include "Filesystem/Path.h"
 #include "Threading/CriticalSection.h"
 #include "Threading/ScopeLock.h"
+#include "Threading/CriticalSection.h"
 
 #include COMPILE_PLATFORM_TYPE_HEADER_FEATURE(Process, Process.h)
-#include COMPILE_PLATFORM_HEADER_FEATURE(Threading, CriticalSection.h)
 
 template<
     typename TItem,
@@ -19,7 +19,7 @@ template<
 >
 class TFilesystemReference
 {
-    inline static SPlatformCriticalSection _allReferencesCS;
+    inline static SCriticalSection _allReferencesCS;
     inline static TMap<CString, TItemPtr> _allReferences;
     
 protected:

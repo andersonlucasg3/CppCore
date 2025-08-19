@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Templates/SharedPointers.h"
-
 #include "Threading/Thread.h"
 
 #include <thread>

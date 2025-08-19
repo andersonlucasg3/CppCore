@@ -47,19 +47,21 @@ namespace NS
     protected:
         friend class Referencing<Object, objc_object>;
 
-        template <class _Class>
-        static _Class* alloc(const char* pClassName);
-        template <class _Class>
-        static _Class* alloc(const void* pClass);
-        template <class _Class>
-        _Class* init();
-
         template <class _Dst>
         static _Dst                   bridgingCast(const void* pObj);
         static class MethodSignature* methodSignatureForSelector(const void* pObj, SEL selector);
         static bool                   respondsToSelector(const void* pObj, SEL selector);
         template <typename _Type>
         static constexpr bool doesRequireMsgSendStret();
+
+    public:
+        template <class _Class>
+        static _Class* alloc(const char* pClassName);
+        template <class _Class>
+        static _Class* alloc(const void* pClass);
+        template <class _Class>
+        _Class* init();
+        
         template <typename _Ret, typename... _Args>
         static _Ret sendMessage(const void* pObj, SEL selector, _Args... args);
         template <typename _Ret, typename... _Args>

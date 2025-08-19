@@ -20,4 +20,6 @@ public:
 
     HTTP_API const CString& Endpoint() const;
     HTTP_API const TMap<CString, CString>& Headers() const;
+
+    HTTP_API virtual void Process() = 0;
 };

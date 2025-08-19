@@ -12,7 +12,7 @@ bool CThread::IsRunning()
     return bIsRunning;
 }
 
-void CThread::Start(const TFunction<void (const CThreadWeakPtr &)> &ThreadFunc)
+void CThread::Start(const TFunction<void (const CThreadWeakPtr &)>&)
 {
     SScopeLock Lock(IsRunningSection);
     bIsRunning = true;

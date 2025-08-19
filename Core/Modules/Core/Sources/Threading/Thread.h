@@ -1,25 +1,19 @@
 #pragma once
 
-#include "Defines/Preprocessors.h"
-
-#include "Object/Object.h"
-
 #include "Templates/Functions.h"
 
+#include "Object/Object.h"
 #include "String/String.h"
-
-#include COMPILE_PLATFORM_HEADER_FEATURE(Threading, CriticalSection.h)
+#include "CriticalSection.h"
 
 DECLARE_CLASS_HEADER(Thread);
 
-class CThread : 
-    public CObject, 
-    public TSharedFromThis<CThread>
+class CThread : public CObject, public TSharedFromThis<CThread>
 {
     using Super = CObject;
     
     bool bIsRunning = false;
-    SPlatformCriticalSection IsRunningSection;
+    SCriticalSection IsRunningSection;
 
 public:
     CORE_API CThread() = default;
