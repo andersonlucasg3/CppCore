@@ -8,14 +8,14 @@
             "preLaunchTask": "Compile ProjectTools",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool"
             },
             "args": [
                 "GenCodeProject",
-                "-Project=Core",
+                "-Project=${input:projects}",
                 "-Generator=${input:generators}",
                 "-Platform=${input:platforms}",
                 "-Configuration=${input:configurations}",
@@ -32,14 +32,14 @@
             "preLaunchTask": "Compile ProjectTools",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool.exe"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/Core/Binaries/DotNet/ProjectTools/BuildTool"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/DotNet/ProjectTools/BuildTool"
             },
             "args": [
                 "Compile",
-                "-Project=Core",
+                "-Project=${input:projects}",
                 "-Platform=${input:platforms}",
                 "-Configuration=${input:configurations}",
                 "-DisableMT"
@@ -55,10 +55,10 @@
             "preLaunchTask": "Compile CoreTests",
             "program": "specified in each platform",
             "windows": {
-                "program": "${workspaceFolder}/Core/Binaries/Windows/Debug/CoreTests.exe"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/Windows/Debug/CoreTests.exe"
             },
             "osx": {
-                "program": "${workspaceFolder}/Core/Binaries/macOS/Debug/CoreTests"
+                "program": "${workspaceFolder}/${input:projects}/Binaries/macOS/Debug/CoreTests"
             },
             "cwd": "${workspaceFolder}",
         }
@@ -95,6 +95,18 @@
             "options": [
                 "Debug",
                 "Release"
+            ]
+        },
+        {
+            "id": "projects",
+            "description": "Project to compile",
+            "type": "pickString",
+            "options": [
+                "Core",
+                "CoreTests",
+                "AppleFrameworks",
+                "Networking",
+                "TestSuit"
             ]
         }
     ]

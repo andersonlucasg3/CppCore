@@ -1,7 +1,3 @@
-
-[submodule "Core/Deps/TestSuit"]
-	path = Core/Deps/TestSuit
-	url = https://github.com/andersonlucasg3/CppTestSuit.git
-[submodule "Core/Deps/AppleFrameworks"]
-	path = Core/Deps/AppleFrameworks
-	url = https://github.com/andersonlucasg3/CppApple.git
+[submodule "ProjectTools"]
+	path = ProjectTools
+	url = https://github.com/andersonlucasg3/CppProjectTools

@@ -7,8 +7,8 @@
             "type": "shell",
             "args": [
                 "-c",
-                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/GenCodeProject.ps1",
-                "-Project", "Core",
+                "${workspaceFolder}/ProjectTools/Scripts/GenCodeProject.ps1",
+                "-Project", "${input:projects}",
                 "-Generator", "${input:generators}",
                 "-Platform", "${input:platforms}",
                 "-Configuration", "${input:configurations}"
@@ -27,8 +27,8 @@
             "type": "shell",
             "args": [
                 "-c",
-                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
-                "-Project", "Core",
+                "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "${input:projects}",
                 "-Platform", "${input:platforms}",
                 "-Configuration", "${input:configurations}"
             ],
@@ -41,38 +41,13 @@
             "group": "build"
         },
         {
-            "label": "Compile CoreTests",
-            "command": "pwsh",
-            "type": "shell",
-            "windows": {
-                "args": [
-                    "-c",
-                    "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
-                    "-Project", "Core",
-                    "-Platform", "Windows",
-                    "-Configuration", "Debug",
-                    "-Modules", "CoreTests"
-                ]
-            },
-            "osx": {
-                "args": [
-                    "-c",
-                    "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
-                    "-Project", "Core",
-                    "-Platform", "macOS",
-                    "-Configuration", "Debug",
-                    "-Modules", "CoreTests"
-                ]
-            }
-        },
-        {
             "label": "Compile ProjectTools",
             "command": "pwsh",
             "type": "shell",
             "args": [
                 "-c",
-                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
-                "-Project", "Core",
+                "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "${input:projects}",
                 "-Platform", "${input:platforms}",
                 "-ProjectToolsOnly"
             ],
@@ -90,8 +65,8 @@
             "type": "shell",
             "args": [
                 "-c",
-                "${workspaceFolder}/Programs/DotNet/ProjectTools/Scripts/Compile.ps1",
-                "-Project", "Core",
+                "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "${input:projects}",
                 "-Platform", "${input:platforms}",
                 "-Configuration", "${input:configurations}",
                 "-Clean"
@@ -134,6 +109,18 @@
             "options": [
                 "Debug",
                 "Release"
+            ]
+        },
+        {
+            "id": "projects",
+            "description": "Project to compile",
+            "type": "pickString",
+            "options": [
+                "Core",
+                "CoreTests",
+                "AppleFrameworks",
+                "Networking",
+                "TestSuit"
             ]
         }
     ]
