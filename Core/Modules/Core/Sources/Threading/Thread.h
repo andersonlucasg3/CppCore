@@ -31,7 +31,7 @@ public:
     CORE_API virtual void Join() = 0;
     CORE_API virtual void Exit();
 
-    CORE_API virtual void Sleep(UInt64 InTimeMilliseconds) = 0;
+    CORE_API virtual void Sleep(UInt64 InTimeMilliseconds) const = 0;
 
     CORE_API static CThreadPtr Create();
 };

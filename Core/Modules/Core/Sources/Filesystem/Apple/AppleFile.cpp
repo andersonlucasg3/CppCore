@@ -1,7 +1,6 @@
 #include "AppleFile.h"
 
-#include "Defines/Asserts.h"
-#include "Templates/SmartPointer/MakeAndCasts.h"
+#include "SmartPointer/MakeAndCasts.h"
 
 #include <filesystem>
 

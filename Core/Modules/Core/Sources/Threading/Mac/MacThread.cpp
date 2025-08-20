@@ -1,8 +1,13 @@
 #include "MacThread.h"
 
-#include "Templates/SmartPointer/MakeAndCasts.h"
+#include "SmartPointer/MakeAndCasts.h"
 
 #include "Threading/Thread.h"
+
+#include "NSAutoreleasePool.h"
+
+#include <chrono>
+#include <thread>
 
 void CMacThread::SetName(const CString &Name)
 {
@@ -25,10 +30,11 @@ void CMacThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc)
             pthread_setname_np(*WeakThread->ThreadName.SubString(0, 15));
             while(WeakThread->IsRunning())
             {
-                @autoreleasepool
-                {
-                    ThreadFunc(WeakThread);
-                }
+                NS::AutoreleasePool* Pool = NS::AutoreleasePool::alloc()->init();
+
+                ThreadFunc(WeakThread);
+
+                Pool->drain();
             }
         });
     }
@@ -42,7 +48,7 @@ void CMacThread::Join()
     }
 }
 
-CMacThreadPtr CMacThread::Create()
+void CMacThread::Sleep(UInt64 InMilliseconds) const
 {
-    return MakeShared<CMacThread>();
+    std::this_thread::sleep_for(std::chrono::milliseconds(InMilliseconds));
 }

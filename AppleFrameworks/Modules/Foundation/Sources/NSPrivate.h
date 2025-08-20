@@ -61,6 +61,8 @@ namespace NS::Private
         _NS_PRIVATE_EXTERN_CLS(NSString);
         _NS_PRIVATE_EXTERN_CLS(NSFileManager);
         _NS_PRIVATE_EXTERN_CLS(NSURLSession);
+        _NS_PRIVATE_EXTERN_CLS(NSURLSessionTask);
+        _NS_PRIVATE_EXTERN_CLS(NSURLSessionDataTask);
     }
 
     namespace Selector
@@ -238,7 +240,6 @@ namespace NS::Private
         _NS_PRIVATE_EXTERN_SEL(retainCount);
         _NS_PRIVATE_EXTERN_SEL(setAutomaticTerminationSupportEnabled_);
         _NS_PRIVATE_EXTERN_SEL(setProcessName_);
-        _NS_PRIVATE_EXTERN_SEL(setDelegate_);
         _NS_PRIVATE_EXTERN_SEL(sharedFrameworksPath);
         _NS_PRIVATE_EXTERN_SEL(sharedFrameworksURL);
         _NS_PRIVATE_EXTERN_SEL(sharedSupportPath);
@@ -271,5 +272,10 @@ namespace NS::Private
         _NS_PRIVATE_EXTERN_SEL(valueWithPointer_);
         _NS_PRIVATE_EXTERN_SEL(wait);
         _NS_PRIVATE_EXTERN_SEL(waitUntilDate_);
+        _NS_PRIVATE_EXTERN_SEL(cancel);
+        _NS_PRIVATE_EXTERN_SEL(resume);
+        _NS_PRIVATE_EXTERN_SEL(suspend);
+        _NS_PRIVATE_EXTERN_SEL(URLWithString_);
+        _NS_PRIVATE_EXTERN_SEL(dataTaskWithURL_);
     }
 }

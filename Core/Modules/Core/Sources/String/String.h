@@ -9,14 +9,16 @@
 
 #include <format>
 
+#if PLATFORM_WINDOWS
 typedef TSharedPtr<wchar_t> CWString;
+#endif // PLATFORM_WINDOWS
 
 class CString : public CHashable
 {
-	CORE_API static const char* _empty;
+	CORE_API static TSharedPtr<char> _empty;
 
-	SizeT Length;
-	TSharedPtr<char> BufferPtr;
+	SizeT _length;
+	TSharedPtr<char> _bufferPtr;
 
 	CORE_API void CopyStr(const char* CStr, SizeT Len);
 	CORE_API SizeT StrLen(const char* CStr) const;
@@ -76,7 +78,9 @@ public:
 
 	CORE_API SizeT Hash() const;
 
+#if PLATFORM_WINDOWS
 	CORE_API CWString WStr() const;
+#endif // PLATFORM_WINDOWS
 
 	CORE_API CString& operator+=(const CString& Other);
 	CORE_API CString& operator+=(const char* CStr);

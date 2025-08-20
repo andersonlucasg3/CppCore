@@ -2,6 +2,7 @@
 
 #include "Defines/Asserts.h"
 #include "Logger/Logger.h"
+#include <type_traits>
 
 struct IDeleter;
 struct SRefCounter;
@@ -24,32 +25,36 @@ struct TSharedFromThis : public SSharedFromThis
 	~TSharedFromThis() override = default;
 
 	template<typename TOtherPtr = TThis>
-	TSharedPtr<TOtherPtr> AsShared()
+	inline TSharedPtr<TOtherPtr> AsShared()
 	{
-		assert(_deleter && _refCounter);
+		if constexpr (std::is_same_v<TThis, TOtherPtr>)
+		{
+			return _weakPtr;
+		}
 
-		return TSharedPtr<TOtherPtr>(static_cast<TOtherPtr*>(this), _deleter, _refCounter);
+		return TSharedPtr<TOtherPtr>(_weakPtr);
 	}
 
 	template<typename TOtherPtr = TThis>
-	TWeakPtr<TOtherPtr> AsWeak()
+	inline TWeakPtr<TOtherPtr> AsWeak()
 	{
-		assert(_deleter && _refCounter);
+		if constexpr (std::is_same_v<TThis, TOtherPtr>)
+		{
+			return _weakPtr;
+		}
 
-		return TWeakPtr<TOtherPtr>(static_cast<TOtherPtr*>(this), _deleter, _refCounter);
+		return TWeakPtr<TOtherPtr>(_weakPtr);
 	}
 
 protected:
 	virtual void OnInitializeShared() { }
 
 private:
-	IDeleter* _deleter = nullptr;
-	SRefCounter* _refCounter = nullptr;
+	TWeakPtr<TThis> _weakPtr;
 
-	void UpdateWeakPtr(IDeleter* InDeleter, SRefCounter* InRefCounter)
+	inline void UpdateWeakPtr(IDeleter* InDeleter, SRefCounter* InRefCounter)
 	{
-		_deleter = InDeleter;
-		_refCounter = InRefCounter;
+		_weakPtr = TWeakPtr<TThis>(static_cast<TThis*>(this), InDeleter, InRefCounter);
 
 		OnInitializeShared();
 	}

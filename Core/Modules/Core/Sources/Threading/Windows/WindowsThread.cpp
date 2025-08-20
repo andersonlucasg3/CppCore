@@ -45,12 +45,7 @@ void CWindowsThread::Join()
 	}
 }
 
-void CWindowsThread::Sleep(UInt64 InTimeMilliseconds)
+void CWindowsThread::Sleep(UInt64 InTimeMilliseconds) const
 {
 	::Sleep(InTimeMilliseconds);
-}
-
-CWindowsThreadPtr CWindowsThread::Create()
-{
-	return MakeShareable(new CWindowsThread);
 }

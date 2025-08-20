@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RefCounter.h"
+#include "SmartPointer/SharedFromThis.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -44,6 +45,19 @@ struct TWeakPtr
 		_refCounter = Shared._refCounter->RetainWeak();
 		_deleter = Shared._deleter;
 		_object = Shared._object;
+	}
+
+	template<typename TOtherPtr = TPtr>
+	inline TWeakPtr(TOtherPtr* SFT) : TWeakPtr()
+	{
+		static_assert(std::is_base_of_v<TPtr, TOtherPtr> || std::is_same_v<TPtr, TOtherPtr>);
+		static_assert(std::is_base_of_v<SSharedFromThis, TOtherPtr>);
+
+		if (SFT == nullptr) return;
+
+		_refCounter = SFT->_weakPtr._refCounter->RetainWeak();
+		_deleter = SFT->_weakPtr._deleter;
+		_object = SFT;
 	}
 
 	inline TWeakPtr(std::nullptr_t) : TWeakPtr()
@@ -168,6 +182,23 @@ struct TWeakPtr
 		return *this;
 	}
 
+	template<typename TOtherPtr = TPtr>
+	inline TWeakPtr& operator=(TOtherPtr* SFT)
+	{
+		static_assert(std::is_base_of_v<TPtr, TOtherPtr> || std::is_same_v<TPtr, TOtherPtr>);
+		static_assert(std::is_base_of_v<SSharedFromThis, TOtherPtr>);
+
+		Reset();
+
+		if (!SFT) return *this;
+
+		_refCounter = SFT->_weakRef->_refCounter->RetainWeak();
+		_deleter = SFT->_deleter;
+		_object = SFT;
+
+		return *this;
+	}
+
 	inline TWeakPtr& operator=(std::nullptr_t)
 	{
 		Reset();
@@ -208,6 +239,8 @@ private:
     template<typename TOtherPtr>
     friend struct TWeakPtr;
 	friend struct TSharedPtr<TPtr>;
+	template<typename TOtherPtr>
+	friend struct TSharedPtr;
 
 	template<typename TPointer>
 	friend struct TSharedFromThis;

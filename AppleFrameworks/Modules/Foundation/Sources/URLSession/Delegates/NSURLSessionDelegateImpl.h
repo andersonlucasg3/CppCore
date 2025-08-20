@@ -1,14 +1,16 @@
 #pragma once
 
-#include "NSURLSessionDelegate.h"
+#include "URLSession/NSURLSessionDelegate.h"
 
 #include <Foundation/Foundation.h>
 
 #include <__memory/shared_ptr.h>
 
-@interface NSURLSessionDelegateObjc : NSObject<NSURLSessionDelegate>
+using namespace NS;
 
-- (instancetype)initWithDelegate:(const std::shared_ptr<NS::URLSessionDelegate>&) InDelegate;
+@interface NSURLSessionDelegateImpl : NSObject<NSURLSessionDelegate>
+
+- (instancetype)initWithDelegate:(const std::shared_ptr<URLSessionDelegate>&) InDelegate;
 
 - (void) URLSession:(NSURLSession *) session didBecomeInvalidWithError:(NSError *) error;
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) session;

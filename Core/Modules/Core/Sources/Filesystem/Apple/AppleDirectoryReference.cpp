@@ -1,7 +1,7 @@
 #include "AppleDirectoryReference.h"
 
 #include "String/String.h"
-#include "Templates/String/Apple/AppleStringConvertion.h"
+#include "String/Apple/AppleStringConvertion.h"
 
 #include "Filesystem/DirectoryReference.h"
 

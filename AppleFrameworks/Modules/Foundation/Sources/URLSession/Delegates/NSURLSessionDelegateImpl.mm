@@ -1,10 +1,10 @@
-#include "NSURLSessionDelegateObjc.h"
+#include "NSURLSessionDelegateImpl.h"
 
-#include "URLAuthenticationChallenge.h"
+#include "NSURLAuthenticationChallenge.h"
 
 using namespace NS;
 
-@implementation NSURLSessionDelegateObjc
+@implementation NSURLSessionDelegateImpl
 {
     std::shared_ptr<URLSessionDelegate> _cppDelegate;
 }
@@ -39,7 +39,10 @@ using namespace NS;
 {
     if (_cppDelegate)
     {
-        _cppDelegate->URLSessionDidReceiveChallenge((URLSession*)session, (URLAuthenticationChallenge*)challenge, (URLSessionChallengeCompletionHandler)completionHandler);
+        _cppDelegate->URLSessionDidReceiveChallenge((URLSession*)session, (URLAuthenticationChallenge*)challenge, [completionHandler](URLSessionAuthChallengeDisposition disposition, URLCredential* credential)
+        {
+            completionHandler((NSURLSessionAuthChallengeDisposition)disposition, (NSURLCredential*)credential);
+        });
     }
 }
 

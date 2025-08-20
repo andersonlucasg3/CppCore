@@ -21,3 +21,4 @@
 #include "NSTypes.h"
 #include "NSURL.h"
 #include "NSFileManager.h"
+#include "NSThread.h"

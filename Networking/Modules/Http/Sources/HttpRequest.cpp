@@ -44,6 +44,11 @@ const TMap<CString, CString>& CHttpRequest::Headers() const
     return _headers;
 }
 
+const CHttpRequestCallbacksPtr& CHttpRequest::Callbacks() const
+{
+    return _callbacks;
+}
+
 CHttpRequest& CHttpRequest::SetEndpoint(const CString& InEndpoint)
 {
     _endpoint = InEndpoint;

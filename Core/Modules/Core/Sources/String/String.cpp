@@ -13,14 +13,16 @@
 #include <cassert>
 #include <cwchar>
 
-const char* CString::_empty = "";
+TSharedPtr<char> CString::_empty = MakeShareable(new char[0]);
 
 void CString::CopyStr(const char* CStr, SizeT Len)
 {
     if (CStr == nullptr || Len == 0)
     {
-        BufferPtr = nullptr;
-        Length = 0;
+        _bufferPtr = _empty;
+        _length = 0;
+
+        return;
     }
 
     const SizeT NewLength = Len + 1;
@@ -28,8 +30,8 @@ void CString::CopyStr(const char* CStr, SizeT Len)
     GMemory.Copy(CStr, NewBuffer, sizeof(char) * Len);
     NewBuffer[Len] = '\0';
 
-    BufferPtr = MakeShareable<char, SArrayDeleter<char>>(NewBuffer);
-    Length = Len;
+    _bufferPtr = MakeShareable<char, SArrayDeleter<char>>(NewBuffer);
+    _length = Len;
 }
 
 SizeT CString::StrLen(const char* Buffer) const
@@ -45,8 +47,8 @@ void CString::CopyStr(const wchar_t* CWStr, SizeT Len)
 {
     if (CWStr == nullptr || Len == 0)
     {
-        BufferPtr = nullptr;
-        Length = 0;
+        _bufferPtr = _empty;
+        _length = 0;
     }
 
     char* NewBuffer = new char[Len + 1];
@@ -74,8 +76,8 @@ void CString::CopyStr(const wchar_t* CWStr, SizeT Len)
     
     NewBuffer[Len] = '\0';
 
-    BufferPtr = MakeShareable<char, SArrayDeleter<char>>(NewBuffer);
-    Length = Len;
+    _bufferPtr = MakeShareable<char, SArrayDeleter<char>>(NewBuffer);
+    _length = Len;
 }
 
 SizeT CString::StrLen(const wchar_t* Buffer) const
@@ -89,9 +91,9 @@ SizeT CString::StrLen(const wchar_t* Buffer) const
 
 bool CString::Contains(const char* CStr, SizeT Len) const
 {
-    for (UInt64 Index = 0; Index <= Length - Len; ++Index)
+    for (UInt64 Index = 0; Index <= _length - Len; ++Index)
     {
-        if (GMemory.Equal(BufferPtr + Index, Len, CStr, Len))
+        if (GMemory.Equal(_bufferPtr + Index, Len, CStr, Len))
         {
             return true;
         }
@@ -102,19 +104,19 @@ bool CString::Contains(const char* CStr, SizeT Len) const
 
 const char* CString::Empty() 
 {
-    return _empty;
+    return _empty.Raw();
 }
 
 CString::CString()
-:   Length(0)
-,   BufferPtr(nullptr)
+:   _length(0)
+,   _bufferPtr(_empty)
 {
     //
 }
 
 CString::CString(const CString& Other)
-:   Length(Other.Length)
-,   BufferPtr(Other.BufferPtr)
+:   _length(Other._length)
+,   _bufferPtr(Other._bufferPtr)
 {
     
 }
@@ -147,12 +149,12 @@ CString::CString(const wchar_t* CWStr, SizeT Len)
 
 SizeT CString::Len() const
 {
-    return Length;
+    return _length;
 }
 
 bool CString::IsEmpty() const
 {
-    return Length == 0;
+    return _length == 0;
 }
 
 bool CString::Contains(const char* CStr) const
@@ -162,14 +164,14 @@ bool CString::Contains(const char* CStr) const
 
 bool CString::Contains(const CString& Other) const
 {
-    return Contains(*Other, Other.Length);
+    return Contains(*Other, Other._length);
 }
 
 Int64 CString::LastIndexOf(const char Char) const
 {
-    for (UInt64 Index = Length - 1; Index >= 0; --Index)
+    for (UInt64 Index = _length - 1; Index >= 0; --Index)
     {
-        if (BufferPtr[Index] == Char)
+        if (_bufferPtr[Index] == Char)
         {
             return Index;
         }
@@ -180,24 +182,24 @@ Int64 CString::LastIndexOf(const char Char) const
 
 CString CString::SubString(UInt64 Start) const
 {
-    return SubString(Start, Length - 1);
+    return SubString(Start, _length - 1);
 }
 
 CString CString::SubString(UInt64 Start, UInt64 End) const
 {
     const SizeT NewLength = End - Start;
-    return CString(BufferPtr + Start, NewLength);
+    return CString(_bufferPtr + Start, NewLength);
 }
 
 CString CString::Replace(const char OldChar, const char NewChar) const
 {
-    CString NewStr(BufferPtr.Raw(), Length);
+    CString NewStr(_bufferPtr.Raw(), _length);
 
-    for (UInt64 Index = 0; Index < NewStr.Length; ++Index)
+    for (UInt64 Index = 0; Index < NewStr._length; ++Index)
     {
-        if (NewStr.BufferPtr[Index] == OldChar)
+        if (NewStr._bufferPtr[Index] == OldChar)
         {
-            NewStr.BufferPtr[Index] = NewChar;
+            NewStr._bufferPtr[Index] = NewChar;
         }
     }
 
@@ -211,9 +213,9 @@ CString CString::Replace(const char* OldCStr, const char* NewCStr) const
     SizeT OldStrLen = StrLen(OldCStr);
 
     UInt64 LastCopyed = 0;
-    for (UInt64 Index = 0; Index <= Length - OldStrLen; ++Index)
+    for (UInt64 Index = 0; Index <= _length - OldStrLen; ++Index)
     {
-        if (GMemory.Equal(BufferPtr + Index, OldStrLen, OldCStr, OldStrLen))
+        if (GMemory.Equal(_bufferPtr + Index, OldStrLen, OldCStr, OldStrLen))
         {
             if (Index > LastCopyed)
             {
@@ -226,9 +228,9 @@ CString CString::Replace(const char* OldCStr, const char* NewCStr) const
         }
     }
 
-    if (LastCopyed < Length)
+    if (LastCopyed < _length)
     {
-        Builder += SubString(LastCopyed, Length);
+        Builder += SubString(LastCopyed, _length);
     }
 
     return Builder;
@@ -236,16 +238,16 @@ CString CString::Replace(const char* OldCStr, const char* NewCStr) const
 
 CString CString::Replace(const CString& OldStr, const CString& NewStr) const
 {
-    return Replace(OldStr.BufferPtr.Raw(), NewStr.BufferPtr.Raw());
+    return Replace(OldStr._bufferPtr.Raw(), NewStr._bufferPtr.Raw());
 }
 
 TArray<CString> CString::Split(const char Separator) const
 {
     TArray<CString> Results;
     Int64 LastFoundSeparator = 0;
-    for (UInt64 Index = 0; Index < Length; Index++)
+    for (UInt64 Index = 0; Index < _length; Index++)
     {
-        if (BufferPtr[Index] == Separator)
+        if (_bufferPtr[Index] == Separator)
         {
             Results.Add(SubString(LastFoundSeparator, Index));
             LastFoundSeparator = Index + 1;
@@ -254,7 +256,7 @@ TArray<CString> CString::Split(const char Separator) const
 
     if (LastFoundSeparator != 0)
     {
-        Results.Add(SubString(LastFoundSeparator, Length));
+        Results.Add(SubString(LastFoundSeparator, _length));
     }
 
     return Results;
@@ -262,21 +264,21 @@ TArray<CString> CString::Split(const char Separator) const
 
 bool CString::StartsWith(const CString& Other) const
 {
-    if (Other.Length > Length) return false;
+    if (Other._length > _length) return false;
 
-    return GMemory.Equal(BufferPtr.Raw(), Other.Length, Other.BufferPtr.Raw(), Other.Length);
+    return GMemory.Equal(_bufferPtr.Raw(), Other._length, Other._bufferPtr.Raw(), Other._length);
 }
 
 bool CString::EndsWith(const CString& Other) const
 {
-    if (Other.Length > Length) return false;
+    if (Other._length > _length) return false;
 
-    return GMemory.Equal(BufferPtr + -Other.Length, Other.Length, Other.BufferPtr.Raw(), Other.Length);
+    return GMemory.Equal(_bufferPtr + -Other._length, Other._length, Other._bufferPtr.Raw(), Other._length);
 }
 
 char CString::LastChar() const
 {
-    return BufferPtr[Length - 1];
+    return _bufferPtr[_length - 1];
 }
 
 SizeT CString::Hash() const
@@ -284,7 +286,7 @@ SizeT CString::Hash() const
     SizeT Hash = 14695981039346656037ULL; // 64-bit FNV offset basis
     constexpr SizeT FnvPrime = 1099511628211ULL;
     
-    char* Buffer = BufferPtr.Raw();
+    char* Buffer = _bufferPtr.Raw();
 
     while (*Buffer) {
         Hash ^= static_cast<SizeT>(*Buffer++);
@@ -294,6 +296,7 @@ SizeT CString::Hash() const
     return Hash;
 }
 
+#if PLATFORM_WINDOWS
 CWString CString::WStr() const
 {
     char* CStr = BufferPtr.Raw();
@@ -325,51 +328,52 @@ CWString CString::WStr() const
 
     return MakeShareable<wchar_t, SArrayDeleter<wchar_t>>(NewBuffer);
 }
+#endif // PLATFORM_WINDOWS
 
 CString& CString::operator+=(const CString& Other)
 {
-    return *this = CString("{}{}", BufferPtr.Raw(), Other.BufferPtr.Raw());
+    return *this = CString("{}{}", _bufferPtr.Raw(), Other._bufferPtr.Raw());
 }
 
 CString& CString::operator+=(const char* CStr)
 {
-    return *this = CString("{}{}", BufferPtr.Raw(), CStr);
+    return *this = CString("{}{}", _bufferPtr.Raw(), CStr);
 }
 
 CString& CString::operator+=(char Char)
 {
-    return *this = CString("{}{}", BufferPtr.Raw(), Char);
+    return *this = CString("{}{}", _bufferPtr.Raw(), Char);
 }
 
 CString CString::operator+(const CString& Other) const
 {
-    return CString("{}{}", BufferPtr.Raw(), Other.BufferPtr.Raw());
+    return CString("{}{}", _bufferPtr.Raw(), Other._bufferPtr.Raw());
 }
 
 CString CString::operator+(const char* CStr) const
 {
-    return CString("{}{}", BufferPtr.Raw(), CStr);
+    return CString("{}{}", _bufferPtr.Raw(), CStr);
 }
 
 CString CString::operator+(char Char) const
 {
-    return CString("{}{}", BufferPtr.Raw(), Char);
+    return CString("{}{}", _bufferPtr.Raw(), Char);
 }
 
 bool CString::operator >(const CString& Other) const
 {
-    return Length > Other.Length;
+    return _length > Other._length;
 }
 
 bool CString::operator <(const CString& Other) const
 {
-    return Length < Other.Length;
+    return _length < Other._length;
 }
 
 CString& CString::operator=(const CString& Other)
 {
-    BufferPtr = Other.BufferPtr;
-    Length = Other.Length;
+    _bufferPtr = Other._bufferPtr;
+    _length = Other._length;
 
     return *this;
 }
@@ -406,14 +410,14 @@ CString& CString::operator=(const wchar_t* CWStr)
 
 bool CString::operator==(const CString& Other) const
 {
-    if (!BufferPtr || !Other.BufferPtr) return false;
-    return std::string_view(BufferPtr.Raw(), Length) == std::string_view(Other.BufferPtr.Raw(), Other.Length);
+    if (!_bufferPtr || !Other._bufferPtr) return false;
+    return std::string_view(_bufferPtr.Raw(), _length) == std::string_view(Other._bufferPtr.Raw(), Other._length);
 }
 
 bool CString::operator==(const char* InCStr) const
 {
-    if (!BufferPtr || !InCStr) return false;
-    return std::string_view(BufferPtr.Raw(), Length) == std::string_view(InCStr);
+    if (!_bufferPtr || !InCStr) return false;
+    return std::string_view(_bufferPtr.Raw(), _length) == std::string_view(InCStr);
 }
 
 CString operator+(const char* Lhs, const CString& Rhs)
@@ -423,10 +427,10 @@ CString operator+(const char* Lhs, const CString& Rhs)
 
 char CString::operator[](UInt64 Index) const
 {
-    return BufferPtr[Index];
+    return _bufferPtr[Index];
 }
 
 char* CString::operator*() const
 {
-    return BufferPtr.Raw();
+    return _bufferPtr.Raw();
 }

@@ -180,7 +180,7 @@ struct TSharedPtr
 
 		if (!SFT) return *this;
 
-		_refCounter = SFT->_refCounter->RetainStrong();
+		_refCounter = SFT->_weakRef->_refCounter->RetainStrong();
 		_deleter = SFT->_deleter;
 		_object = static_cast<TPtr*>(SFT);
 

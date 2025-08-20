@@ -1,6 +1,6 @@
 #include "AppleFileReference.h"
 
-#include "Templates/String/Apple/AppleStringConvertion.h"
+#include "String/Apple/AppleStringConvertion.h"
 
 #include "NSFileManager.h"
 

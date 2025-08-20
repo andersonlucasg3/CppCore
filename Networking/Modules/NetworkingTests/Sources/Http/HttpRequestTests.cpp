@@ -1,13 +1,12 @@
 #include "HttpRequestTests.h"
 
-#include "HttpRequestError.h"
-#include "TestSuit.h"
-
 #include "Threading/Semaphore.h"
 
+#include "TestSuit.h"
+
 #include "HttpRequest.h"
+#include "HttpRequestError.h"
 #include "HttpRequestManager.h"
-#include <string>
 
 REGISTER_TEST_CLASS(HttpRequestTests);
 

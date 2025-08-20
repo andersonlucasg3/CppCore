@@ -1,7 +1,14 @@
 #include "NSURL.h"
 
+#include "NSPrivate.h"
+
 namespace NS 
 {
+    URL* URL::url(const String* urlString)
+    {
+        return Object::sendMessage<URL*>(_NS_PRIVATE_CLS(NSURL), _NS_PRIVATE_SEL(URLWithString_), urlString);
+    }
+
     URL* URL::fileURLWithPath(const String* pPath)
     {
         return Object::sendMessage<URL*>(_NS_PRIVATE_CLS(NSURL), _NS_PRIVATE_SEL(fileURLWithPath_), pPath);

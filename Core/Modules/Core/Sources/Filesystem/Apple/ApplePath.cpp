@@ -1,9 +1,10 @@
 #include "ApplePath.h"
 
-#include "Process/Desktop/DesktopProcess.h"
-#include "Process/Mac/MacProcess.h"
-#include "Templates/String/Apple/AppleStringConvertion.h"
 #include "Templates/Array.h"
+
+#include "Process/Mac/MacProcess.h"
+
+#include "String/Apple/AppleStringConvertion.h"
 
 #include "NSFileManager.h"
 #include "NSError.h"

@@ -26,5 +26,5 @@ void CThread::Exit()
 
 CThreadPtr CThread::Create()
 {
-    return CPlatformThread::Create();
+    return MakeShared<CPlatformThread>();
 }

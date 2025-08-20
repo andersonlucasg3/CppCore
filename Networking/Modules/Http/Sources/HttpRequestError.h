@@ -7,6 +7,7 @@ struct CHttpRequestError
     enum EHttpRequestError
     {
         PlatformApiError,
+        PlatformError,
         ConnectionError,
         NoResponseError,
 
@@ -14,6 +15,7 @@ struct CHttpRequestError
     };
 
     EHttpRequestError Error;
+    UInt64 ErrorCode;
     CString Message;
 
     HTTP_API CHttpRequestError() = default;

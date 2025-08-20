@@ -10,10 +10,10 @@
 #include <execinfo.h>
 #include <cxxabi.h>
 
-void CAppleLogger::WriteLogLine(const CString& LogLine) const
+void CAppleLogger::WriteLogLine(const std::string& LogLine) const
 {
     // Write to Apple's logging system
-    NSLog(@"%s", *LogLine);
+    NSLog(@"%s", LogLine.c_str());
 }
 
 void CAppleLogger::LogException() const

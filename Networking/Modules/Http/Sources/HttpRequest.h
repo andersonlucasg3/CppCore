@@ -53,6 +53,7 @@ public:
     HTTP_API const CString& Endpoint() const;
     HTTP_API EHttpRequestMethod Method() const;
     HTTP_API const TMap<CString, CString>& Headers() const;
+    HTTP_API const CHttpRequestCallbacksPtr& Callbacks() const;
 
     HTTP_API CHttpRequest& SetEndpoint(const CString& InEndpoint);
     HTTP_API CHttpRequest& SetMethod(EHttpRequestMethod InMethod);
