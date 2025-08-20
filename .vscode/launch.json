@@ -61,6 +61,20 @@
                 "program": "${workspaceFolder}/Binaries/macOS/Debug/CoreTests"
             },
             "cwd": "${workspaceFolder}",
+        },
+        {
+            "name": "Debug NetworkingTests",
+            "type": "lldb",
+            "request": "launch",
+            "preLaunchTask": "Compile NetworkingTests",
+            "program": "specified in each platform",
+            "windows": {
+                "program": "${workspaceFolder}/Binaries/Windows/Debug/NetworkingTests.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/Binaries/macOS/Debug/NetworkingTests"
+            },
+            "cwd": "${workspaceFolder}"
         }
     ],
     "compounds": [

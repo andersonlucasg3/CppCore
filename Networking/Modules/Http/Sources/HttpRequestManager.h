@@ -9,8 +9,9 @@
 
 #include "HttpRequest.h"
 
-class CHttpRequestManager : public TSharedFromThis<CHttpRequestManager>
+class CHttpRequestManager
 {
+    SCriticalSection _httpThreadCS;
     CThreadPtr _httpThread;
 
     SCriticalSection _pendingRequestsCS;
@@ -28,4 +29,4 @@ public:
     HTTP_API void AddRequest(const CHttpRequestPtr& InRequest);
 };
 
-extern CHttpRequestManager& GHttpRequestManager;
+HTTP_API extern CHttpRequestManager& GHttpRequestManager;

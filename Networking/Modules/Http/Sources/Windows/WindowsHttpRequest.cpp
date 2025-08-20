@@ -3,7 +3,6 @@
 #include "HttpRequestError.h"
 
 #include "String/String.h"
-#include "String/Windows/WString.h"
 
 #include <Windows.h>
 #include <errhandlingapi.h>
@@ -55,8 +54,8 @@ void CWindowsHttpRequest::Process()
         return;
     }
 
-    CWString Endpoint = Super::Endpoint();
-    HINTERNET Connect = WinHttpConnect(Session, *Endpoint, INTERNET_DEFAULT_HTTP_PORT, 0);
+    CWString WEndpoint = Endpoint().WStr();
+    HINTERNET Connect = WinHttpConnect(Session, WEndpoint.Raw(), INTERNET_DEFAULT_HTTP_PORT, 0);
 
     if (!Connect)
     {
@@ -67,8 +66,8 @@ void CWindowsHttpRequest::Process()
         return;
     }
 
-    CWString Method = ToString(Super::Method());
-    HINTERNET Request = WinHttpOpenRequest(Connect, *Method, L"/", NULL, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, 0);
+    CWString WMethod = CString(ToString(Method())).WStr();
+    HINTERNET Request = WinHttpOpenRequest(Connect, WMethod.Raw(), L"/", NULL, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, 0);
 
     if (!Request)
     {
@@ -79,13 +78,15 @@ void CWindowsHttpRequest::Process()
         return;
     }
 
-    CWString HeadersString;
+    CString HeadersString;
+    CWString WHeadersString;
     LPWSTR Headers = WINHTTP_NO_ADDITIONAL_HEADERS;
     if (Super::Headers().Num() > 0)
     {
         // fill headers string
         HeadersString = "";
-        Headers = *HeadersString;
+        WHeadersString = HeadersString.WStr();
+        Headers = WHeadersString.Raw();
     }
 
     bool bResult = WinHttpSendRequest(Request, Headers, HeadersString.Len(), WINHTTP_NO_REQUEST_DATA, 0, 0, 0);

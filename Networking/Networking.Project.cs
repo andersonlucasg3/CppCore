@@ -12,6 +12,7 @@ public class NetworkingProject : AProjectDefinition
     protected override void Configure()
     {
         AddModule<HttpModule>();
+        AddModule<NetworkingTests>();
 
         AddProjectDependency<CoreProject>();
     }

@@ -54,3 +54,6 @@ bool CTestCoordinator::Run()
 
     return !bHadAnyFailures;
 }
+
+// do not remove, faking pthread_atfork
+extern "C" int pthread_atfork(void (*)(), void (*)(), void (*)()) { return 0; }

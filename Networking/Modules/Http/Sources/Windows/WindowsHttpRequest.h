@@ -16,3 +16,5 @@ public:
 
 	HTTP_API void Process() override;
 };
+
+typedef CWindowsHttpRequest CPlatformHttpRequest;

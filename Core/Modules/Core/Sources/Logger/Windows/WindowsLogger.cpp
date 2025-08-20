@@ -8,15 +8,15 @@
 #include <Windows.h>
 #include <iostream>
 
-void CWindowsLogger::WriteLogLine(const CString& LogLine) const
+void CWindowsLogger::WriteLogLine(const std::string& LogLine) const
 {
-	CString Line = LogLine + GEnvironment.NewLine();
+	std::string Line = LogLine + GEnvironment.NewLine();
 
 	Super::WriteLogLine(Line);
 
-	std::cout << *Line << GEnvironment.NewLine();
+	std::cout << Line << GEnvironment.NewLine();
 
-	OutputDebugStringA(*Line);
+	OutputDebugStringA(Line.c_str());
 }
 
 CWindowsLogger::CWindowsLogger() : Super()

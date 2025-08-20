@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Templates/Array.h"
+
 #include "String/String.h"
 
 class CProcess

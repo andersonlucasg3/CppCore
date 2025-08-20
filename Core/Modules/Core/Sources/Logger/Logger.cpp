@@ -15,9 +15,9 @@
 static const CPlatformLogger GPlatformLogger;
 const CLogger& GLogger = GPlatformLogger;
 
-TArray<CString> GLogBuffer;
+TArray<std::string> GLogBuffer;
 
-void CLogger::WriteLogLine(const CString& LogLine) const
+void CLogger::WriteLogLine(const std::string& LogLine) const
 {
 	if (_logFile == nullptr)
 	{
@@ -26,7 +26,7 @@ void CLogger::WriteLogLine(const CString& LogLine) const
 		return;
 	}
 
-	_logFile->Write(*LogLine, LogLine.Len());
+	_logFile->Write(LogLine.c_str(), LogLine.size());
 	_logFile->Flush();
 }
 
@@ -57,9 +57,9 @@ void CLogger::InitializeLogFile(const SFileRef& LogFilePath)
 
 	if (GLogBuffer.Num() > 0)
 	{
-		for (const CString& Log : GLogBuffer)
+		for (const std::string& Log : GLogBuffer)
 		{
-			_logFile->Write(*Log, Log.Len());
+			_logFile->Write(Log.c_str(), Log.size());
 		}
 
 		GLogBuffer = {};

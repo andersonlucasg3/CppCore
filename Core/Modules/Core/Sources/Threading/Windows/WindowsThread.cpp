@@ -1,10 +1,9 @@
 #include "WindowsThread.h"
 
-#include "String/Windows/WString.h"
-
 #include <Windows.h>
 
 #include <processthreadsapi.h>
+#include <synchapi.h>
 
 void CWindowsThread::SetName(const CString& Name)
 {
@@ -33,8 +32,7 @@ void CWindowsThread::Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadF
 
 		if (!_name.IsEmpty())
 		{
-			CWString WName(*_name, _name.Len());
-			SetThreadDescription(Thread->native_handle(), *WName);
+			SetThreadDescription(Thread->native_handle(), _name.WStr().Raw());
 		}
 	}
 }
@@ -45,6 +43,11 @@ void CWindowsThread::Join()
 	{
 		Thread->join();
 	}
+}
+
+void CWindowsThread::Sleep(UInt64 InTimeMilliseconds)
+{
+	::Sleep(InTimeMilliseconds);
 }
 
 CWindowsThreadPtr CWindowsThread::Create()

@@ -1,8 +1,11 @@
 #include "HttpRequest.h"
 
 #include "Defines/Asserts.h"
+#include "Defines/Preprocessors.h"
 
 #include "HttpRequestError.h"
+
+#include COMPILE_PLATFORM_HEADER(HttpRequest.h)
 
 const char* ToString(EHttpRequestMethod InMethod)
 {
@@ -67,4 +70,9 @@ CHttpRequest& CHttpRequest::SetCallbacks(const CHttpRequestCallbacksPtr& InCallb
     _callbacks = InCallbacks;
 
     return *this;
+}
+
+CHttpRequestPtr CHttpRequest::Create()
+{
+    return MakeShared<CPlatformHttpRequest>();
 }

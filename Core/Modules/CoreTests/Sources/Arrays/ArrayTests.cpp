@@ -1,5 +1,6 @@
 #include "ArrayTests.h"
 #include "Assert.h"
+#include "Defines/Types.h"
 
 REGISTER_TEST_CLASS(ArrayTests);
 
@@ -9,15 +10,15 @@ void CArrayTests::TestIntArray()
 {
 	TArray<int> IntArray;
 
-	for (UInt32 i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		ASSERT_EQUAL(IntArray.Num(), i);
 
 		IntArray.Add(i);
 	}
 
-	UInt32 oi = 0;
-	for (const UInt32 i : IntArray)
+	int oi = 0;
+	for (const int i : IntArray)
 	{
 		ASSERT_EQUAL(i, oi);
 		oi++;
@@ -27,12 +28,12 @@ void CArrayTests::TestIntArray()
 
 	ASSERT_EQUAL(IntArray.Num(), 5);
 
-	for (UInt32 i = 0; i < IntArray.Num(); i++)
+	for (UInt64 i = 0; i < IntArray.Num(); i++)
 	{
 		ASSERT_EQUAL(IntArray[i], i);
 	}
 
-	for (UInt32 i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		int32_t NewElement = (i + 1) * -1;
 		IntArray.Insert(0, NewElement);
@@ -40,7 +41,7 @@ void CArrayTests::TestIntArray()
 		ASSERT_EQUAL(IntArray[0], NewElement);
 	}
 	
-	for (UInt32 i = 0; i < IntArray.Num(); i++)
+	for (int i = 0; i < IntArray.Num(); i++)
 	{
 		ASSERT_EQUAL(IntArray[i], i - 4);
 	}
@@ -52,7 +53,7 @@ void CArrayTests::TestIntArray()
 		IntArray.RemoveAt(4);
 	}
 
-	for (UInt32 i = 0; i < IntArray.Num(); i++)
+	for (int i = 0; i < IntArray.Num(); i++)
 	{
 		ASSERT_EQUAL(IntArray[i], (IntArray.Num() - i) * -1);
 	}

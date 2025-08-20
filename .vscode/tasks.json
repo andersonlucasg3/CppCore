@@ -83,6 +83,31 @@
             }
         },
         {
+            "label": "Compile NetworkingTests",
+            "command": "pwsh",
+            "type": "shell",
+            "windows": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Networking",
+                    "-Platform", "Windows",
+                    "-Configuration", "Debug",
+                    "-Modules", "NetworkingTests"
+                ]
+            },
+            "osx": {
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                    "-Project", "Networking",
+                    "-Platform", "macOS",
+                    "-Configuration", "Debug",
+                    "-Modules", "NetworkingTests"
+                ]
+            }
+        },
+        {
             "label": "Clean",
             "command": "pwsh",
             "type": "shell",

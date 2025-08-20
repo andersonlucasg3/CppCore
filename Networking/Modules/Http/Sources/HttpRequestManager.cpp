@@ -4,14 +4,16 @@
 #include "Threading/ScopeLock.h"
 #include "Threading/Thread.h"
 
+static CHttpRequestManager GStaticHttpRequestManager;
+CHttpRequestManager& GHttpRequestManager = GStaticHttpRequestManager;
+
 void CHttpRequestManager::ThreadWorker(const CThreadWeakPtr& Thread)
 {
     SScopeLock ScopeLock(_pendingRequestsCS);
 
     if (_pendingRequests.IsEmpty())
     {
-        // no need to keep the thread running if there are no requests to process
-        Thread->Exit();
+        Thread->Sleep(100);
 
         return;
     }
@@ -36,27 +38,28 @@ CHttpRequestManager::~CHttpRequestManager()
 
 void CHttpRequestManager::StartRequestWorker()
 {
+    // TODO: implement a SharedPtr with thread safety abstraction so we don't need this
+    SScopeLock ScopeLock(_httpThreadCS);
+
     if (_httpThread->IsRunning()) return;
 
-    _httpThread->Start([WeakThis = AsWeak()](const CThreadWeakPtr& Thread)
+    _httpThread->Start([this](const CThreadWeakPtr& Thread)
     {
-        if (!WeakThis)
-        {
-            Thread->Exit();
-
-            return;
-        }
-
-        WeakThis->ThreadWorker(Thread);
+        ThreadWorker(Thread);
     });
 }
 
 void CHttpRequestManager::StopRequestWorker()
 {
-    if (!_httpThread->IsRunning()) return;
+    // TODO: implement a SharedPtr with thread safety abstraction so we don't need this
+    SScopeLock ScopeLock(_httpThreadCS); 
+
+    if (!_httpThread || !_httpThread->IsRunning()) return;
 
     _httpThread->Exit();
     _httpThread->Join();
+
+    _httpThread = nullptr;
 }
 
 void CHttpRequestManager::AddRequest(const CHttpRequestPtr& InRequest)

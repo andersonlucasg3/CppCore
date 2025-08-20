@@ -26,6 +26,8 @@ public:
     CORE_API void Start(const TFunction<void(const CThreadWeakPtr&)>& ThreadFunc) override;
     CORE_API void Join() override;
 
+    CORE_API void Sleep(UInt64 InTimeInMilliseconds) override;
+
     CORE_API static CWindowsThreadPtr Create();
 };
 
