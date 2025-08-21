@@ -12,6 +12,14 @@ namespace NS
         URLSessionDelayedRequestCancel = 2,
     };
 
+    _NS_ENUM(Integer, URLSessionResponseDisposition) 
+    {
+        URLSessionResponseCancel = 0,
+        URLSessionResponseAllow = 1,
+        URLSessionResponseBecomeDownload = 2,
+        URLSessionResponseBecomeStream = 3,
+    };
+
     class URLSession : public Copying<URLSession>
     {
     public:

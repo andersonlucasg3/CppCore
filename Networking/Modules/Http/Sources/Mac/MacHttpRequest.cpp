@@ -2,12 +2,14 @@
 
 #include "HttpRequestError.h"
 
-#include "NSURLSessionDataTask.h"
+#include "NSData.h"
 #include "String/Apple/AppleStringConvertion.h"
 
 #include "NSURL.h"
-#include "NSURLSession.h"
-#include "NSURLSessionDelegate.h"
+#include "NSError.h"
+#include "Templates/Array.h"
+#include "URLSession/NSURLSession.h"
+#include "URLSession/NSURLSessionDataTask.h"
 
 using namespace NS;
 
@@ -19,7 +21,9 @@ void CMacHttpRequest::Process()
 
     URLSessionDataTask* DataTask = Session->dataTask(Url);
 
-    DataTask->
+    DataTask->setDelegate(this);
+
+    DataTask->resume();
 }
 
 void CMacHttpRequest::URLSessionDidBecomeInvalidWithError(URLSession *, Error *Error)
@@ -31,4 +35,33 @@ void CMacHttpRequest::URLSessionDidBecomeInvalidWithError(URLSession *, Error *E
     RequestError.Message = NSStringToCString(Error->debugDescription());
 
     SendErrorCallback(RequestError);
+}
+
+void CMacHttpRequest::URLSessionTaskDidCompleteWithError(URLSession* session, URLSessionTask* task, Error* error)
+{
+    if (error != nullptr)
+    {
+        CHttpRequestError RequestError;
+        RequestError.Error = CHttpRequestError::PlatformError;
+        RequestError.ErrorCode = error->code();
+        RequestError.Message = NSStringToCString(error->debugDescription());
+
+        SendErrorCallback(RequestError);
+
+        return;
+    }
+
+    _response.FinishResponse();
+
+    SendSuccessCallback();
+}
+
+void CMacHttpRequest::URLSessionDataTaskDidReceiveData(URLSession* session, URLSessionDataTask* dataTask, Data* data)
+{
+    _response.AppendResponse(TArray<UInt8>(reinterpret_cast<UInt8*>(data->mutableBytes()), data->length()));
+}
+
+void CMacHttpRequest::URLSessionDataTaskDidReceiveResponse(URLSession* session, URLSessionDataTask* dataTask, URLResponse* response, const URLSessionDataTaskDidReceiveResponseCompletionHandler& completionHandler)
+{
+    // TODO: get the response from ther and put in _response
 }

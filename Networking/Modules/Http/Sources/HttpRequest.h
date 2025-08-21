@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Defines/Types.h"
+#include "HttpResponse.h"
 #include "Templates/Map.h"
 
 #include "SmartPointer/SharedFromThis.h"
@@ -31,7 +32,7 @@ public:
 
     HTTP_API virtual void HttpRequestFailedWithError(const CHttpRequestPtr& InRequest, const CHttpRequestError& InError) = 0;
     // TODO: instead implement a response object with status and additional response information
-    HTTP_API virtual void HttpRequestSucceeded(const CHttpRequestPtr& InRequest, const CString& InResponseString) = 0;
+    HTTP_API virtual void HttpRequestSucceeded(const CHttpRequestPtr& InRequest, const CHttpResponse& InResponse) = 0;
 };
 
 class CHttpRequest : public TSharedFromThis<CHttpRequest>
@@ -43,18 +44,22 @@ class CHttpRequest : public TSharedFromThis<CHttpRequest>
     CHttpRequestCallbacksPtr _callbacks;
 
 protected:
+    CHttpResponse _response;
+
     HTTP_API void SendErrorCallback(const CHttpRequestError& InError);
-    HTTP_API void SendSuccessCallback(const CString& InResponseString); // TODO: see callbacks above
+    HTTP_API void SendSuccessCallback();
 
 public:
     HTTP_API CHttpRequest() = default;
     HTTP_API virtual ~CHttpRequest() = default;
 
+    HTTP_API const CHttpResponse& Response() const;
+
     HTTP_API const CString& Endpoint() const;
     HTTP_API EHttpRequestMethod Method() const;
     HTTP_API const TMap<CString, CString>& Headers() const;
     HTTP_API const CHttpRequestCallbacksPtr& Callbacks() const;
-
+    
     HTTP_API CHttpRequest& SetEndpoint(const CString& InEndpoint);
     HTTP_API CHttpRequest& SetMethod(EHttpRequestMethod InMethod);
     HTTP_API CHttpRequest& SetHeader(const CString& InKey, const CString& InValue);

@@ -7,8 +7,11 @@
 using namespace NS;
 
 @interface NSURLSessionTaskDelegateImpl : NSURLSessionDelegateImpl <NSURLSessionTaskDelegate>
+{
+    @public URLSessionTaskDelegate* TaskDelegate;
+}
 
-- (instancetype)initWithDelegate:(const std::shared_ptr<URLSessionTaskDelegate>&) InDelegate;
+- (instancetype)initWithDelegate:(URLSessionTaskDelegate*) InDelegate;
 
 - (void)URLSession:(NSURLSession *)session didCreateTask:(NSURLSessionTask *)task;
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willBeginDelayedRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLSessionDelayedRequestDisposition disposition, NSURLRequest* newRequest))completionHandler;

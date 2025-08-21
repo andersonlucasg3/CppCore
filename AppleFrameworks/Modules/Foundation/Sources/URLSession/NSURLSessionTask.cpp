@@ -1,5 +1,7 @@
 #include "NSURLSessionTask.h"
 
+#include "NSURLSessionTaskDelegate.h"
+
 #include "NSPrivate.h"
 
 namespace NS

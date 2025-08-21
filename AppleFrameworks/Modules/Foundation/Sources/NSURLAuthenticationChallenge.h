@@ -8,10 +8,10 @@ namespace NS
 {
     _NS_ENUM(Integer, URLSessionAuthChallengeDisposition)
     {
-        NSURLSessionAuthChallengeUseCredential = 0,
-        NSURLSessionAuthChallengePerformDefaultHandling = 1,
-        NSURLSessionAuthChallengeCancelAuthenticationChallenge = 2,
-        NSURLSessionAuthChallengeRejectProtectionSpace = 3,
+        URLSessionAuthChallengeUseCredential = 0,
+        URLSessionAuthChallengePerformDefaultHandling = 1,
+        URLSessionAuthChallengeCancelAuthenticationChallenge = 2,
+        URLSessionAuthChallengeRejectProtectionSpace = 3,
     };
 
     // TODO: implement

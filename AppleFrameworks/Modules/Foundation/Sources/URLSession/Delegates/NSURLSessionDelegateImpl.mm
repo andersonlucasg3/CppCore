@@ -5,15 +5,12 @@
 using namespace NS;
 
 @implementation NSURLSessionDelegateImpl
-{
-    std::shared_ptr<URLSessionDelegate> _cppDelegate;
-}
 
-- (instancetype)initWithDelegate:(const std::shared_ptr<URLSessionDelegate>&) InDelegate
+- (instancetype)initWithDelegate:(URLSessionDelegate*) InDelegate
 {
     if (self = [super init])
     {
-        _cppDelegate = InDelegate;
+        Delegate = InDelegate;
     }
 
     return self;
@@ -21,25 +18,25 @@ using namespace NS;
 
 - (void) URLSession:(NSURLSession *) session didBecomeInvalidWithError:(NSError *) error
 {
-    if (_cppDelegate)
+    if (Delegate)
     {
-        _cppDelegate->URLSessionDidBecomeInvalidWithError((URLSession*)session, (Error*)error);
+        Delegate->URLSessionDidBecomeInvalidWithError((URLSession*)session, (Error*)error);
     }
 }
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) session
 {
-    if (_cppDelegate)
+    if (Delegate)
     {
-        _cppDelegate->URLSessionDidFinishEventsForBackgroundURLSession((URLSession*)session);
+        Delegate->URLSessionDidFinishEventsForBackgroundURLSession((URLSession*)session);
     }
 }
 
 - (void) URLSession:(NSURLSession *) session didReceiveChallenge:(NSURLAuthenticationChallenge *) challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * credential)) completionHandler
 {
-    if (_cppDelegate)
+    if (Delegate)
     {
-        _cppDelegate->URLSessionDidReceiveChallenge((URLSession*)session, (URLAuthenticationChallenge*)challenge, [completionHandler](URLSessionAuthChallengeDisposition disposition, URLCredential* credential)
+        Delegate->URLSessionDidReceiveChallenge((URLSession*)session, (URLAuthenticationChallenge*)challenge, [completionHandler](URLSessionAuthChallengeDisposition disposition, URLCredential* credential)
         {
             completionHandler((NSURLSessionAuthChallengeDisposition)disposition, (NSURLCredential*)credential);
         });

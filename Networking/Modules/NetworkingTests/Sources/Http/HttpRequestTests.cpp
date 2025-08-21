@@ -45,7 +45,7 @@ void CHttpRequestTests::TestCase()
     SSemaphore RequestSemaphore;
 
     CHttpRequestPtr Request = CHttpRequest::Create();
-    Request->SetEndpoint("www.google.com")
+    Request->SetEndpoint("https://www.google.com")
         .SetMethod(EHttpRequestMethod::Get)
         .SetCallbacks(MakeShared<CRequestCallbacks>(&RequestSemaphore));
 

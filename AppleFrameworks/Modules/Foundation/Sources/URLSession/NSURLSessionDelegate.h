@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NSTypes.h"
+#include "NSURLAuthenticationChallenge.h"
 
 #include <functional>
 
@@ -22,6 +23,10 @@ namespace NS
 
         FOUNDATION_API virtual void URLSessionDidBecomeInvalidWithError(URLSession* /* session */, Error* /* error */) {}
         FOUNDATION_API virtual void URLSessionDidFinishEventsForBackgroundURLSession(URLSession* /* session */) {}
-        FOUNDATION_API virtual void URLSessionDidReceiveChallenge(URLSession* /* session */, URLAuthenticationChallenge* /* challenge */, const URLSessionChallengeCompletionHandler& /* completionHandler */) {}
+
+        FOUNDATION_API virtual void URLSessionDidReceiveChallenge(URLSession* /* session */, URLAuthenticationChallenge* /* challenge */, const URLSessionChallengeCompletionHandler& completionHandler)
+        {
+            completionHandler(URLSessionAuthChallengePerformDefaultHandling, nullptr);
+        }
     };
 }

@@ -4,7 +4,7 @@
 
 #include "Object/ClassMacros.h"
 
-#include "URLSession/NSURLSessionDelegate.h"
+#include "URLSession/NSURLSessionDataDelegate.h"
 
 DECLARE_CLASS_HEADER(MacHttpRequest);
 
@@ -16,6 +16,9 @@ class CMacHttpRequest : public CHttpRequest, public URLSessionDataDelegate
 
 protected:
     HTTP_API void URLSessionDidBecomeInvalidWithError(URLSession* Session, Error* Error) override;
+    HTTP_API void URLSessionTaskDidCompleteWithError(URLSession* session, URLSessionTask* task, Error* error) override;
+    HTTP_API void URLSessionDataTaskDidReceiveData(URLSession* session, URLSessionDataTask* dataTask, Data* data) override;
+    HTTP_API void URLSessionDataTaskDidReceiveResponse(URLSession* session, URLSessionDataTask* dataTask, URLResponse* response, const URLSessionDataTaskDidReceiveResponseCompletionHandler& completionHandler) override;
 
 public:
     HTTP_API CMacHttpRequest() = default;

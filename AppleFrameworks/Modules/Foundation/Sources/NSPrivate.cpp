@@ -242,5 +242,10 @@ namespace NS::Private
         _NS_PRIVATE_DEF_SEL(valueWithPointer_, "valueWithPointer:");
         _NS_PRIVATE_DEF_SEL(wait, "wait");
         _NS_PRIVATE_DEF_SEL(waitUntilDate_, "waitUntilDate:");
+        _NS_PRIVATE_DEF_SEL(cancel, "cancel");
+        _NS_PRIVATE_DEF_SEL(resume, "resume");
+        _NS_PRIVATE_DEF_SEL(suspend, "suspend");
+        _NS_PRIVATE_DEF_SEL(URLWithString_, "URLWithString:");
+        _NS_PRIVATE_DEF_SEL(dataTaskWithURL_, "dataTaskWithURL:");
     }
 }

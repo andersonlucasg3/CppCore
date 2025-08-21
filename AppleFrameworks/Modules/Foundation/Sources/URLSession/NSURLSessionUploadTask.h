@@ -1,13 +1,14 @@
 #pragma once
 
 #include "NSObject.hpp"
+
 #include "NSURLSessionTask.h"
 
 namespace NS
 {
-    class URLSessionDataTask : public Copying<URLSessionDataTask, URLSessionTask>
+    class URLSessionUploadTask : public Copying<URLSessionUploadTask, URLSessionTask>
     {
     public:
-    
+        
     };
 }

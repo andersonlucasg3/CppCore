@@ -5,7 +5,7 @@
 #include "Math/Fixed.h"
 #include "Math/Math.h"
 
-#include "Templates/Strings.h"
+#include "String/String.h"
 
 using namespace Core::Types;
 using namespace Core::Maths;

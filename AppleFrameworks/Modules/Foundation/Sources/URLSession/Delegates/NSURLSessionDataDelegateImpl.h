@@ -1,14 +1,17 @@
 #pragma once
 
-#include "NSObjcURLSesssionTaskDelegate.h"
+#include "NSURLSessionTaskDelegateImpl.h"
 
-#include "NSURLSessionDataDelegate.h"
+#include "URLSession/NSURLSessionDataDelegate.h"
 
 using namespace NS;
 
-@interface NSObjcURLSessionDataDelegate : NSObjcURLSessionTaskDelegate
+@interface NSURLSessionDataDelegateImpl : NSURLSessionTaskDelegateImpl
+{
+    @public URLSessionDataDelegate* DataDelegate;
+}
 
-- (instancetype)initWithDelegate:(const std::shared_ptr<URLSessionDataDelegate>&)InDelegate;
+- (instancetype)initWithDelegate:(URLSessionDataDelegate*) InDelegate;
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionResponseDisposition disposition))completionHandler;
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask;

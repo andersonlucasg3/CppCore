@@ -24,9 +24,9 @@ void CHttpRequest::SendErrorCallback(const CHttpRequestError& InError)
     _callbacks->HttpRequestFailedWithError(AsShared(), InError);
 }
 
-void CHttpRequest::SendSuccessCallback(const CString& InResponseString)
+void CHttpRequest::SendSuccessCallback()
 {
-    _callbacks->HttpRequestSucceeded(AsShared(), InResponseString);
+    _callbacks->HttpRequestSucceeded(AsShared(), _response);
 }
 
 const CString& CHttpRequest::Endpoint() const
