@@ -63,6 +63,8 @@ namespace NS::Private
         _NS_PRIVATE_EXTERN_CLS(NSURLSession);
         _NS_PRIVATE_EXTERN_CLS(NSURLSessionTask);
         _NS_PRIVATE_EXTERN_CLS(NSURLSessionDataTask);
+        _NS_PRIVATE_EXTERN_CLS(NSURLRequest);
+        _NS_PRIVATE_EXTERN_CLS(NSURLResponse);
     }
 
     namespace Selector

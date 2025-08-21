@@ -63,5 +63,11 @@ void CMacHttpRequest::URLSessionDataTaskDidReceiveData(URLSession* session, URLS
 
 void CMacHttpRequest::URLSessionDataTaskDidReceiveResponse(URLSession* session, URLSessionDataTask* dataTask, URLResponse* response, const URLSessionDataTaskDidReceiveResponseCompletionHandler& completionHandler)
 {
-    // TODO: get the response from ther and put in _response
+    
+    completionHandler(URLSessionResponseAllow);
+}
+
+void CMacHttpRequest::URLSessionTaskDidReceiveInformationalResponse(URLSession* session, URLSessionTask* task, HTTPURLResponse* response)
+{
+
 }

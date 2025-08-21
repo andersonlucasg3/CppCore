@@ -19,6 +19,7 @@ protected:
     HTTP_API void URLSessionTaskDidCompleteWithError(URLSession* session, URLSessionTask* task, Error* error) override;
     HTTP_API void URLSessionDataTaskDidReceiveData(URLSession* session, URLSessionDataTask* dataTask, Data* data) override;
     HTTP_API void URLSessionDataTaskDidReceiveResponse(URLSession* session, URLSessionDataTask* dataTask, URLResponse* response, const URLSessionDataTaskDidReceiveResponseCompletionHandler& completionHandler) override;
+    HTTP_API void URLSessionTaskDidReceiveInformationalResponse(URLSession* session, URLSessionTask* task, HTTPURLResponse* response) override;
 
 public:
     HTTP_API CMacHttpRequest() = default;

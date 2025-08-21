@@ -1,7 +1,7 @@
 #pragma once
 
-#include "NSDefines.h"
 #include "NSObject.hpp"
+#include "NSDefines.h"
 #include "NSTypes.h"
 
 namespace NS

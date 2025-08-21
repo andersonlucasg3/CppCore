@@ -5,6 +5,7 @@
 #include "TestSuit.h"
 
 #include "HttpRequest.h"
+#include "HttpResponse.h"
 #include "HttpRequestError.h"
 #include "HttpRequestManager.h"
 
@@ -30,9 +31,9 @@ public:
     }
 
     
-    void HttpRequestSucceeded(const CHttpRequestPtr& InRequest, const CString& InResponseString) override 
+    void HttpRequestSucceeded(const CHttpRequestPtr& InRequest, const CHttpResponse& InResponse) override 
     {
-        GLogger.Log("{}", *InResponseString);
+        GLogger.Log("Status: {}, Response: {}", InResponse.Status(), *InResponse.ResponseString());
         
         _semaphore->NotifyOne();
     }
@@ -45,7 +46,7 @@ void CHttpRequestTests::TestCase()
     SSemaphore RequestSemaphore;
 
     CHttpRequestPtr Request = CHttpRequest::Create();
-    Request->SetEndpoint("https://www.google.com")
+    Request->SetEndpoint("https://jsonplaceholder.typicode.com/todos/1")
         .SetMethod(EHttpRequestMethod::Get)
         .SetCallbacks(MakeShared<CRequestCallbacks>(&RequestSemaphore));
 
