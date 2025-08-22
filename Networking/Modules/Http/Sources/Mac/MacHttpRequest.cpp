@@ -1,13 +1,14 @@
 #include "MacHttpRequest.h"
 
-#include "HttpRequestError.h"
+#include "Templates/Array.h"
 
-#include "NSData.h"
 #include "String/Apple/AppleStringConvertion.h"
 
-#include "NSURL.h"
+#include "HttpRequestError.h"
+
+#include "URL/NSURL.h"
+#include "NSData.h"
 #include "NSError.h"
-#include "Templates/Array.h"
 #include "URLSession/NSURLSession.h"
 #include "URLSession/NSURLSessionDataTask.h"
 
@@ -69,5 +70,5 @@ void CMacHttpRequest::URLSessionDataTaskDidReceiveResponse(URLSession* session, 
 
 void CMacHttpRequest::URLSessionTaskDidReceiveInformationalResponse(URLSession* session, URLSessionTask* task, HTTPURLResponse* response)
 {
-
+    
 }

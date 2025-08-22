@@ -1,7 +1,8 @@
 #pragma once
 
 #include "NSTypes.h"
-#include "NSURLAuthenticationChallenge.h"
+
+#include "URL/NSURLAuthenticationChallenge.h"
 
 #include <functional>
 

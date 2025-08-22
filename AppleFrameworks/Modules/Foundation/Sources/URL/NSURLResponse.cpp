@@ -11,8 +11,8 @@ namespace NS
         return Object::alloc<URLResponse>(_NS_PRIVATE_CLS(NSURLResponse));
     }
 
-    URLResponse* URLResponse::init(URL* URL, String* MIMEType, Integer expectedContentLength, String* textEncodingName)
+    URLResponse* URLResponse::init(class URL* URL, String* MIMEType, Integer expectedContentLength, String* textEncodingName)
     {
-        
+        return Object::sendMessage<URLResponse*>(this, _NS_PRIVATE_SEL(initWithURL_MIMEType_expectedContentLength_textEncodingName_), URL, MIMEType, expectedContentLength, textEncodingName);
     }
 }

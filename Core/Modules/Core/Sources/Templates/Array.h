@@ -42,9 +42,9 @@ class TArray
 		return Element = Item;
 	}
 
-	void IncreaseArray()
+	void IncreaseArray(SizeT InSize = 4)
 	{
-		Resize(ArraySize + 4);
+		Resize(ArraySize + InSize);
 	}
 
 	void DecreaseArray(bool bKeepArraySize)
@@ -129,6 +129,17 @@ public:
 		}
 
 		return SetAt(ItemNum++, NewItem);
+	}
+
+	void Add(const TArray<TElement>& InElements)
+	{
+		if (ArraySize - ItemNum <= InElements.Num())
+		{
+			IncreaseArray(InElements.Num() + 4);
+		}
+
+		GMemory.Copy(InElements.GetData(), DataPtr.Raw() + ItemNum, InElements.Num());
+		ItemNum += InElements.ItemNum;
 	}
 
 	TElement& Insert(UInt64 Index, const TElement& NewItem)

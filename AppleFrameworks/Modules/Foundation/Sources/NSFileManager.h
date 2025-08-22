@@ -4,7 +4,7 @@
 #include "NSDictionary.h"
 #include "NSString.h"
 #include "NSError.h"
-#include "NSURL.h"
+#include "URL/NSURL.h"
 
 namespace NS
 {

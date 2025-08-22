@@ -3,8 +3,8 @@
 #include "Filesystem/DirectoryReference.h"
 
 #include "NSString.h"
-#include "NSURL.h"
 #include "NSSharedPtr.hpp"
+#include "URL/NSURL.h"
 
 class CAppleDirectoryReference : public CDirectoryReference
 {

@@ -8,7 +8,7 @@
 
 #include "NSFileManager.h"
 #include "NSError.h"
-#include "NSURL.h"
+#include "URL/NSURL.h"
 
 char CApplePath::PathSeparator() const
 {

@@ -1,6 +1,6 @@
 #include "NSURLSessionTaskDelegateImpl.h"
 
-#include "NSURLAuthenticationChallenge.h"
+#include "URL/NSURLAuthenticationChallenge.h"
 #include "URLSession/NSURLSession.h"
 #include "URLSession/NSURLSessionTask.h"
 

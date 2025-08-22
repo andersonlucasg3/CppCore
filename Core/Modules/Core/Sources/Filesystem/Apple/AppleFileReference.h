@@ -5,7 +5,7 @@
 
 #include "NSSharedPtr.hpp"
 #include "NSString.h"
-#include "NSURL.h"
+#include "URL/NSURL.h"
 
 DECLARE_CLASS_HEADER(AppleFileReference);
 

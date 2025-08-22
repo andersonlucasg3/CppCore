@@ -1,6 +1,6 @@
 #include "NSURLSessionDelegateImpl.h"
 
-#include "NSURLAuthenticationChallenge.h"
+#include "URL/NSURLAuthenticationChallenge.h"
 
 using namespace NS;
 

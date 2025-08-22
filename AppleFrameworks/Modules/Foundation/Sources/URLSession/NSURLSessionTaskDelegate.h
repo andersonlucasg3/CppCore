@@ -2,7 +2,7 @@
 
 #include "NSURLSession.h"
 #include "NSURLSessionDelegate.h"
-#include "NSURLAuthenticationChallenge.h"
+#include "URL/NSURLAuthenticationChallenge.h"
 
 namespace NS
 {
