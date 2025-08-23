@@ -16,6 +16,13 @@ using namespace NS;
     return self;
 }
 
+- (void)dealloc
+{
+    Delegate = nullptr;
+    
+    [super dealloc];
+}
+
 - (void) URLSession:(NSURLSession *) session didBecomeInvalidWithError:(NSError *) error
 {
     if (Delegate)

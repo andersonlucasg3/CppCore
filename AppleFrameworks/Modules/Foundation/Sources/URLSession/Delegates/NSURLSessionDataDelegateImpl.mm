@@ -16,6 +16,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    DataDelegate = nullptr;
+    
+    [super dealloc];
+}
+
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
     if (DataDelegate)

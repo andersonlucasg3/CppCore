@@ -16,6 +16,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    TaskDelegate = nullptr;
+    
+    [super dealloc];
+}
+
 - (void)URLSession:(NSURLSession *)session didCreateTask:(NSURLSessionTask *)task
 {
     if (TaskDelegate)
