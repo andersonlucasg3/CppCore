@@ -34,7 +34,7 @@ namespace NS
         FOUNDATION_API virtual void URLSessionDataTaskDidBecomeStreamTask(URLSession* /* session */, URLSessionDataTask* /* dataTask */, URLSessionStreamTask* /* streamTask */) {}
         FOUNDATION_API virtual void URLSessionDataTaskDidReceiveData(URLSession* /* session */, URLSessionDataTask* /* dataTask */, Data* /* data */) {}
 
-        FOUNDATION_API virtual void URLSessionDataTaskWillCacheResponse(URLSession* /* session */, URLSessionDataTask* /* dataTask */, CachedURLResponse* proposedResponse, const URLSessionDataTaskWillCacheResponseCompletionHandler& completionHandler) 
+        FOUNDATION_API virtual void URLSessionDataTaskWillCacheResponse(URLSession* /* session */, URLSessionDataTask* /* dataTask */, CachedURLResponse* proposedResponse, const URLSessionDataTaskWillCacheResponseCompletionHandler& completionHandler)
         {
             completionHandler(proposedResponse);
         }

@@ -66,6 +66,4 @@ public:
     HTTP_API CHttpRequest& SetCallbacks(const CHttpRequestCallbacksPtr& InCallbacks);
 
     HTTP_API virtual void Process() = 0;
-
-    HTTP_API static CHttpRequestPtr Create();
 };

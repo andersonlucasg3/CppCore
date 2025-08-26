@@ -280,5 +280,6 @@ namespace NS::Private
         _NS_PRIVATE_EXTERN_SEL(URLWithString_);
         _NS_PRIVATE_EXTERN_SEL(dataTaskWithURL_);
         _NS_PRIVATE_EXTERN_SEL(initWithURL_MIMEType_expectedContentLength_textEncodingName_);
+        _NS_PRIVATE_EXTERN_SEL(sessionWithConfiguration_);
     }
 }

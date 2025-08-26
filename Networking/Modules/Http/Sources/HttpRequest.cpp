@@ -76,8 +76,3 @@ CHttpRequest& CHttpRequest::SetCallbacks(const CHttpRequestCallbacksPtr& InCallb
 
     return *this;
 }
-
-CHttpRequestPtr CHttpRequest::Create()
-{
-    return MakeShared<CPlatformHttpRequest>();
-}

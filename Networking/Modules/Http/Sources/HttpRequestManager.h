@@ -26,6 +26,8 @@ public:
     HTTP_API void StartRequestWorker();
     HTTP_API void StopRequestWorker();
 
+    HTTP_API virtual CHttpRequestPtr CreateRequest() = 0;
+
     HTTP_API void AddRequest(const CHttpRequestPtr& InRequest);
 };
 

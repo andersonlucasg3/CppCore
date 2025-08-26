@@ -25,6 +25,8 @@ namespace NS
     public:
         FOUNDATION_API static URLSession* sharedSession();
 
+        FOUNDATION_API static URLSession* session(class URLSessionConfiguration* configuration);
+
         FOUNDATION_API class URLSessionDataTask* dataTask(class URL* url);
     };
 }

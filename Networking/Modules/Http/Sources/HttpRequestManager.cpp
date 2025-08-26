@@ -1,11 +1,15 @@
 #include "HttpRequestManager.h"
 
+#include "Defines/Preprocessors.h"
+
 #include "HttpRequest.h"
 #include "Threading/ScopeLock.h"
 #include "Threading/Thread.h"
 
-static CHttpRequestManager GStaticHttpRequestManager;
-CHttpRequestManager& GHttpRequestManager = GStaticHttpRequestManager;
+#include COMPILE_PLATFORM_HEADER(HttpRequestManager.h)
+
+static CPlatformHttpRequestManager GPlatformHttpRequestManager;
+CHttpRequestManager& GHttpRequestManager = GPlatformHttpRequestManager;
 
 void CHttpRequestManager::ThreadWorker(const CThreadWeakPtr& Thread)
 {

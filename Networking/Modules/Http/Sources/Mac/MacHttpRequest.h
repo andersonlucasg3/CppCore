@@ -4,6 +4,8 @@
 
 #include "Object/ClassMacros.h"
 
+#include "NSSharedPtr.hpp"
+
 #include "URLSession/NSURLSessionDataDelegate.h"
 
 DECLARE_CLASS_HEADER(MacHttpRequest);
@@ -14,18 +16,17 @@ class CMacHttpRequest : public CHttpRequest, public URLSessionDataDelegate
 {
     using Super = CHttpRequest;
 
-protected:
-    HTTP_API void URLSessionDidBecomeInvalidWithError(URLSession* Session, Error* Error) override;
-    HTTP_API void URLSessionTaskDidCompleteWithError(URLSession* session, URLSessionTask* task, Error* error) override;
-    HTTP_API void URLSessionDataTaskDidReceiveData(URLSession* session, URLSessionDataTask* dataTask, Data* data) override;
-    HTTP_API void URLSessionDataTaskDidReceiveResponse(URLSession* session, URLSessionDataTask* dataTask, URLResponse* response, const URLSessionDataTaskDidReceiveResponseCompletionHandler& completionHandler) override;
-    HTTP_API void URLSessionTaskDidReceiveInformationalResponse(URLSession* session, URLSessionTask* task, HTTPURLResponse* response) override;
+    SharedPtr<URLSession> _urlSession;
 
 public:
     HTTP_API CMacHttpRequest() = default;
     HTTP_API ~CMacHttpRequest() override = default;
 
+    HTTP_API void SetURLSession(const SharedPtr<class URLSession> InURLSession);
+
     HTTP_API void Process() override;
+
+    friend class CMacHttpRequestManager;
 };
 
 typedef CMacHttpRequest CPlatformHttpRequest;

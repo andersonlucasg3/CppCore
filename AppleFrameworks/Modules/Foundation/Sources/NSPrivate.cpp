@@ -250,5 +250,6 @@ namespace NS::Private
         _NS_PRIVATE_DEF_SEL(URLWithString_, "URLWithString:");
         _NS_PRIVATE_DEF_SEL(dataTaskWithURL_, "dataTaskWithURL:");
         _NS_PRIVATE_DEF_SEL(initWithURL_MIMEType_expectedContentLength_textEncodingName_, "initWithURL:MIMEType:expectedContentLength:textEncodingName:");
+        _NS_PRIVATE_DEF_SEL(sessionWithConfiguration_, "sessionWithConfiguration:");
     }
 }

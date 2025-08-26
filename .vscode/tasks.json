@@ -41,6 +41,26 @@
             "group": "build"
         },
         {
+            "label": "Recompile",
+            "command": "pwsh",
+            "type": "shell",
+            "args": [
+                "-c",
+                "${workspaceFolder}/ProjectTools/Scripts/Compile.ps1",
+                "-Project", "${input:projects}",
+                "-Platform", "${input:platforms}",
+                "-Configuration", "${input:configurations}",
+                "-Recompile"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": "build"
+        },
+        {
             "label": "Compile ProjectTools",
             "command": "pwsh",
             "type": "shell",

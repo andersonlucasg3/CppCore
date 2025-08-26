@@ -45,7 +45,8 @@ void CHttpRequestTests::TestCase()
 
     SSemaphore RequestSemaphore;
 
-    CHttpRequestPtr Request = CHttpRequest::Create();
+    CHttpRequestPtr Request = GHttpRequestManager.CreateRequest();
+    
     Request->SetEndpoint("https://jsonplaceholder.typicode.com/todos/1")
         .SetMethod(EHttpRequestMethod::Get)
         .SetCallbacks(MakeShared<CRequestCallbacks>(&RequestSemaphore));
